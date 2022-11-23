@@ -1,0 +1,65 @@
+[
+    {
+        "key": "sb",
+        "value": "DvszY2pMveBG10bjRTErDMsc",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2022-11-22T18:21:24.248Z",
+        "lastAccessed": "2022-11-22T18:21:24.249Z"
+    },
+    {
+        "key": "datr",
+        "value": "DvszY8GUbl0RUmj86jvnQZQB",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2022-11-22T18:21:24.249Z",
+        "lastAccessed": "2022-11-22T18:21:24.249Z"
+    },
+    {
+        "key": "c_user",
+        "value": "100046721985974",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2022-11-22T18:21:24.249Z",
+        "lastAccessed": "2022-11-22T18:21:24.249Z"
+    },
+    {
+        "key": "wd",
+        "value": "1920x961",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2022-11-22T18:21:24.249Z",
+        "lastAccessed": "2022-11-22T18:21:24.249Z"
+    },
+    {
+        "key": "xs",
+        "value": "28%3Au8C3swUm2Mg8WA%3A2%3A1664351718%3A-1%3A4047%3A%3AAcXbbec7LR0KKi73mL2ae7KQRitZ4SHYW5KWfQ5vJw",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2022-11-22T18:21:24.249Z",
+        "lastAccessed": "2022-11-22T18:21:24.249Z"
+    },
+    {
+        "key": "fr",
+        "value": "0522JtLii6BlPSPY6.AWVRQz3C3Okq3tvUc_nWGjJxs1k.BjfRLG.zG.AAA.0.0.BjfRLG.AWVVXnmoZ0o",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2022-11-22T18:21:24.249Z",
+        "lastAccessed": "2022-11-22T18:21:24.249Z"
+    },
+    {
+        "key": "presence",
+        "value": "C%7B%22lm3%22%3A%22g.5059004720874903%22%2C%22t3%22%3A%5B%5D%2C%22utc3%22%3A1669141258120%2C%22v%22%3A1%7D",
+        "domain": "facebook.com",
+        "path": "/",
+        "hostOnly": false,
+        "creation": "2022-11-22T18:21:24.249Z",
+        "lastAccessed": "2022-11-22T18:21:24.249Z"
+    }
+]
