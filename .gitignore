@@ -1,2 +1,4 @@
 /node_modules
-/msgs
+/fbnew.json
+.vscode
+/data

@@ -10,9 +10,9 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 const { RemoveBgError, removeBackgroundFromImageUrl } = rmbg
 
 cloudinary.config({ 
-  cloud_name: 'ds113ssay', 
-  api_key: '679318421227858', 
-  api_secret: '5qA-m8DwqS__6kWnw3GZVq6um7U' 
+  cloud_name: process.env.cloud_name, 
+  api_key: process.env.api_key, 
+  api_secret: process.env.api_secret
 });
 
 

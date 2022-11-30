@@ -2,10 +2,13 @@ import {
 bg,
 loopMsg
 } from "./events/index.js"
-
+import  wait from './utils/wait.js'
+ ; 
+ 
 
 let user ={     
-      "bgrmv":bg,
+      "bgrmv":bg
+      ,
 }
 
 let vip = {
@@ -20,7 +23,7 @@ let admin = {
       ...vip,
 }
 
-const commands = (api,event,cmd,role="user")=> {
+const commands = async (api,event,cmd,role="user")=> {
       if(role == "admin" && admin[cmd] !== undefined ){
             admin[cmd](api, event);
       }
@@ -29,7 +32,11 @@ const commands = (api,event,cmd,role="user")=> {
             vip[cmd](api, event);
       }
 
-      if(user[cmd] !== undefined) user[cmd](api, event);
+      if(user[cmd] !== undefined){ 
+            await wait(1000,api,event);
+            
+            user[cmd](api, event)
+      };
 }
 
 export default  (api,event,role)=>{

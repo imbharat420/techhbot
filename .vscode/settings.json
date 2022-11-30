@@ -1,10 +1,7 @@
 {
-  "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+  // "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
   "editor.fontSize": 18,
   // "editor.fontFamily": "Consolas, 'Courier New', monospace,",
-  "dart.openDevTools": "flutter",
-  "workbench.colorTheme": "Night Owl (No Italics)",
-  "workbench.iconTheme": "material-icon-theme",
   "editor.fastScrollSensitivity": 8,
   "editor.tabSize": 8,
   "editor.insertSpaces": true,
@@ -26,5 +23,11 @@
     "editor.detectIndentation": false,
     "editor.defaultFormatter": "ms-vscode.vscode-js-profile-table",
     "editor.formatOnSave": true
-  }
+  },
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+  "prettier.singleQuote": true,
+  "editor.bracketPairColorization.enabled": true,
+   
 }
