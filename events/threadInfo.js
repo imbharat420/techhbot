@@ -1,11 +1,15 @@
-const threadInfo = async (api,event)=>{
-      let object;
-      object = await api.getThreadInfo(event?.threadID, (err, ret) => {
-            if(err) return console.error(err);
-            object = ret;
-            return object;  
+let getData = (api,event)=>{
+      return new Promise((resolve, reject) => {
+            api.getThreadInfo(event?.threadID, (err, ret) => {
+                  if(err) reject(err);
+                  resolve(ret)
+            });
       });
-      return object;
+}
+
+const threadInfo = async (api,event)=>{
+      let data = await getData(api,event)
+      return data;
 }
 
 export default threadInfo;

@@ -6,32 +6,49 @@ import saveOnFile from "./saveOnFile.js";
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
-const infoById = async (id)=>{
-      let object= ""
-      object = await api.getUserInfo(id, (err, ret) => {
-            if(err) return console.error(err);
-            object = ret;
-            if(ret !== undefined){
-                  saveOnFile(folderName,fileName,ret)
-            } 
-            return object;  
+let getThreadData = (api,event)=>{
+      return new Promise((resolve, reject) => {
+            api.getThreadInfo(id, (err, ret) => {
+                  if(err) reject(err);
+                  resolve(ret)
+            });
       });
-
-      return object;
 }
 
-const tInfo = async (id)=>{
-      let object = "";
-      object = await api.getThreadInfo(id, (err, ret) => {
-            if(err) return console.error(err);
-            object = ret;
-            if(ret !== undefined){
-                  saveOnFile(folderName,fileName,ret)
-            } 
-            return object;  
-      });
 
-      return object;
+let getUserData = (api,event)=>{
+      return new Promise((resolve, reject) => {
+            api.getUserInfo(id, (err, ret) => {
+                  if(err) reject(err);
+                  resolve(ret)
+            });
+      });
+}
+
+
+
+
+const infoById = async (api,id)=>{
+      let user = null;
+      let {isGroup=undefined,senderID=undefined,userID=undefined} = event
+      let object = {}
+      var now = new Date();
+      var logfile_name = now.getDate()  + "-"+ now.getMonth() + "-" + now.getFullYear();
+      var folderName ,fileName;
+      let id = senderID !== undefined ? senderID : userID;
+
+      if(isGroup){
+            folderName = path.join(__dirname,'..','data','accounts',"groups");
+            fileName = path.resolve(folderName, `${event.threadID}.json`)
+      }else{
+            folderName = path.join(__dirname, '..','data','accounts');
+            fileName = path.resolve(folderName, `users.json`) 
+      } 
+      user = checkUserExist()
+}
+
+const tInfo = async (api,id)=>{
+      let thread = 
 }
 
 

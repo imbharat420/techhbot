@@ -17,7 +17,7 @@ import wait from './utils/wait.js';
 
 // Events
 import saveMsgs from "./events/saveMsgs.js";
-import userInfo from './events/userInfo.js';
+import {userInfo,userReplyInfo} from './events/userInfo.js';
 import loopMsg from "./events/loopMsg.js";
 import unsendMessage from "./events/unsendMessage.js";
 
@@ -51,6 +51,9 @@ let eventTypes = ["message",""]
 
 let a = true;
 
+let history = []
+
+
 fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err, api) => {
   if (err) return console.error(err);
 
@@ -61,47 +64,27 @@ fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err,
 
   const listenEmitter = api.listen(async (err, event) => {
       if(err) return console.log(err);
-      console.log(event);
-      // logs(api,event)
-
-
-
-      // if(event?.threadID == "5341521042643129" || event?.threadID == "100046721985974"){
-      //       console.log("Thread Id is ");
-      //       api.getThreadInfo(event?.threadID, (err, ret) => {
-      //             if(err) return console.error(err);
-      //             console.log(ret); 
-      //       });
-      // }
+      // console.log(event);
+      logs(api,event)
 
       if(a){
             // Techh Jork => "100037131918629"
-            let currentUserID = api.getCurrentUserID()
-            api.getUserInfo(currentUserID, (err, ret) => {
-                  if(err) return console.error(err);
-                  console.log(ret)
-                  api.sendMessage("Bot Running",currentUserID);
-            });
             api.sendMessage("Bot Running","100037131918629");
-            a= false;
+            a= false;    
       }
 
-     if(event.type == "message_unsend"){  
+
+      if(event.type == "message_unsend"){  
             console.log(event);   
             unsendMessage(api,event);
       }
       
 
-     
 
       /**
        * @Description IF MSG Exist as string 
       */
       if(typeof event.body !== 'string' ) return
-
-   
-    
-
 
       /**
        * @Description IF MSG Exist as string but empty 
@@ -119,8 +102,7 @@ fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err,
       /**
        * @Desction For NLP
       */
-      if(event.type == "message" || event.type == "message_reply" ){
-            
+      if(event.type == "message" || event.type == "message_reply" ){      
             saveMsgs(event);         
       }
   })
@@ -172,6 +154,39 @@ fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err,
       // }
 
 /* IMP 
+
+
+      if(event.senderID == "100037131918629"){
+            let sent = false;
+
+            let type = api.sendTypingIndicator("100037131918629", function(){
+                  if(sent){
+                        return type()
+                  }
+            }) 
+      }
+    
+
+
+
+let currentUserID = api.getCurrentUserID()
+            api.getUserInfo(currentUserID, (err, ret) => {
+                  if(err) return console.error(err);
+                  console.log(ret)
+                  api.sendMessage("Bot Running",currentUserID);
+            });
+
+
+
+      if(event?.threadID == "5341521042643129" || event?.threadID == "100046721985974"){
+            console.log("Thread Id is ");
+            api.getThreadInfo(event?.threadID, (err, ret) => {
+                  if(err) return console.error(err);
+                  console.log(ret); 
+            });
+      }
+
+
 if(event.body.startsWith("loopMsg")){
       api.getUserInfo("100028613110159", (err, ret) => {
             if(err) return console.error(err);

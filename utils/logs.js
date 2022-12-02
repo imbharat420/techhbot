@@ -1,4 +1,4 @@
-import userInfo from "../events/userInfo.js"
+import {userInfo,userReplyInfo} from "../events/userInfo.js"
 import threadInfo from "../events/threadInfo.js"
 import {check} from "./conditions.js"
 
@@ -8,7 +8,7 @@ const time = (timestamp) =>{
       var date = now.getDate()  + "/"+ now.getMonth() + "/" + now.getFullYear() + " " + now.getHours() + ":" + now.getMinutes() + ":" + ":"+ now.getSeconds() 
       return date;
 }
-
+ 
 
 
 
@@ -52,21 +52,19 @@ const logs = async (api,event)=>{
             info = await userInfo(api,event);
       }
 
-      /**
-       * So Big That's why not work
-       */
-      // if(threadID !== undefined){
-      //    tInfo = await threadInfo(api,event);
-      // }
-      
-  
-
-
       if(event?.messageReply !== undefined ){
-            reInfo = {name:"NLLLLLLL"} //"await userInfo(api,event);"
+            reInfo = await userReplyInfo(api,event);      
       }
 
 
+
+       /**
+       * So Big That's why not work
+       */
+      if(threadID !== undefined && isGroup){
+            tInfo = await threadInfo(api,event);
+            // console.log(tInfo.threadName);
+      }
 
 
       switch(type){
@@ -77,7 +75,7 @@ const logs = async (api,event)=>{
                   
                   if(body.length === ""){}
                   
-                  if(isGroup) console.log(`[${time()}] :(${threadID} -> ${info.name}) -> "${body}"`);
+                  if(isGroup) console.log(`[${time()}] :(${tInfo.threadName} -> ${info.name}) -> "${body}"`);
                   else console.log(`[${time()}] :(${info.name}) -> "${body}"`);
                   
                   if(check("isBad",event))   console.log(`**#$** >> `,messageID);
@@ -85,18 +83,7 @@ const logs = async (api,event)=>{
                   /**
                    * Send Logs for Attachment 
                    */
-                  attachments.forEach(attachment => {
-                        if(attachment.type == "sticker"){ 
-                              console.log(`>>> Stick : "${attachment.type}" -> [${attachment.caption}]`);
-                              return;
-                        }
-
-                        if(attachment.type == "share"){
-                              console.log(`>>> FileName : "${attachment.type}" -> [${attachment.title}]`);
-                        }
-
-                        console.log(`>>> FileName : "${attachment.type}" -> [${attachment.filename}]`); //animated_image,file,image
-                  });
+                   getAttachmentsLog(attachments);
             
              
                 
@@ -106,23 +93,24 @@ const logs = async (api,event)=>{
                    * if Body Exist !=""
                    */
 
-                  if(isGroup) console.log(`[${time()}] ->(${threadID} ->${info.name}) : "${body}" <<< Replied -> (${reInfo.name}) : \n "${messageReply.body}" `);
-                  else  console.log(`[${time()}] -> (${info.name}) : "${body}" <<< Replied -> (${reInfo.name}) : \n "${messageReply.body}"`);
+                  if(isGroup) console.log(`[${time()}] ->\$(${tInfo.threadName} ->${info.name}) : "${body}" <<< Replied -> (${reInfo.name}) : "${messageReply.body}" `);
+                  else  console.log(`[${time()}] -> (${info.name}) : "${body}" <<< Replied -> (${reInfo.name}) :  "${messageReply.body}"`);
 
                   if(check("isBad",event))  console.log(`$$$$$$$ >> `,messageReply.messageID);
 
                   /**
                    * Send Logs for Attachment 
                    */
-                  messageReply.attachments.forEach(attachment => {
-                        console.log(`>>> FileName : "\$${attachment.type}" [${attachment.filename}]`);
-                  });
+                   getAttachmentsLog(messageReply.attachments)
                   break;   
+            case "message_reaction": 
+                  if(isGroup) console.log(`[${time()}] :(${tInfo.threadName} -> ${info.name}) -> ${reaction} react on "${messageID}" `);
+                  else console.log(`[${time()}] : (${info.name}) -> ${reaction} react on "${messageID}"`);
 
+                  break;
             case "event": 
-                  console.log(event);
-                  console.log(`[${time()}] :(${info.name}) -> "${logMessageBody}"`);
-
+                  // console.log(`[${time()}] : (${tInfo.threadName}) "${logMessageBody}"`);
+                  console.log(`[${time()}] : (${threadID}) "${logMessageBody}"`);
                   break;
 
             
@@ -135,6 +123,20 @@ const logs = async (api,event)=>{
 }
 
 
+let getAttachmentsLog = (attachments)=>{
+      attachments.forEach(attachment => {
+            if(attachment.type == "sticker"){ 
+                  console.log(`\t>>> Stick : "${attachment.type}" -> [${attachment.caption}]`);
+                  return;
+            }
+
+            if(attachment.type == "share"){
+                  console.log(`\t>>> FileName : "${attachment.type}" -> [${attachment.title}]`);
+            }
+
+            console.log(`\t>>> FileName : "${attachment.type}" -> [${attachment.filename}]`); //animated_image,file,image
+      });
+}
 
 
 
