@@ -108,11 +108,11 @@ fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err,
        * @Description IF MSG Exist as string but empty 
        * That contain GIF,Sticker
       */
-      if(event.body == ''){}
+      if(event.body == '') return // in this only item which has GIF sticker or only photos
 
 
       /**
-       * @Description For Inbuilt Commands
+       * @Description For Inbuilt Commands sorry
       */
       cmd(api,event,"admin");   
       
@@ -120,7 +120,7 @@ fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err,
 
 
       /**
-       * @Desction For NLP
+       * @Desction AI this is for NLP
       */
       if(event.type == "message" || event.type == "message_reply" ){      
             saveMsgs(event);         
