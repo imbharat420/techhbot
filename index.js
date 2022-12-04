@@ -54,6 +54,20 @@ let a = true;
 let history = []
 
 
+let getData = (api,event)=>{
+      return new Promise((resolve, reject) => {
+            api.getUserID("Techh Jork", (err, ret) => {
+                  if(err) reject(err);
+                  resolve(ret)
+            });
+      });
+}
+
+const getUserID = async (api,event)=>{
+      let data = await getData(api,event)
+      return data;
+}
+
 fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err, api) => {
   if (err) return console.error(err);
 
@@ -70,7 +84,11 @@ fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err,
       if(a){
             // Techh Jork => "100037131918629"
             api.sendMessage("Bot Running","100037131918629");
-            a= false;    
+            
+            a= false;   
+            
+            let userInfoById = await getUserID(api,event)
+           console.log("called when start",userInfoById) 
       }
 
 
@@ -80,9 +98,9 @@ fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err,
       }
       
 
-
+ 
       /**
-       * @Description IF MSG Exist as string 
+       * @Description IF MSG Exist as string  
       */
       if(typeof event.body !== 'string' ) return
 
@@ -98,6 +116,8 @@ fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err,
       */
       cmd(api,event,"admin");   
       
+      
+
 
       /**
        * @Desction For NLP
@@ -107,6 +127,8 @@ fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err,
       }
   })
 })
+
+
 
 
 

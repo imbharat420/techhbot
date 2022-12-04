@@ -6,3 +6,9 @@
 
 ## LOGS
 - [ ] 
+
+## RESOURCES
+|  whhy      | Link |
+| ----------- | ----------- |
+| images      | https://jrt-api.nguyenhaidang.ml/       |
+| Paragraph   | Text        | 1. https://jrt-api.nguyenhaidang.ml/

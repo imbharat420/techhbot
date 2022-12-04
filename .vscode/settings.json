@@ -29,5 +29,10 @@
   },
   "prettier.singleQuote": true,
   "editor.bracketPairColorization.enabled": true,
-   
+   "runOnSave.commands": [
+    {
+      "command": "git add . -A && git commit -am 'Auto-Commit'",
+      "runIn": "terminal"
+    }
+  ]
 }

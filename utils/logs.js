@@ -75,8 +75,8 @@ const logs = async (api,event)=>{
                   
                   if(body.length === ""){}
                   
-                  if(isGroup) console.log(`[${time()}] :(${tInfo.threadName} -> ${info.name}) -> "${body}"`);
-                  else console.log(`[${time()}] :(${info.name}) -> "${body}"`);
+                  if(isGroup) console.log(`[${time()}]  ✩ (${tInfo.threadName} -> ${info.name}) -> "${body}"`);
+                  else console.log(`[${time()}] ◎  (${info.name}) -> "${body}"`);
                   
                   if(check("isBad",event))   console.log(`**#$** >> `,messageID);
                
@@ -93,10 +93,12 @@ const logs = async (api,event)=>{
                    * if Body Exist !=""
                    */
 
-                  if(isGroup) console.log(`[${time()}] ->\$(${tInfo.threadName} ->${info.name}) : "${body}" <<< Replied -> (${reInfo.name}) : "${messageReply.body}" `);
-                  else  console.log(`[${time()}] -> (${info.name}) : "${body}" <<< Replied -> (${reInfo.name}) :  "${messageReply.body}"`);
+                  if(isGroup) console.log(`[${time()}] ✩ \$(${tInfo.threadName} -> ${info.name}) : "${body}" <<< Replied -> (${reInfo.name}) : "${messageReply.body}" `);
+                  else  console.log(`[${time()}] ◎  (${info.name}) : "${body}" <<< Replied -> (${reInfo.name}) :  "${messageReply.body}"`);
 
                   if(check("isBad",event))  console.log(`$$$$$$$ >> `,messageReply.messageID);
+
+                  
 
                   /**
                    * Send Logs for Attachment 
@@ -104,13 +106,13 @@ const logs = async (api,event)=>{
                    getAttachmentsLog(messageReply.attachments)
                   break;   
             case "message_reaction": 
-                  if(isGroup) console.log(`[${time()}] :(${tInfo.threadName} -> ${info.name}) -> ${reaction} react on "${messageID}" `);
-                  else console.log(`[${time()}] : (${info.name}) -> ${reaction} react on "${messageID}"`);
+                  if(isGroup) console.log(`[${time()}] ✩ (${tInfo.threadName} -> ${info.name}) -> ${reaction} react on "${messageID}" `);
+                  else console.log(`[${time()}] ◎  (${info.name}) -> ${reaction} react on "${messageID}"`);
 
                   break;
             case "event": 
                   // console.log(`[${time()}] : (${tInfo.threadName}) "${logMessageBody}"`);
-                  console.log(`[${time()}] : (${threadID}) "${logMessageBody}"`);
+                  console.log(`[${time()}] : (${tInfo.threadName}) "${logMessageBody}"`);
                   break;
 
             
@@ -175,4 +177,16 @@ export default logs;
     '👨🏿‍🎤'.replace(/(?![*#0-9]+)[\p{Emoji}\p{Emoji_Modifier}\p{Emoji_Component}\p{Emoji_Modifier_Base}\p{Emoji_Presentation}]/gu, '').charCodeAt(0)
 
    'Smile😀'.replace(/\p{Emoji}/gu, '');
+
+
+
+   console.table(
+                        COMMANDS.map(command => {
+                              return {
+                                    "Long Option": command.long_option,
+                                    "Short Option": command.short_option,
+                                    Description: command.description
+                              };
+                        })
+                  );
 */
