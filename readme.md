@@ -10,5 +10,8 @@
 ## RESOURCES
 |  whhy      | Link |
 | ----------- | ----------- |
-| images      | https://jrt-api.nguyenhaidang.ml/       |
-| Paragraph   | Text        | 1. https://jrt-api.nguyenhaidang.ml/
+| text into GIF | https://jrt-api.nguyenhaidang.ml/   |    
+| tts         |  https://ttsmp3.com/makemp3_new.php | 
+| bad word    |  https://www.neutrinoapi.com/api/bad-word-filter/ |
+| txt to img  |  https://popcat.xyz/api |
+|             |

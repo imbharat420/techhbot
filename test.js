@@ -1,11 +1,84 @@
 import fs from "fs";
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
+import request from "request"
+
 // import saveOnFile from "./utils/saveOnFile.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
+
+
+
+import axios from "axios";
+import FormData from 'form-data';
+
+
+let url = "https://ttsmp3.com/makemp3_new.php";
+
+var ttsPost = async  ()=>{
+  try{
+      let res = await axios({
+        method:"POST",
+        url:"https://ttsmp3.com/makemp3_new.php",
+        headers: {"Content-Type": "application/x-www-form-urlencoded"},
+        data: {msg:"I LOVE YOU",lang:"Raveena",source:"ttsmp3"}     
+      })
+      console.log(res.data);
+  }catch(err){
+      console.log("error",err.data);
+  }
+}
+
+ttsPost();
+
+
+
+
+
+// const tts = (api,event)=>{
+//     download(url,"./sounds/me.mp3",()=>{
+//       console.log(url);
+//     })
+// }
+
+
+
+// var download = function(uri, filename, callback){
+//     request(uri).pipe(fs.createWriteStream(filename)).on('close', callback);
+// };
+
+
+
+
+
+/*
+//UPLOAD BINARY
+const FormData = require('form-data')
+const fs = require('fs')
+const path = require('path')
+
+const formData = new FormData()
+formData.append('files[]', JSON.stringify({ to: [{ phoneNumber: process.env.RINGCENTRAL_RECEIVER }] }), 'test.json')
+formData.append('files[]', fs.createReadStream(path.join(__dirname, 'test.png')), 'test.png')
+await rc.post('/restapi/v1.0/account/~/extension/~/fax', formData, {
+  headers: formData.getHeaders()
+})
+*/
+
+
+
+
+
+
+
+
+
+
+
+/*
+//Text For MSGS
 
 let users = [
       {
@@ -121,7 +194,7 @@ msgs.map((items)=>{
       }
       saveOnFile(folderName,fileName,object);
 })
-
+*/
 
 // var {
 //       outputName,

@@ -10,6 +10,8 @@ const time = (timestamp) =>{
 }
  
 
+// const out = process.stdout.write.bind(process.stdout);
+// out('foo');
 
 
 const logs = async (api,event)=>{ 
@@ -112,7 +114,7 @@ const logs = async (api,event)=>{
                   break;
             case "event": 
                   // console.log(`[${time()}] : (${tInfo.threadName}) "${logMessageBody}"`);
-                  console.log(`[${time()}] : (${tInfo.threadName}) "${logMessageBody}"`);
+                  console.log(`[${time()}] : (${threadID}) "${logMessageBody}"`);
                   break;
 
             

@@ -96,20 +96,14 @@ fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err,
             console.log(event);   
             unsendMessage(api,event);
       }
-      
+       
 
- 
+
       /**
        * @Description IF MSG Exist as string  
       */
-      if(typeof event.body !== 'string' ) return
 
-      /**
-       * @Description IF MSG Exist as string but empty 
-       * That contain GIF,Sticker
-      */
-      if(event.body == '') return // in this only item which has GIF sticker or only photos
-
+      if(typeof event?.body !== 'string' ) return
 
       /**
        * @Description For Inbuilt Commands sorry
@@ -125,6 +119,42 @@ fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err,
       if(event.type == "message" || event.type == "message_reply" ){      
             saveMsgs(event);         
       }
+
+
+                                                     
+                                                     
+      //         GGGGGGGGGGGGGIIIIIIIIIIFFFFFFFFFFFFFFFFFFFFFF
+      //      GGG::::::::::::GI::::::::IF::::::::::::::::::::F
+      //    GG:::::::::::::::GI::::::::IF::::::::::::::::::::F
+      //   G:::::GGGGGGGG::::GII::::::IIFF::::::FFFFFFFFF::::F
+      //  G:::::G       GGGGGG  I::::I    F:::::F       FFFFFF
+      // G:::::G                I::::I    F:::::F             
+      // G:::::G                I::::I    F::::::FFFFFFFFFF   
+      // G:::::G    GGGGGGGGGG  I::::I    F:::::::::::::::F   
+      // G:::::G    G::::::::G  I::::I    F:::::::::::::::F   
+      // G:::::G    GGGGG::::G  I::::I    F::::::FFFFFFFFFF   
+      // G:::::G        G::::G  I::::I    F:::::F             
+      //  G:::::G       G::::G  I::::I    F:::::F             
+      //   G:::::GGGGGGGG::::GII::::::IIFF:::::::FF           
+      //    GG:::::::::::::::GI::::::::IF::::::::FF           
+      //      GGG::::::GGG:::GI::::::::IF::::::::FF           
+      //         GGGGGG   GGGGIIIIIIIIIIFFFFFFFFFFF           
+
+
+                                                                                 
+
+      
+      /**
+       * @Description IF MSG Exist as string but empty 
+       * That contain GIF,Sticker
+      */
+
+      // in this only item which has GIF sticker or only photos
+
+      if(event.body === '' ){
+            
+      }
+
   })
 })
 
