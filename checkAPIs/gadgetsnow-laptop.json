@@ -1,0 +1,583 @@
+// GET  https://www.gadgetsnow.com/pwafeeds/gnow/mweb/list/gadgets/json?path=/productShortDetail/&category=laptop&uName=HP-Victus-16-Laptop-AMD-Ryzen-7-5800H-Nvidia-GeForce-RTX-3060-32GB-1TB-SSD-Windows-10,Lenovo-IdeaPad-5-82LN00A3IN-Laptop-AMD-Ryzen-7-5700U-AMD-Radeon-16GB-512GB-SSD-Windows-10&isInLine=N
+
+{
+    "jsonFeed": {
+        "data": {
+            "pg": {
+                "np": "",
+                "pp": 20,
+                "cp": 1,
+                "lp": []
+            },
+            "items": [
+                {
+                    "productId": "G240936",
+                    "productName": "HP Victus 16 Laptop AMD Ryzen 7 5800H Nvidia GeForce RTX 3060  32GB 1TB SSD Windows 10",
+                    "imageId": 82839477,
+                    "imageversion": 1,
+                    "product_image": "/thumb/msid-82839477,width-218,resizemode-4,imgv-1/HP-Victus-16-Laptop-AMD-Ryzen-7-5800H-Nvidia-GeForce-RTX-3060-32GB-1TB-SSD-Windows-10.jpg",
+                    "product_imageList": [
+                        82839477
+                    ],
+                    "productUName": "HP-Victus-16-Laptop-AMD-Ryzen-7-5800H-Nvidia-GeForce-RTX-3060-32GB-1TB-SSD-Windows-10",
+                    "price": "57200.0",
+                    "avgrating": "4.5",
+                    "ratings": [
+                        {
+                            "rating": 5,
+                            "count": 1
+                        },
+                        {
+                            "rating": 4,
+                            "count": 1
+                        }
+                    ],
+                    "reviews": {
+                        "msid": 82839470,
+                        "parentid": 0,
+                        "reviewdetail": [
+                            {
+                                "msid": 82839470,
+                                "parentid": 53049822,
+                                "hostid": 307,
+                                "cmstype": "ARTICLE",
+                                "status": "ACTIVE",
+                                "title": "HP Victus 16 Laptop AMD Ryzen 7 5800H Nvidia GeForce RTX 3060  32GB 1TB SSD Windows 10",
+                                "cmssource": "CMSLITE",
+                                "parenttitle": "hp",
+                                "titleforurl": "hp victus 16 laptop amd ryzen 7 5800h nvidia geforce rtx 3060  32gb 1tb ssd windows 10",
+                                "seopath": "laptops/hp/hp-victus-16-laptop-amd-ryzen-7-5800h-nvidia-geforce-rtx-3060-32gb-1tb-ssd-windows-10",
+                                "insertdate": 1621618960000,
+                                "updatedate": 1621618961050,
+                                "createdby": "techgadgetuser@service.til.in",
+                                "agency": {
+                                    "id": 87654322
+                                },
+                                "metainfo": {
+                                    "LastPublishMilliTime": {
+                                        "id": 529,
+                                        "value": "1621618961067"
+                                    },
+                                    "GadgetsBrand": {
+                                        "id": 189,
+                                        "value": "HP"
+                                    },
+                                    "ReadabilityGradeLevel": {
+                                        "id": 498,
+                                        "value": "Tenth Grade"
+                                    },
+                                    "NumberOfCharacters": {
+                                        "id": 494,
+                                        "value": "86"
+                                    },
+                                    "GadgetsCategory": {
+                                        "id": 188,
+                                        "value": "laptop"
+                                    },
+                                    "NumberOfWords": {
+                                        "id": 495,
+                                        "value": "17"
+                                    },
+                                    "AutomatedReadabilityIndex": {
+                                        "id": 497,
+                                        "value": "11"
+                                    },
+                                    "GadgetsPrimaryGadget": {
+                                        "id": 434,
+                                        "value": "HP-Victus-16-Laptop-AMD-Ryzen-7-5800H-Nvidia-GeForce-RTX-3060-32GB-1TB-SSD-Windows-10"
+                                    },
+                                    "HashCode": {
+                                        "id": 468,
+                                        "value": "1550188038"
+                                    },
+                                    "latestnewsflag": {
+                                        "id": 73,
+                                        "value": "1"
+                                    },
+                                    "NumberOfSentences": {
+                                        "id": 496,
+                                        "value": "1"
+                                    },
+                                    "GadgetsMarkedReviewed": {
+                                        "id": 436,
+                                        "value": "0"
+                                    },
+                                    "GadgetsModel": {
+                                        "id": 190,
+                                        "value": "Victus 16 Laptop AMD Ryzen 7 5800H Nvidia GeForce RTX 3060  32GB 1TB SSD Windows 10"
+                                    }
+                                },
+                                "cache": "VALID"
+                            }
+                        ]
+                    },
+                    "variants": [],
+                    "productUrl": "/laptops/HP-Victus-16-Laptop-AMD-Ryzen-7-5800H-Nvidia-GeForce-RTX-3060-32GB-1TB-SSD-Windows-10",
+                    "gadgetDescription": "If you are looking for an ideal computing device then HP Victus 16 Laptop AMD Ryzen 7 5800H Nvidia GeForce RTX 3060  32GB 1TB SSD Windows 10 is amongst the most sought after devices that you can go for.<br/><br />This laptop is compact and lightweight hence you can easily carry it in your backpack. The dimensions of the HP Victus 16 Laptop AMD Ryzen 7 5800H Nvidia GeForce RTX 3060  32GB 1TB SSD Windows 10 are 249 x 357 x 16.95 mm and it weighs around 1.5 Kg.<br/><br />This HP Victus 16 Laptop AMD Ryzen 7 5800H Nvidia GeForce RTX 3060  32GB 1TB SSD Windows 10 comes with a sturdy, full-length, and ergonomically designed Full RGB Backlit Keyboard so that you can work comfortably for extended working hours. In addition to this, the laptop is equipped with a high-quality Li-Ion. There are zero chances of overheating or battery swelling<br/><br />You can buy the HP Victus 16 Laptop AMD Ryzen 7 5800H Nvidia GeForce RTX 3060  32GB 1TB SSD Windows 10 in India at Rs 57,200. Also, you get a warranty of 1 Year from the manufacturer from the date of purchase.",
+                    "brand": "HP",
+                    "keyFeature": {
+                        "storage": "1TB SSD",
+                        "display": "16 Inches",
+                        "processor": "AMD Ryzen 7 5800H",
+                        "performance": "Nvidia GeForce RTX 3060",
+                        "ram": "32GB",
+                        "battery": "Li-Ion",
+                        "price_in_india": "57200"
+                    },
+                    "affLabel": "SEE ALSO",
+                    "affArray": [
+                        {
+                            "isExactMatch": false,
+                            "affiliate": "amazon",
+                            "affName": "HP Victus Gaming Latest AMD Ryzen 7-5800H Processor 16.1inch(40.9cm) QHD Gaming Laptop (16GB RAM/ 1TB SSD/6GB RTX 3060 Graphics/165Hz/3Ms Response Time/Alexa/Win 11/ MSO/ Xbox Game Pass)- 16-e0362ax",
+                            "affurl": "https://www.gadgetsnow.com/affiliate_amazon.cms?url=%2Fdp%2FB09LM6CYC4%3Ftag%3Dtimofind-21%26linkCode%3Dogi%26th%3D1%26psc%3D1&price=108290&title=HP%20Victus%20Gaming%20Latest%20AMD%20Ryzen%207-5800H%20Processor%2016.1inch(40.9cm)%20QHD%20Gaming%20Laptop%20(16GB%20RAM%2F%201TB%20SSD%2F6GB%20RTX%203060%20Graphics%2F165Hz%2F3Ms%20Response%20Time%2FAlexa%2FWin%2011%2F%20MSO%2F%20Xbox%20Game%20Pass)-%2016-e0362ax&tag=mweb_articleshow_seealso-21",
+                            "imgUrl": "https://m.media-amazon.com/images/I/31wx6mVi0+L._SL75_.jpg",
+                            "afflogourl": "https://static.toiimg.com/photo/msid-85659033,resizemode-4/85659033.cms",
+                            "listPrice": 140347,
+                            "lowestPrice": 108290,
+                            "pricePercentage": "22.84"
+                        },
+                        {
+                            "isExactMatch": false,
+                            "affiliate": "croma",
+                            "affName": "HP Pavilion x360 14-dy0208TU Intel Core i3 11th Gen (14 inch, 8GB, 512GB, Windows 11 Home, MS Office 2019, Intel UHD, IPS Display, Spruce Blue, 67G61PA#ACJ)",
+                            "affurl": "https://www.gadgetsnow.com/affiliate.cms?url=https%3A%2F%2Fwww.croma.com%2Fhp-pavilion-x360-14-dy0208tu-intel-core-i3-11th-gen-14-inch-8gb-512gb-windows-11-home-ms-office-2019-intel-uhd-ips-display-spruce-blue-67g61pa-acj-%2Fp%2F257191%3Futm_source%3Dgadgetsnow%26utm_medium%3Daffiliate%26utm_campaign%3Dmweb_articleshow&logo=84466844",
+                            "imgUrl": "https://media.croma.com/image/upload/v1666277561/Croma%20Assets/Computers%20Peripherals/Tablets%20and%20iPads/Images/257191_0_xjcm3m.png",
+                            "afflogourl": "https://static.toiimg.com/photo/msid-93203333,resizemode-4/93203333.jpg",
+                            "listPrice": 69267,
+                            "lowestPrice": 56490,
+                            "pricePercentage": "18.45"
+                        }
+                    ],
+                    "categoryName": "laptop"
+                },
+                {
+                    "productId": "G281616",
+                    "productName": "Lenovo IdeaPad 5 82LN00A3IN Laptop AMD Ryzen 7 5700U AMD Radeon 16GB 512GB SSD Windows 10",
+                    "imageId": 87367871,
+                    "imageversion": 1,
+                    "product_image": "/thumb/msid-83206127,width-218,resizemode-4,imgv-1/Lenovo-IdeaPad-5-82LN00A3IN-Laptop-AMD-Ryzen-7-5700U-AMD-Radeon-16GB-512GB-SSD-Windows-10.jpg",
+                    "product_imageList": [
+                        83206127,
+                        87367864,
+                        87367869,
+                        87367871
+                    ],
+                    "productUName": "Lenovo-IdeaPad-5-82LN00A3IN-Laptop-AMD-Ryzen-7-5700U-AMD-Radeon-16GB-512GB-SSD-Windows-10",
+                    "price": "77999.0",
+                    "avgrating": "4.5",
+                    "ratings": [
+                        {
+                            "rating": 5,
+                            "count": 1
+                        },
+                        {
+                            "rating": 4,
+                            "count": 1
+                        }
+                    ],
+                    "reviews": {
+                        "msid": 83206125,
+                        "parentid": 0,
+                        "reviewdetail": [
+                            {
+                                "msid": 83206125,
+                                "parentid": 53419531,
+                                "hostid": 307,
+                                "cmstype": "ARTICLE",
+                                "status": "ACTIVE",
+                                "title": "Lenovo IdeaPad 5 82LN00A3IN Laptop AMD Ryzen 7 5700U AMD Radeon 16GB 512GB SSD Windows 10",
+                                "cmssource": "CMSLITE",
+                                "parenttitle": "lenovo",
+                                "titleforurl": "lenovo ideapad 5 82ln00a3in laptop amd ryzen 7 5700u amd radeon 16gb 512gb ssd windows 10",
+                                "seopath": "laptops/lenovo/lenovo-ideapad-5-82ln00a3in-laptop-amd-ryzen-7-5700u-amd-radeon-16gb-512gb-ssd-windows-10",
+                                "insertdate": 1622728101000,
+                                "updatedate": 1622728101670,
+                                "createdby": "techgadgetuser@service.til.in",
+                                "agency": {
+                                    "id": 87654322
+                                },
+                                "metainfo": {
+                                    "LastPublishMilliTime": {
+                                        "id": 529,
+                                        "value": "1622728101682"
+                                    },
+                                    "GadgetsBrand": {
+                                        "id": 189,
+                                        "value": "Lenovo"
+                                    },
+                                    "ReadabilityGradeLevel": {
+                                        "id": 498,
+                                        "value": "Twelfth Grade"
+                                    },
+                                    "NumberOfCharacters": {
+                                        "id": 494,
+                                        "value": "89"
+                                    },
+                                    "GadgetsCategory": {
+                                        "id": 188,
+                                        "value": "laptop"
+                                    },
+                                    "NumberOfWords": {
+                                        "id": 495,
+                                        "value": "16"
+                                    },
+                                    "AutomatedReadabilityIndex": {
+                                        "id": 497,
+                                        "value": "13"
+                                    },
+                                    "GadgetsPrimaryGadget": {
+                                        "id": 434,
+                                        "value": "Lenovo-IdeaPad-5-82LN00A3IN-Laptop-AMD-Ryzen-7-5700U-AMD-Radeon-16GB-512GB-SSD-Windows-10"
+                                    },
+                                    "HashCode": {
+                                        "id": 468,
+                                        "value": "-1091774474"
+                                    },
+                                    "latestnewsflag": {
+                                        "id": 73,
+                                        "value": "1"
+                                    },
+                                    "NumberOfSentences": {
+                                        "id": 496,
+                                        "value": "1"
+                                    },
+                                    "GadgetsMarkedReviewed": {
+                                        "id": 436,
+                                        "value": "0"
+                                    },
+                                    "GadgetsModel": {
+                                        "id": 190,
+                                        "value": "IdeaPad 5 82LN00A3IN Laptop AMD Ryzen 7 5700U AMD Radeon 16GB 512GB SSD Windows 10"
+                                    }
+                                },
+                                "cache": "VALID"
+                            }
+                        ]
+                    },
+                    "variants": [],
+                    "productUrl": "/laptops/Lenovo-IdeaPad-5-82LN00A3IN-Laptop-AMD-Ryzen-7-5700U-AMD-Radeon-16GB-512GB-SSD-Windows-10",
+                    "gadgetDescription": "If you are looking for an ideal computing device then Lenovo IdeaPad 5 82LN00A3IN Laptop AMD Ryzen 7 5700U AMD Radeon 16GB 512GB SSD Windows 10 is amongst the most sought after devices that you can go for. The laptop features a AMD Ryzen 7 5700U with 1.8 GHz clock speed so that you can multitask with ease and accomplish your tasks timely<br/><br />This laptop is compact and lightweight hence you can easily carry it in your backpack. The dimensions of the Lenovo IdeaPad 5 82LN00A3IN Laptop AMD Ryzen 7 5700U AMD Radeon 16GB 512GB SSD Windows 10 are 35.7 x 23.3 x 2 cm and it weighs around 1.66 Kg.<br/><br />This Lenovo IdeaPad 5 82LN00A3IN Laptop AMD Ryzen 7 5700U AMD Radeon 16GB 512GB SSD Windows 10 comes with a sturdy, full-length, and ergonomically designed Standard Notebook Keyboard so that you can work comfortably for extended working hours. In addition to this, the laptop is equipped with a high-quality Li-Ion. There are zero chances of overheating or battery swelling<br/><br />You can buy the Lenovo IdeaPad 5 82LN00A3IN Laptop AMD Ryzen 7 5700U AMD Radeon 16GB 512GB SSD Windows 10 in India at Rs 77,999. Also, you get a warranty of 1 Year from the manufacturer from the date of purchase.",
+                    "brand": "Lenovo",
+                    "keyFeature": {
+                        "storage": "512GB SSD",
+                        "display": "15.6 Inches",
+                        "processor": "AMD Ryzen 7 5700U",
+                        "performance": "AMD Radeon",
+                        "ram": "16GB",
+                        "battery": "Li-Ion",
+                        "price_in_india": "77999"
+                    },
+                    "affLabel": "BUY",
+                    "affArray": [
+                        {
+                            "isExactMatch": true,
+                            "affiliate": "amazon",
+                            "affName": "Lenovo IdeaPad Slim 5 AMD Ryzen 7 5700U 15.6 inches(39.6cm) FHD IPS Thin & Light Business Laptop (16GB/512GB SSD/Windows 10/MS Office/Backlit Keyboard/Fingerprint Reader/Graphite Grey/1.66Kg)",
+                            "affurl": "https://www.gadgetsnow.com/affiliate_amazon.cms?url=%2Fdp%2FB095KMNZCW%3Ftag%3Dtimofind-21%26linkCode%3Dogi%26th%3D1%26psc%3D1&price=87000&title=Lenovo%20IdeaPad%20Slim%205%20AMD%20Ryzen%207%205700U%2015.6%20inches(39.6cm)%20FHD%20IPS%20Thin%20%26%20Light%20Business%20Laptop%20(16GB%2F512GB%20SSD%2FWindows%2010%2FMS%20Office%2FBacklit%20Keyboard%2FFingerprint%20Reader%2FGraphite%20Grey%2F1.66Kg)&tag=mweb_articleshow_buyat-21",
+                            "imgUrl": "https://m.media-amazon.com/images/I/41jzbBcb8bL._SL75_.jpg",
+                            "listPrice": 98999,
+                            "afflogourl": "https://static.toiimg.com/photo/msid-85659033,resizemode-4/85659033.cms",
+                            "lowestPrice": 87000,
+                            "pricePercentage": "12.12"
+                        },
+                        {
+                            "isExactMatch": false,
+                            "affiliate": "croma",
+                            "affName": "Lenovo IdeaPad 5 Pro 14ITL6 Intel Core i7 11th Gen (14 inch, 16GB, 512GB, Windows 11, MS Office 2021, Intel Iris Xe Graphics, FHD IPS Display, Story Grey, 82L300CAIN)",
+                            "affurl": "https://www.gadgetsnow.com/affiliate.cms?url=https%3A%2F%2Fwww.croma.com%2Flenovo-ideapad-5-pro-14itl6-intel-core-i7-11th-gen-14-inch-16gb-512gb-windows-11-ms-office-2021-intel-iris-xe-graphics-fhd-ips-display-story-grey-82l300cain-%2Fp%2F252761%3Futm_source%3Dgadgetsnow%26utm_medium%3Daffiliate%26utm_campaign%3Dmweb_articleshow&logo=84466844",
+                            "imgUrl": "https://media.croma.com/image/upload/v1663349234/Croma%20Assets/Computers%20Peripherals/Laptop/Images/252761_0_wvlqai.png",
+                            "afflogourl": "https://static.toiimg.com/photo/msid-93203333,resizemode-4/93203333.jpg",
+                            "listPrice": 124490,
+                            "lowestPrice": 77490,
+                            "pricePercentage": "37.75"
+                        }
+                    ],
+                    "categoryName": "laptop"
+                }
+            ]
+        },
+        "category": {
+            "mobile": {
+                "id": "mobile",
+                "name": "Mobiles",
+                "caps": "MOBILES",
+                "seo": "mobile-phones",
+                "weightage": {
+                    "Apple": 1,
+                    "Samsung": 2,
+                    "Xiaomi": 3,
+                    "OnePlus": 4,
+                    "Vivo": 5,
+                    "OPPO": 6,
+                    "RealMe": 7,
+                    "Motorola": 8,
+                    "Google": 9
+                }
+            },
+            "laptop": {
+                "id": "laptop",
+                "name": "Laptops",
+                "caps": "LAPTOPS",
+                "seo": "laptops",
+                "weightage": {
+                    "Apple": 1,
+                    "Dell": 2,
+                    "HP": 3,
+                    "Lenovo": 4,
+                    "Asus": 5,
+                    "Acer": 6,
+                    "Xiaomi": 7,
+                    "HCL": 8
+                }
+            },
+            "tablet": {
+                "id": "tablet",
+                "name": "Tablets",
+                "caps": "TABLETS",
+                "seo": "tablets",
+                "weightage": {
+                    "Apple": 1,
+                    "Samsung": 2,
+                    "Lenovo": 3,
+                    "Alcatel": 4,
+                    "Xiaomi": 5,
+                    "Micromax": 6,
+                    "Nokia": 7,
+                    "RealMe": 8,
+                    "Microsoft": 9
+                }
+            },
+            "camera": {
+                "id": "camera",
+                "name": "Cameras",
+                "caps": "CAMERAS",
+                "seo": "cameras"
+            },
+            "tv": {
+                "id": "tv",
+                "name": "TVs",
+                "caps": "TVs",
+                "seo": "television",
+                "weightage": {
+                    "Sony": 1,
+                    "Samsung": 2,
+                    "OnePlus": 3,
+                    "LG": 4,
+                    "Xiaomi": 5,
+                    "RealMe": 6,
+                    "Micromax": 7,
+                    "Panasonic": 8
+                }
+            },
+            "powerbank": {
+                "id": "powerbank",
+                "name": "Powerbanks",
+                "caps": "POWERBANKS",
+                "seo": "powerbank"
+            },
+            "smartwatch": {
+                "id": "smartwatch",
+                "name": "Smartwatches",
+                "caps": "SMARTWATCH",
+                "seo": "smartwatch",
+                "weightage": {
+                    "Apple": 1,
+                    "Samsung": 2,
+                    "Amazfit": 3,
+                    "Noise": 4,
+                    "RealMe": 5,
+                    "OnePlus": 6,
+                    "Honor": 7,
+                    "Garmin": 8,
+                    "Fossil": 9
+                }
+            },
+            "ac": {
+                "id": "ac",
+                "name": "ACs",
+                "caps": "ACs",
+                "seo": "ac",
+                "weightage": {
+                    "Blue-Star": 1,
+                    "Carrier": 2,
+                    "Lloyd": 3,
+                    "Hitachi": 4,
+                    "LG": 5,
+                    "O-General": 6,
+                    "Mitsubishi": 7
+                }
+            },
+            "washingmachine": {
+                "id": "washingmachine",
+                "name": "Washing M/Cs",
+                "caps": "WASHING M/Cs",
+                "seo": "washingmachine",
+                "weightage": {
+                    "Whirlpool": 1,
+                    "LG": 2,
+                    "Samsung": 3,
+                    "Godrej": 4,
+                    "Haier": 5,
+                    "IFB": 6,
+                    "Bosch": 7
+                }
+            },
+            "refrigerator": {
+                "glid": "60016991",
+                "id": "refrigerator",
+                "name": "Refrigerators",
+                "caps": "REFRIGERATOR",
+                "seo": "refrigerator",
+                "weightage": {
+                    "Samsung": 1,
+                    "LG": 2,
+                    "Whirlpool": 3,
+                    "Haier": 4,
+                    "Godrej": 5,
+                    "Videocon": 6,
+                    "Bosch": 7
+                }
+            },
+            "fitnessband": {
+                "id": "fitnessband",
+                "name": "Fitnessbands",
+                "caps": "FITNESSBANDS",
+                "seo": "fitnessband",
+                "weightage": {
+                    "Xiaomi": 1,
+                    "Honor": 2,
+                    "Samsung": 3,
+                    "Huawei": 4,
+                    "Fitbit": 5
+                }
+            },
+            "epilator": {
+                "id": "epilator",
+                "name": "Epilators",
+                "caps": "Epilators",
+                "seo": "epilators",
+                "seoFormate": "other"
+            },
+            "haircurler": {
+                "id": "haircurler",
+                "name": "Hair Curlers",
+                "caps": "Hair Curlers",
+                "seo": "haircurlers",
+                "seoFormate": "other"
+            },
+            "hairdryer": {
+                "id": "hairdryer",
+                "name": "Hair Dryers",
+                "caps": "Hair Dryers",
+                "seo": "hairdryers",
+                "seoFormate": "other"
+            },
+            "hairstraightener": {
+                "id": "hairstraightener",
+                "name": "Hair Straighteners",
+                "caps": "Hair Straighteners",
+                "seo": "hairstraighteners",
+                "seoFormate": "other"
+            },
+            "trimmer": {
+                "id": "trimmer",
+                "name": "Trimmers",
+                "caps": "Trimmers",
+                "seo": "trimmers",
+                "seoFormate": "other"
+            },
+            "microwave": {
+                "id": "microwave",
+                "name": "Microwave",
+                "caps": "Microwave",
+                "seo": "microwave",
+                "seoFormate": "other"
+            },
+            "bluetoothspeaker": {
+                "id": "bluetoothspeaker",
+                "name": "Bluetooth Speakers",
+                "caps": "Bluetooth Speakers",
+                "seo": "bluetooth-speakers",
+                "seoFormate": "other"
+            },
+            "headphones": {
+                "id": "headphones",
+                "name": "Headphones",
+                "caps": "Headphones",
+                "seo": "headphones",
+                "seoFormate": "other"
+            },
+            "airpurifier": {
+                "id": "airpurifier",
+                "name": "Air Purifiers",
+                "caps": "Air Purifiers",
+                "seo": "air-purifiers",
+                "seoFormate": "other"
+            },
+            "waterpurifier": {
+                "id": "waterpurifier",
+                "name": "Water Purifiers",
+                "caps": "Water Purifiers",
+                "seo": "water-purifiers",
+                "seoFormate": "other"
+            },
+            "airfryer": {
+                "id": "airfryer",
+                "name": "Air Fryers",
+                "caps": "Air Fryers",
+                "seo": "air-fryers",
+                "seoFormate": "other"
+            },
+            "iron": {
+                "id": "iron",
+                "name": "Irons",
+                "caps": "Irons",
+                "seo": "irons",
+                "seoFormate": "other"
+            },
+            "fan": {
+                "id": "fan",
+                "name": "Fans",
+                "caps": "Fans",
+                "seo": "fans",
+                "seoFormate": "other"
+            },
+            "aircooler": {
+                "id": "aircooler",
+                "name": "Air Coolers",
+                "caps": "Air Coolers",
+                "seo": "air-coolers",
+                "seoFormate": "other"
+            },
+            "handblender": {
+                "id": "handblender",
+                "name": "Hand Blenders",
+                "caps": "Hand Blenders",
+                "seo": "hand-blenders",
+                "seoFormate": "other"
+            },
+            "foodprocessor": {
+                "id": "foodprocessor",
+                "name": "Food Processors",
+                "caps": "Food Processors",
+                "seo": "food-processors",
+                "seoFormate": "other"
+            },
+            "chimney": {
+                "id": "chimney",
+                "name": "Chimneys",
+                "caps": "Chimneys",
+                "seo": "chimneys",
+                "seoFormate": "other"
+            },
+            "roomheater": {
+                "id": "roomheater",
+                "name": "Room Heaters",
+                "caps": "Room Heaters",
+                "seo": "room-heaters",
+                "seoFormate": "other"
+            }
+        }
+    }
+}

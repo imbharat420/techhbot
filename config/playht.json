@@ -1,0 +1,7 @@
+{
+    "narrationStyle": "regular",
+    "platform":"landing_demo",
+    "userId":"public-access",
+    "voice":"ja-JP-Wavenet-B",
+    "ssml":"<speak><p>hello aa</p></speak>"
+}
