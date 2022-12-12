@@ -70,3 +70,5 @@ https://github.com/duckduckgo/zeroclickinfo-goodies/blob/master/share/goodie/che
 
 //fortune_telling
 https://github.com/dariusk/corpora/blob/master/data/divination/tarot_interpretations.json
+
+https://pastebin.com/eqEjSNRi

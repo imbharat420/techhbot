@@ -6,13 +6,92 @@ import request from "request"
 // import saveOnFile from "./utils/saveOnFile.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
-
-
-
-
 import axios from "axios";
 import FormData from 'form-data';
+
+import dotenv from "dotenv";
+
+dotenv.config();
+
+// import photomania from "./config/photomania.json"
+
+
+const filter = async (img_id)=>{
+      let photoId = img_id;
+      let effectId = "520fdb6592237be077cf99eb"
+
+       const form = new FormData();
+      form.append("photoId",img_id)
+      form.append('effectId',effectId);
+      const request_config = {
+            headers: {...form.getHeaders()}
+      };
+      console.log("data");
+      try{
+        let {data} = await axios.post(process.env.FILTER_RENDER,form,request_config);
+        console.log(data);   
+      }catch(err){
+            console.log(err);
+      }
+}
+
+
+
+const upload = async ()=>{
+      const form = new FormData();
+      form.append("name","rahul.jpg")
+      form.append('file', fs.createReadStream("rahul.png"));
+      const request_config = {
+            headers: {...form.getHeaders()}
+      };
+      try{
+            let {data} = await axios.post(process.env.FILTER_UPLOAD,form,request_config);
+            let {id,url,url_secure,width,height,expires_at} = data
+            filter(id);
+      }catch(err){
+            console.log(err);
+      }  
+
+}
+
+// upload()
+
+
+
+
+
+
+
+
+
+// import { Configuration, OpenAIApi } from "openai";
+
+// const configuration = new Configuration({
+//   apiKey: process.env.OPENAI_API_KEY,
+// });
+// const openai = new OpenAIApi(configuration);
+
+// const response = await openai.createCompletion({
+//   model: "text-davinci-003",
+//   prompt: "I am a highly intelligent question answering bot. If you ask me a question that is rooted in truth, I will give you the answer. If you ask me a question that is nonsense, trickery, or has no clear answer, I will respond with \"Unknown\".\n\nQ: What is human life expectancy in the United States?\nA: Human life expectancy in the United States is 78 years.\n\nQ: Who was president of the United States in 1955?\nA: Dwight D. Eisenhower was president of the United States in 1955.\n\nQ: Which party did he belong to?\nA: He belonged to the Republican Party.\n\nQ: What is the square root of banana?\nA: Unknown\n\nQ: How does a telescope work?\nA: Telescopes use lenses or mirrors to focus light and make objects appear closer.\n\nQ: Where were the 1992 Olympics held?\nA: The 1992 Olympics were held in Barcelona, Spain.\n\nQ: How many squigs are in a bonk?\nA: Unknown\n\nQ: Where is the Valley of Kings?\nA:",
+//   temperature: 0,
+//   max_tokens: 100,
+//   top_p: 1,
+//   frequency_penalty: 0.0,
+//   presence_penalty: 0.0,
+//   stop: ["\n"],
+// });
+
+// console.log(response);
+
+
+
+
+
+
+
+
+/*
 
 
 let url = "https://ttsmp3.com/makemp3_new.php";
@@ -33,7 +112,7 @@ var ttsPost = async  ()=>{
 
 ttsPost();
 
-
+*/
 
 
 

@@ -28,6 +28,22 @@
 | tts | https://imtranslator.net/translation/tts-voice/ |
 | tts | https://texttospeech.wideo.co/ |
 | melodybytes | https://api.gardosnetwork.com/c_melobytes_com/run/melobytes/?token=6efdd30167020499b546e21ae4ea3676fe0afa495621c6794acc3877448f606a |
+
+| images  | https://picsum.photos/v2/list?page=1&limit=1 |
+| lyrics | https://docs.genius.com/#annotations-h2 |
+|  quiz     | https://quiz-api.vulcanwm.repl.co/api/all ![docs](https://github.com/VulcanWM/Quiz-API/blob/API/APILANG/nodejs.md) |
+|   amime image   |  https://apikanna.change-itit.repl.co/ |
+| anime image | https://apisagiri.khoahoang3.repl.co/ |
+| anime image | https://nekos.life/api/v2/img/neko |
+| Cosplay anime | https://api.zacros.my.id/ |
+| NSFW anime | https://api.xteam.xyz/randomimage/tentacles?apikey=MIMINETBOT |
+
+| tiktok download also  | https://api.xteam.xyz/ |
+| MOON |  https://www.moongiant.com/phase/11/11/2001/ ![images](https://www.moongiant.com/images/today_phase/?C=M;O=D)|
+| name avatar |  https://ui-avatars.com/api/?name=mohan |
+|  face avatar |  https://avatars.dicebear.com/api/male/john.svg?mood[]=happy&mood[]=sad |
+
+
 ## CHECK 
 
 **ISSUE 
@@ -75,9 +91,6 @@ file: (binary)
 ```
 
 https://photomania.net/render
-
-
-
 <!-- Formdata -->
 photoId: bd9523e6c7ad01e949cfd8f07dab2b42
 effectId: 520fb17992237bdc7726726c
@@ -197,3 +210,38 @@ source: web
 
 
 https://www.gadgetsnow.com/pwafeeds/gnow/mweb/list/gadgets/json?path=/productShortDetail/&category=mobile&uName=Apple-iPhone-13-Pro-Max,Google-Pixel-7&isInLine=N
+
+
+
+
+
+
+
+https://sentencechecker.com/v2/check
+
+language=tl-PH&text=Use QuillBot's free online grammar checker tool to perfect your English by reviewing your writing for grammar, spellng, and punctuation errors.&disabledRules=WHITESPACE_RULE
+
+language=en-US&text=Use QuillBot's free online grammar checker tool to perfect your English by reviewing your writing for grammar, spellng, and punctuation errors.&disabledRules=WHITESPACE_RULE
+
+
+
+
+https://app.micmonster.com/restapi/create
+
+//formdata
+locale:ja-JP
+content:<voice name="su-ID-TutiNeural">hello</voice>
+ip:77.245.57.108
+
+
+
+https://pointerpointer.com/images/710.jpg   (1 to 710)
+
+
+https://waifulabs.com/generate  (check console)
+
+https://api.popcat.xyz/caution?text=query
+
+https://popcat.xyz/api
+
+

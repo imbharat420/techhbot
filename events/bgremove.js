@@ -29,7 +29,7 @@ async function removeFromImgUrl(url,outputFile,cb) {
   try {
     let a = {
       url,
-      apiKey: "2Z55AjQezWSwSXDopYnhxiZb",
+      apiKey: process.env.REMOVE_BG_API,
       size: "regular",
       type: "product",
       outputFile
