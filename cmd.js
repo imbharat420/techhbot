@@ -78,6 +78,8 @@ export default  (api,event,role)=>{
     let vip = {
       "savePhoto":savePhoto,
       "unsend":unsend,
+
+
       ...user
     }
     

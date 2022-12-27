@@ -1,3 +1,13 @@
+{
+      "data": "https://www.codepen.com",
+      "config": {"body":"pointed-smooth","eye":"frame2","eyeBall":"ball2","erf1":["fv"],"erf2":[],"erf3":[],"brf1":["fv"],"brf2":[],"brf3":[],"bodyColor":"#3b5998","bgColor":"#FFFFFF","eye1Color":"#3B5998","eye2Color":"#3b5998","eye3Color":"#3b5998","eyeBall1Color":"#3b5998","eyeBall2Color":"#3b5998","eyeBall3Color":"#3b5998","gradientColor1":"#2C4270","gradientColor2":"#476CB9","gradientType":"linear","gradientOnEyes":false,"logo":"#vimeo-circle"},
+      "size": 1000,
+      "download": "imageUrl",
+      "file": "svg"
+  }
+
+
+
 apiDomain + "/qr/custom?download=true&file=" + e + "&data=" + encodeURIComponent(r.getTypeData(r.tempQrcode.type)) + "&size=" + r.tempQrcode.size + "&config=" + encodeURIComponent(JSON.stringify(r.tempQrcode.config))
    
  method: "post",

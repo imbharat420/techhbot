@@ -7,7 +7,7 @@ const downloadFile = async (currentReturnUrl, name, isLast = false)=> {
     let dirpos = __dirname + '/imgs'
     let path = Path.join(dirpos, name);
     Axios({
-        method: 'GET',
+        method: 'GET', 
         url: currentReturnUrl,
         responseType: 'stream'
     }).then(async function(response){ 

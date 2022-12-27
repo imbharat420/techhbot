@@ -42,8 +42,16 @@
 | MOON |  https://www.moongiant.com/phase/11/11/2001/ ![images](https://www.moongiant.com/images/today_phase/?C=M;O=D)|
 | name avatar |  https://ui-avatars.com/api/?name=mohan |
 |  face avatar |  https://avatars.dicebear.com/api/male/john.svg?mood[]=happy&mood[]=sad |
+| Couple Name Join | https://couplenamegenerator.com/wk/mix-names/Jork-Yiesha |
+
+| picsum | https://picsum.photos/v2/list |
+
+| GOOGLE SUGGESTION | https://suggestqueries.google.com/complete/search?output=toolbar&hl=en&q=CUT |
+| University | https://unstop.com/api/autocomplete/indira/Organisation/name |
+| color rectangle | https://singlecolorimage.com/get/311d81/400x100 |
 
 
+| colors with name | https://colornames.org/color/ecd2fb |
 ## CHECK 
 
 **ISSUE 

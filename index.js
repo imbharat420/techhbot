@@ -1,167 +1,143 @@
 import fca from 'fca-unofficial';
 import fs from 'fs';
-import cmd from "./cmd.js";
+import cmd from './cmd.js';
 
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-import {
-      wife,
-      motivation
-} from "./utils/quote.js"
+import { wife, motivation } from './utils/quote.js';
 import logs from './utils/logs.js';
 import wait from './utils/wait.js';
 
-
 // Events
-import saveMsgs from "./events/saveMsgs.js";
-import {userInfo,userReplyInfo} from './events/userInfo.js';
-import loopMsg from "./events/loopMsg.js";
-import unsendMessage from "./events/unsendMessage.js";
+import saveMsgs from './events/saveMsgs.js';
+import { userInfo, userReplyInfo } from './events/userInfo.js';
+import loopMsg from './events/loopMsg.js';
+import unsendMessage from './events/unsendMessage.js';
 
-
-
-
-import dotenv from "dotenv";
-dotenv.config() 
-
-
+import dotenv from 'dotenv';
+dotenv.config();
 
 function prefix(msg) {
   if (typeof msg !== 'string') return false;
-  if (msg.substring(1, 0) !== "~") return false;
+  if (msg.substring(1, 0) !== '~') return false;
   return true;
 }
 
 let options = {
-      // logLevel: "silent", //"silly", "verbose", "info", "http", "warn", "error", or "silent"
-      // listenEvents: true, 
-      autoMarkRead: true,
-      autoMarkDelivery:true,
-      // updatePresence: false, 
-      // selfListen:true,
-      // pageID:"100037131918629",
-}
+  // logLevel: "silent", //"silly", "verbose", "info", "http", "warn", "error", or "silent"
+  // listenEvents: true,
+  autoMarkRead: true,
+  autoMarkDelivery: true,
+  // updatePresence: false,
+  // selfListen:true,
+  // pageID:"100037131918629",
+};
 
-
-let eventTypes = ["message",""]
-
+let eventTypes = ['message', ''];
 
 let a = true;
 
-let history = []
+let history = [];
 
+let getData = (api, event) => {
+  return new Promise((resolve, reject) => {
+    api.getUserID('Techh Jork', (err, ret) => {
+      if (err) reject(err);
+      resolve(ret);
+    });
+  });
+};
 
-let getData = (api,event)=>{
-      return new Promise((resolve, reject) => {
-            api.getUserID("Techh Jork", (err, ret) => {
-                  if(err) reject(err);
-                  resolve(ret)
-            });
-      });
-}
+const getUserID = async (api, event) => {
+  let data = await getData(api, event);
 
-const getUserID = async (api,event)=>{
-      let data = await getData(api,event)
-      return data;
-}
+  return data;
+};
 
-fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err, api) => {
-  if (err) return console.error(err);
+fca(
+  { appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) },
+  async (err, api) => {
+    if (err) return console.error(err);
 
+    await wait(100);
+    //await api.setOptions(options);
+    await api.setOptions({
+      listenEvents: true,
+      autoMarkDelivery: true,
+      selfListen: true,
+    });
 
-  await wait(100);
-  //await api.setOptions(options);
-  await api.setOptions({ listenEvents: true,autoMarkDelivery:true,selfListen:true});
+    const listenEmitter = api.listen(async (err, event) => {
+      if (err) return console.log(err);
+      console.log(event);
+      // logs(api,event)
 
-  const listenEmitter = api.listen(async (err, event) => {
-      if(err) return console.log(err);
-      // console.log(event);
-      logs(api,event)
+      if (a) {
+        // Techh Jork => "100037131918629"
+        api.sendMessage('Bot Running', '100037131918629');
 
-      if(a){
-            // Techh Jork => "100037131918629"
-            api.sendMessage("Bot Running","100037131918629");
-            
-            a= false;   
-            
-            let userInfoById = await getUserID(api,event)
-           console.log("called when start",userInfoById) 
+        a = false;
+
+        let userInfoById = await getUserID(api, event);
+        console.log('called when start', userInfoById);
       }
 
-
-      if(event.type == "message_unsend"){  
-            console.log(event);   
-            unsendMessage(api,event);
+      if (event.type == 'message_unsend') {
+        console.log(event);
+        unsendMessage(api, event)
+        ;
       }
-       
-
 
       /**
-       * @Description IF MSG Exist as string  
-      */
+       * @Description IF MSG Exist as string
+       */
 
-      if(typeof event?.body !== 'string' ) return
+      if (typeof event?.body !== 'string') return;
 
       /**
        * @Description For Inbuilt Commands sorry
-      */
-      cmd(api,event,"admin");   
-      
-      
-
+       */
+      cmd(api, event, 'admin');
 
       /**
        * @Desction AI this is for NLP
-      */
-      if(event.type == "message" || event.type == "message_reply" ){      
-            saveMsgs(event);         
+       */
+      if (event.type == 'message' || event.type == 'message_reply') {
+        saveMsgs(event);
       }
 
-
-                                                     
-                                                     
       //         GGGGGGGGGGGGGIIIIIIIIIIFFFFFFFFFFFFFFFFFFFFFF
       //      GGG::::::::::::GI::::::::IF::::::::::::::::::::F
       //    GG:::::::::::::::GI::::::::IF::::::::::::::::::::F
       //   G:::::GGGGGGGG::::GII::::::IIFF::::::FFFFFFFFF::::F
       //  G:::::G       GGGGGG  I::::I    F:::::F       FFFFFF
-      // G:::::G                I::::I    F:::::F             
-      // G:::::G                I::::I    F::::::FFFFFFFFFF   
-      // G:::::G    GGGGGGGGGG  I::::I    F:::::::::::::::F   
-      // G:::::G    G::::::::G  I::::I    F:::::::::::::::F   
-      // G:::::G    GGGGG::::G  I::::I    F::::::FFFFFFFFFF   
-      // G:::::G        G::::G  I::::I    F:::::F             
-      //  G:::::G       G::::G  I::::I    F:::::F             
-      //   G:::::GGGGGGGG::::GII::::::IIFF:::::::FF           
-      //    GG:::::::::::::::GI::::::::IF::::::::FF           
-      //      GGG::::::GGG:::GI::::::::IF::::::::FF           
-      //         GGGGGG   GGGGIIIIIIIIIIFFFFFFFFFFF           
+      // G:::::G                I::::I    F:::::F
+      // G:::::G                I::::I    F::::::FFFFFFFFFF
+      // G:::::G    GGGGGGGGGG  I::::I    F:::::::::::::::F
+      // G:::::G    G::::::::G  I::::I    F:::::::::::::::F
+      // G:::::G    GGGGG::::G  I::::I    F::::::FFFFFFFFFF
+      // G:::::G        G::::G  I::::I    F:::::F
+      //  G:::::G       G::::G  I::::I    F:::::F
+      //   G:::::GGGGGGGG::::GII::::::IIFF:::::::FF
+      //    GG:::::::::::::::GI::::::::IF::::::::FF
+      //      GGG::::::GGG:::GI::::::::IF::::::::FF
+      //         GGGGGG   GGGGIIIIIIIIIIFFFFFFFFFFF
 
-
-                                                                                 
-
-      
       /**
-       * @Description IF MSG Exist as string but empty 
+       * @Description IF MSG Exist as string but empty
        * That contain GIF,Sticker
-      */
+       */
 
       // in this only item which has GIF sticker or only photos
 
-      if(event.body === '' ){
-            
+      if (event.body === '') {
       }
-
-  })
-})
-
-
-
-
-
+    });
+  }
+);
 
 /** MAIN EVENTS
 
@@ -197,13 +173,11 @@ fca({ appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8')) }, async (err,
      }
 */
 
+// if (prefix(event.body)) {
+// api.setMessageReaction(":heart:", event.messageID);
+//
 
- 
-      // if (prefix(event.body)) {
-            // api.setMessageReaction(":heart:", event.messageID);
-            // 
-            
-      // }
+// }
 
 /* IMP 
 
@@ -262,9 +236,6 @@ if(event.body.includes("!send")){
 
 */
 
-
-
-
 /*
 if(event.type == "presence") {}
       if(event.type == "typ"){}
@@ -286,19 +257,6 @@ if(event.type == "presence") {}
 
       */
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 /*
 api.addUserToGroup(userID, threadID[, callback])
  api.markAsDelivered(message.threadID, message.messageID);
@@ -318,9 +276,6 @@ api.addUserToGroup(userID, threadID[, callback])
     api.changeNickname(nickname, threadID, participantID[, callback])
 */
 
-
-
-
 // let check = true
 // fca({appState: JSON.parse(fs.readFileSync('fbnew.json', 'utf8'))}, async (err, api) => {
 //   if (err) return console.error(err)
@@ -334,17 +289,17 @@ api.addUserToGroup(userID, threadID[, callback])
 //     // prettier-ignore
 //     if(check){ sendMessage(api);
 //             check = false;
-//     } 
-//   }) 
+//     }
+//   })
 // })
 
-// let count = 0 
- 
+// let count = 0
+
 // function sendMessage(api) {  let inter = setInterval(() => {  api.sendMessage(quotes[count], '100058559106793')
 //     console.log(count, '=>', quotes[count])
 //     count++
 //     if (count == 100) {
 //       clearTimeout(inter)
-//     } 
+//     }
 //   }, 20000)
 // }

@@ -16,7 +16,7 @@
   "editor.formatOnPaste": false,
   "prettier.useEditorConfig": false,
   "prettier.useTabs": false,
-  "prettier.configPath": "../.prettierrc",
+ 
   "[javascript]": {
     "editor.tabSize": 6,
     "editor.insertSpaces": true,
