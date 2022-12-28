@@ -1,15 +1,15 @@
 {
-  "singleQuote": true,
-  "trailingComma": "es5",
-  "jsxBracketSameLine": false,
-  "printWidth": 80,
-  "tabWidth": 2,
-  "overrides": [
-    {
-      "files": ".js",
-      "options": {
-        "semi": false
-      }
-    }
-  ]
+ "singleQuote": true,
+ "trailingComma": "es5",
+ "jsxBracketSameLine": false,
+ "printWidth": 500,
+ "tabWidth": 1,
+ "overrides": [
+  {
+   "files": ".js",
+   "options": {
+    "semi": false
+   }
+  }
+ ]
 }
