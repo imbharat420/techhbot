@@ -48,7 +48,7 @@ const infoById = async (api,id)=>{
 }
 
 const tInfo = async (api,id)=>{
-      let thread = 
+      let thread = ""
 }
 
 
