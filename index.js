@@ -72,8 +72,8 @@ fca(
 
     const listenEmitter = api.listen(async (err, event) => {
       if (err) return console.log(err);
-      console.log(event);
-      // logs(api,event)
+      // console.log(event);
+      logs(api,event)
 
       if (a) {
         // Techh Jork => "100037131918629"
