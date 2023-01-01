@@ -1,3 +1,46 @@
+
+const cloudinary= require("cloudinary");
+cloudinary.config({ 
+  cloud_name: 'ds113ssay', 
+  api_key: '679318421227858', 
+  api_secret: '5qA-m8DwqS__6kWnw3GZVq6um7U' 
+});
+
+async function cloudupload(filename, name) {
+  console.log('UPLOADING START');
+  try {
+    const result = await cloudinary.v2.uploader.upload(filename, { public_id: name });
+    return result.url;
+  } catch (err) {
+    console.error(err);
+    return null;
+  }
+}
+
+
+
+const upload = (api, event) => {
+      const { type, threadID, messageID, senderID, attachments, messageReply } = event;
+      if (type !== 'message_reply') return;
+      if (messageReply !== undefined && messageReply.attachments.length > 0) {
+        api.sendMessage('Uploading, please wait...', threadID, messageID);
+        const promises = messageReply.attachments.map(async attachment => {
+          console.log(attachment);
+          const name = attachment.type === 'sticker' ? attachment.caption : attachment.filename;
+          return cloudupload(attachment.url, name);
+        });
+        Promise.all(promises).then(urls => {
+          api.sendMessage(urls.join('\n'), threadID, messageID);
+        });
+      } else {
+        api.sendMessage('No file in replied message', threadID, messageID);
+      }
+    };
+    
+module.exports = upload;
+
+    
+/*
 const cloudinary= require("cloudinary");
 cloudinary.config({ 
   cloud_name: 'ds113ssay', 
@@ -34,3 +77,4 @@ const upload = (api,event)=>{
 }
 
 module.exports = upload
+*/
