@@ -16,6 +16,25 @@ dotenv.config();
 // import photomania from "./config/photomania.json"
 
 
+
+
+
+// let url ="https://www.useblackbox.io/autocomplete"
+
+// axios({
+//       method:"POST",
+//       url:url,
+//       headers: {"Content-Type": "application/json"},
+//       data:JSON.stringify({
+//             "userId": "",
+//             "textInput": "write webgl shaders code",
+//             "source": "webapp"
+//         })
+// })
+
+
+
+
 const filter = async (img_id)=>{
       let photoId = img_id;
       let effectId = "520fdb6592237be077cf99eb"
@@ -83,8 +102,6 @@ const response = await openai.createCompletion({
 });
 
 console.log(response.data);
-
-
 
 
 
