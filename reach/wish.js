@@ -53,7 +53,7 @@ function sleep(ms) {
       });
 }
 
-let count = 1268
+let count = 1329
 console.log(friends[count])
 
 function sendMessage(api){
@@ -69,7 +69,7 @@ function sendMessage(api){
                   console.log(err,friends[count].userID);
             }
       
-            if(count == 1300){
+            if(count == 1350){
                   clearInterval(inter)
                   console.log("********************done*******************************")
             }

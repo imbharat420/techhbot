@@ -12,7 +12,7 @@ login({ appState: JSON.parse(fs.readFileSync('../login/techh.json', 'utf8')) }, 
    case 'message':
    case 'message_reply':
     if (event.senderID !== '100054832716212') return;
-    await sleep(1000);
+    await sleep(3000);
     api.sendMessage(event.body, event.threadID);
     await sleep(3000);
     api.setMessageReaction(':love:', event.messageID);
