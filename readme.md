@@ -52,6 +52,11 @@
 | word list               | https://www.oxfordlearnersdictionaries.com/wordlists/oxford3000-5000                                                                                                                                                                                                                                                                                                                   |
 | wordlist                | https://github.com/kkrypt0nn/wordlists                                                                                                                                                                                                                                                                                                                                                 |
 | Dictoionary             | https://api.dictionaryapi.dev/api/v2/entries/en/hello                                                                                                                                                                                                                                                                                                                                  |
+| MUSIC API               | https://musicovery.com/api/V6/doc/documentation.php                                                                                                                                                                                                                                                                                                                                    |
+| advice                  | https://api.adviceslip.com/advice                                                                                                                                                                                                                                                                                                                                                      |
+| Movie API               | https://api.themoviedb.org/3/search/movie?api_key=38deb63e034c6e307ea70df8731a9dc4&query=Bal&page=1&include_adult=false                                                                                                                                                                                                                                                                |
+| Logo                    | https://namelix.com/app/?keywords=pina                                                                                                                                                                                                                                                                                                                                                 |
+| content Ideas           | https://contentideas.io/search?q=cute                                                                                                                                                                                                                                                                                                                                                  |
 
 ## CHECK
 
@@ -60,16 +65,19 @@
 > IFRAME ![tts](https://imtranslator.net/translation/tts-voice/) > [tts up link](https://imtranslator.net/translate-and-speak/speak/japanese/)
 
 ```js
-let imgs = document.querySelectorAll('picture img');
+let imgs = document.querySelectorAll('picture img')
 
-let arr = [];
+let arr = []
 imgs.forEach((img) => {
- let token = img.getAttribute('src').split('/')[5];
- let name = img.getAttribute('alt');
- arr.push({ name: name, token: token });
-});
+          let token = img.getAttribute('src').split('/')[5]
+          let name = img.getAttribute('alt')
+          arr.push({
+                    name: name,
+                    token: token,
+          })
+})
 
-console.log(arr);
+console.log(arr)
 ```
 
 https://photomania.net/editor
@@ -83,12 +91,12 @@ file: (binary)
 
 ```json
 {
- "id": "bd9523e6c7ad01e949cfd8f07dab2b42",
- "url": "http://api.photomania.net/photos/bd9523e6c7ad01e949cfd8f07dab2b42.jpg",
- "url_secure": "https://api.photomania.net/photos/bd9523e6c7ad01e949cfd8f07dab2b42.jpg",
- "width": 850,
- "height": 900,
- "expires_at": "Wed, 07 Dec 2022 09:30:37 +0000"
+          "id": "bd9523e6c7ad01e949cfd8f07dab2b42",
+          "url": "http://api.photomania.net/photos/bd9523e6c7ad01e949cfd8f07dab2b42.jpg",
+          "url_secure": "https://api.photomania.net/photos/bd9523e6c7ad01e949cfd8f07dab2b42.jpg",
+          "width": 850,
+          "height": 900,
+          "expires_at": "Wed, 07 Dec 2022 09:30:37 +0000"
 }
 ```
 

@@ -2,11 +2,11 @@
  "singleQuote": true,
  "trailingComma": "es5",
  "jsxBracketSameLine": false,
- "printWidth": 500,
- "tabWidth": 1,
+ "printWidth": 11000,
+ "tabWidth": 10,
  "overrides": [
   {
-   "files": ".js",
+   "files": ["*.md"],
    "options": {
     "semi": false
    }
