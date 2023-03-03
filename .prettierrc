@@ -1,15 +1,7 @@
 {
- "singleQuote": true,
- "trailingComma": "es5",
- "jsxBracketSameLine": false,
- "printWidth": 11000,
- "tabWidth": 10,
- "overrides": [
-  {
-   "files": ["*.md"],
-   "options": {
-    "semi": false
-   }
-  }
- ]
+    "semi": true,
+    "trailingComma": "all",
+    "singleQuote": true,
+    "printWidth": 120, 
+    "tabWidth": 2
 }
