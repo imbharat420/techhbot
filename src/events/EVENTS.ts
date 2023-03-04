@@ -1,4 +1,6 @@
 import fs from 'fs';
+import https from 'http';
+
 import OPERATIONS from './OPERATIONS';
 
 const wait = (ms: number) => {
@@ -45,14 +47,14 @@ class EVENTS {
   }
 
   async sorry(event: any, msg: string): Promise<void> {
-    this.react('😎', event);
+    this.react('😢', event);
     this.send(msg, event);
   }
 
   async send(msg: string, event: any): Promise<void> {
     if (typeof msg === 'string' && msg !== '' && msg !== undefined) {
       console.log(msg);
-      await wait(1000 * msg.length * 0.2);
+      // await wait(1000 * msg.length * 0.2);
       this.#api.sendMessage(msg, event.threadID, event.messageID);
       return;
     }
@@ -67,7 +69,7 @@ class EVENTS {
       return;
     }
 
-    await wait(1000 * 2);
+    // await wait(1000 * 2);
     this.#api.sendMessage(
       {
         body: '',
@@ -75,6 +77,18 @@ class EVENTS {
       },
       event.threadID,
     );
+  }
+
+  async sendByURL(url: string, event: any): Promise<void> {
+    https.get(url).on('response', (stream) => {
+      this.#api.sendMessage(
+        {
+          body: '',
+          attachment: [stream],
+        },
+        event.threadID,
+      );
+    });
   }
 }
 
