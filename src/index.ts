@@ -2,11 +2,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 import fca from 'fca-unofficial';
 import fs from 'fs';
-import CONFIG from './config';
+import handleMessageEvent from './events/handleMessageEvent';
 import EVENTS from './events/EVENTS';
-import filterImg from './events/filterImg';
-import ytsummarize from './events/yt-summarize';
-// console.log("Hello World")
+import handleMessageReply from './events/handleMessageReply';
 
 const configListener: any = {
   listenEvents: true,
@@ -28,41 +26,12 @@ fca(login, async (err: any, api: any) => {
       done = false;
       customListen = new EVENTS(api);
     }
-    console.log(event);
     switch (event.type) {
       case 'message':
-        const msg: string = customListen.prefix_clean(event.body);
-        const command: string = msg;
-        if (command.startsWith('ytsummarize')) {
-          const body: string = customListen.clean_cmd('ytsummarize', command);
-          const isLink: boolean = customListen.is_link(body);
-          if (isLink) {
-            ytsummarize(body)
-              .then((data: any) => {
-                console.log(data);
-                customListen.send(data, event);
-              })
-              .catch((err: any) => {
-                console.log('sorry for error \n' + err);
-              });
-          } else {
-            customListen.sorry(event);
-          }
-        }
-
-        if (command == 'bot') {
-          customListen.react('Hello World', event);
-        }
-
-        if (command == 'dog') {
-          customListen.react('Hello World', event);
-        }
-
-        if (command == 'cat') {
-          customListen.react('Hello World', event);
-        }
+        handleMessageEvent(event, customListen);
+        break;
       case 'message_reply':
-        console.log(event);
+        handleMessageReply(event, customListen);
         break;
       case 'message_reaction':
         console.log(event);

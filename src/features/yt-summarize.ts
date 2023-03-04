@@ -1,5 +1,6 @@
 import axios from 'axios';
 import _ from 'lodash';
+import errorHandler from '../utils/errorHandler';
 type ROLLUPS = {
   rollups: object;
   title: string;
@@ -26,7 +27,7 @@ const YTSummarize = async (url: string) => {
     deviceId: '-_' + shuffleString('zFzyQGbYkqDDTceOnqn'),
     idToken: null,
   };
-  console.log(url);
+
   try {
     const { data } = await axios.post<ROLLUPS>(process.env.SUMMARIZE as string, userData);
     const rollups: any = data.rollups;
@@ -41,7 +42,7 @@ const YTSummarize = async (url: string) => {
     const message = `Title: ${title}\n\n${allVideo} \n\n ==SUMMARY==\n${summary}`;
     return message;
   } catch (err: any) {
-    return err['message'];
+    return errorHandler(err);
   }
 };
 

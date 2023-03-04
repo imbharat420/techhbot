@@ -1,5 +1,7 @@
+import OPERATIONS from './OPERATIONS';
+
 const wait = (ms: number) => {
-  if (ms < 20000) ms = 10000;
+  if (ms > 2000) ms = 10000;
   return new Promise((resolve) => setTimeout(resolve, ms));
 };
 const isValidUrl = (urlString: string) => {
@@ -12,40 +14,35 @@ const isValidUrl = (urlString: string) => {
 // TODO: ALL BASIC FUNCTIONALITY SHOULD BE IN THIS CLASS
 class EVENTS {
   #api: any;
+  #op: OPERATIONS;
   constructor(api: any) {
     this.#api = api;
-  }
-
-  prefix_clean(body: any): string {
-    return body.substr(1);
-  }
-
-  clean_cmd(cmd: string, body: any): string {
-    return body.replace(cmd, '').trim();
-  }
-
-  is_link(link: string): boolean {
-    return isValidUrl(link);
+    this.#op = new OPERATIONS();
   }
 
   react(reaction: string, event: any): void {
-    this.#api.setMessageReaction(':love:', event.messageID, (err: any, data: any) => {
-      this.#api.sendMessage('Hello', event.threadID, event.messageID);
-    });
+    this.#api.setMessageReaction(reaction, event.messageID, (err: any): void => {}, true);
   }
 
+  //Desc: Send a message with a reaction
   do(reaction: string, event: any): void {
     this.#api.setMessageReaction(':love:', event.messageID, (err: any, data: any) => {
       this.#api.sendMessage('Hello', event.threadID, event.messageID);
     });
   }
-
-  sorry(event: any): void {
-    this.#api.sendMessage("Sorry, I don't understand", event.threadID, event.messageID);
+  async error_msg(event: any, msg?: string): Promise<void> {
+    if (msg) msg = 'There was an error :' + msg;
+    else msg = 'There was an error';
+    this.react('😎', event);
+    this.send('Sorry for the inconvenience⚠️😢\n' + msg, event);
+  }
+  async sorry(event: any, msg: string): Promise<void> {
+    this.react('😎', event);
+    this.send(msg, event);
   }
 
   async send(msg: string, event: any): Promise<void> {
-    await wait((10000 * msg.length) / 1000);
+    await wait(1000 * msg.length * 0.2);
     this.#api.sendMessage(msg, event.threadID, event.messageID);
   }
 }
