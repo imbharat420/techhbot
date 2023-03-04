@@ -20,7 +20,7 @@ let customListen: EVENTS;
 fca(login, async (err: any, api: any) => {
   if (err) return console.error(err);
   await api.setOptions(configListener);
-  const listenEmitter = api.listen(async (err: any, event: any) => {
+  const stopListening = api.listen(async (err: any, event: any) => {
     if (err) return console.log(err);
     if (done) {
       done = false;
@@ -28,6 +28,10 @@ fca(login, async (err: any, api: any) => {
     }
     switch (event.type) {
       case 'message':
+        if (event.body === '!stop') {
+          api.sendMessage('Goodbye...', event.threadID);
+          return stopListening();
+        }
         handleMessageEvent(event, customListen);
         break;
       case 'message_reply':

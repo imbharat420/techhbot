@@ -12,8 +12,8 @@ class FILEHANDLE {
     const location: string = this.filePath(type);
     const filename: string = this.ext(type, name);
     const path = `${location}/${filename}`;
-    this.download(url, location, filename, async () => {
-      callback(filename, path);
+    return this.download(url, location, filename, async () => {
+      return callback(filename, path);
     });
   }
 

@@ -1,3 +1,4 @@
+import fs from 'fs';
 import OPERATIONS from './OPERATIONS';
 
 const wait = (ms: number) => {
@@ -36,6 +37,13 @@ class EVENTS {
     this.react('😎', event);
     this.send('Sorry for the inconvenience⚠️😢\n' + msg, event);
   }
+
+  async markAsRead(event: any): Promise<void> {
+    this.#api.markAsRead(event.threadID, (err: any, data: any) => {
+      if (err) console.log(err);
+    });
+  }
+
   async sorry(event: any, msg: string): Promise<void> {
     this.react('😎', event);
     this.send(msg, event);
@@ -50,6 +58,23 @@ class EVENTS {
     }
 
     this.#api.sendMessage('Sorry the message is empty 😢 because of error', event.threadID, event.messageID);
+  }
+  // path: string | Array<string>
+  async sendAttachment(path: string, event: any): Promise<void> {
+    console.log('sendAttachment', path);
+    if (path === '') {
+      this.send('Sorry the message is empty 😢 because of error', event);
+      return;
+    }
+
+    await wait(1000 * 2);
+    this.#api.sendMessage(
+      {
+        body: '',
+        attachment: [fs.createReadStream(path), fs.createReadStream(path)],
+      },
+      event.threadID,
+    );
   }
 }
 

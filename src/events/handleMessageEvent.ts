@@ -5,6 +5,7 @@ import TripPlanner from '../features/TripPlanner';
 import SentenceSpin from '../features/sentence_spin';
 import MusicHumming from '../features/music_humming';
 import handleAttachments from './handleAttachments';
+import Pointer from '../features/pointer';
 
 const op: OPERATIONS = new OPERATIONS();
 
@@ -57,6 +58,12 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
         console.log(err);
         customListen.error_msg(event, err);
       });
+  }
+
+  if (command.startsWith('poke')) {
+    Pointer((path: string) => {
+      customListen.sendAttachment(path, event);
+    });
   }
 
   if (command.startsWith('!findSong')) {
