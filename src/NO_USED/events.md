@@ -31,6 +31,7 @@ POOL VOTES
 }
 ```
 
+```json
 {
   type: 'event',
   threadID: '4189084664528680',
@@ -46,3 +47,53 @@ POOL VOTES
   logMessageBody: 'Shipon Hossen voted for "Aminpur, Pabna" in the poll.',
   author: '100029260891225'
 }
+```
+
+## type:audio -> audioType:VOICE_MESSAGE
+```json
+{
+  type: 'message',
+  senderID: '100037131918629',
+  body: '',
+  threadID: '100037131918629',
+  messageID: 'mid.$cAAAABkTlcJOM3YZZZGGrEER506AT',
+  attachments: [
+    {
+      type: 'audio',
+      filename: 'audioclip-1677927118000-13235.mp4',
+      ID: 'AT23nlPeJ__CKoWF4pwfivmjzUNAT6KlzpavNOJR7HmDWtalPbQJS2xMYZoj2PMUvou-aON8kXtxM5HfOmghlVixf8MWP4J6_edY9yIwGWboUpCNzPPVVL6i7kaEloJOMBC6MgZ5fo03zgIfcnbpQxvkx94',
+      audioType: 'VOICE_MESSAGE',
+      duration: 13235,
+      url: 'https://cdn.fbsbx.com/v/t59.3654-21/332308271_222947196779020_8487455756860496409_n.mp4/audioclip-1677927118000-13235.mp4?_nc_cat=108&ccb=1-7&_nc_sid=7272a8&_nc_ohc=p_At5ZBMTIUAX-aCT1N&_nc_ht=cdn.fbsbx.com&oh=03_AdSH5nt4Y2y2N3eMlJfLHd8rtVdTzaX3Q5Div-lqVUznYQ&oe=640510E7&dl=1',
+      isVoiceMail: false
+    }
+  ],
+  mentions: {},
+  timestamp: '1677927190884',
+  isGroup: false
+}
+```
+
+```json
+{
+  type: 'message_reply',
+  threadID: '100037131918629',
+  messageID: 'mid.$cAAAABkTlcJOM3ZOtrmGrE5oBElFm',
+  senderID: '100037131918629',
+  attachments: [],
+  body: '!findSong',
+  isGroup: false,
+  mentions: {},
+  timestamp: 1677928064430,
+  messageReply: {
+    threadID: '100037131918629',
+    messageID: 'mid.$cAAAABkTlcJOM3YZZZGGrEER506AT',
+    senderID: '100037131918629',
+    attachments: [ [Object] ],
+    body: '',
+    isGroup: false,
+    mentions: {},
+    timestamp: 1677927190884
+  }
+}
+```

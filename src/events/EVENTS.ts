@@ -42,8 +42,14 @@ class EVENTS {
   }
 
   async send(msg: string, event: any): Promise<void> {
-    await wait(1000 * msg.length * 0.2);
-    this.#api.sendMessage(msg, event.threadID, event.messageID);
+    if (typeof msg === 'string' && msg !== '' && msg !== undefined) {
+      console.log(msg);
+      await wait(1000 * msg.length * 0.2);
+      this.#api.sendMessage(msg, event.threadID, event.messageID);
+      return;
+    }
+
+    this.#api.sendMessage('Sorry the message is empty 😢 because of error', event.threadID, event.messageID);
   }
 }
 

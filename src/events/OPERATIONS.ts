@@ -1,4 +1,5 @@
 import SWEAR_WORDS from '../constants/swear_words';
+import FILEHANDLE from './FILEHANDLE';
 const isValidUrl = (urlString: string) => {
   console.log(urlString);
   return new RegExp(
@@ -6,7 +7,7 @@ const isValidUrl = (urlString: string) => {
   ).test(urlString);
 };
 
-class OPERATIONS {
+class OPERATIONS extends FILEHANDLE {
   #event: any;
   //   constructor(event: any) {
   //     this.#event = event;
@@ -20,6 +21,11 @@ class OPERATIONS {
 
   is_link(link: string): boolean {
     return isValidUrl(link);
+  }
+
+  getAttachment(event: any): string {
+    const attachment = event.attachments[0];
+    return attachment;
   }
   clean_bad(body: string): string {
     const cleanedInputStr = body.replace(/[^\w\s\u00C0-\u024F]/g, '');
