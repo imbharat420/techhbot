@@ -136,9 +136,34 @@ api.sendMessage({ attachment: [stream] }, event.threadID);
 ```
 
 ![Spotify replit](https://replit.com/@imbharat420/Spotify)
+https://spotify-recently-played-readme.vercel.app/api?user=31ye3pvdjhhskndt6unwwwuawma4
 
 ![spotify-recently-played-readme Github](https://github.com/JeffreyCA/spotify-recently-played-readme)
 
+
+
 ```
 
+
+
 </details>
+
+
+# Spotify playlist for all users
+```
+
+https://github.dev/JeffreyCA/spotify-recently-played-readme
+https://developer.spotify.com/console/get-users-currently-playing-track/
+https://api.spotify.com/v1/me/player/recently-played
+https://spotify-recently-played-readme.vercel.app/api?user=31ye3pvdjhhskndt6unwwwuawma4   username
+
+Idea should be the 
+
+url?user=id || and check if requested for spotify command recently or not if yes show the spotify list else give link with user?user=id and check user=id present on list or not that should be on database
+
+```
+
+
+```js
+chrome-untrusted://new-tab-page/background.jpg
+```
