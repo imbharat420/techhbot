@@ -73,7 +73,7 @@ class EVENTS {
     this.#api.sendMessage(
       {
         body: '',
-        attachment: [fs.createReadStream(path), fs.createReadStream(path)],
+        attachment: [fs.createReadStream(path)],
       },
       event.threadID,
     );

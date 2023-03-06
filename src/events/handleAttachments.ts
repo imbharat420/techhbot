@@ -41,21 +41,15 @@ const handleAttachments = async (event: any, customListen: EVENTS) => {
   const { attachments } = event.messageReply;
   console.log(attachments);
 
-  // if (attachments[0].filename === 'audio') {
-  //   customListen.send('Only Audio type needed for find song', event);
-
-  //   // attachments.forEach(async (attachment: any) => {
-  //   // console.log(attachment);
-  //   const { url, type, filename } = attachments[0];
-  //   op.downloadFile(url, type, filename, (file: string, path: string) => {
-  //     MusicHumming(path).then((res: any) => {
-  //       console.log(res);
-  //       customListen.send(res, event);
-  //     });
-  //   });
-  // });
-  // }
-
+  if (body.startsWith('!findSong')) {
+    const { url, type, filename } = attachments[0];
+    op.downloadFile(url, type, filename, (file: string, path: string) => {
+      MusicHumming(path).then((res: any) => {
+        console.log(res);
+        customListen.send(res, event);
+      });
+    });
+  }
   if (body.startsWith('!uploadImg')) {
     const { url, type, filename } = attachments[0];
     console.log(url, type, filename);
