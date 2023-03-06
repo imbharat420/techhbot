@@ -57,7 +57,7 @@ api.sendMessage({ attachment: [stream] }, event.threadID);
 [Jenna AI endpoint generate Suggest](https://us-central1-speare.cloudfunctions.net/generate-suggest)
 
 
-### Body
+### Body and need Bearer Token
 ```json
 {
   "data": {
