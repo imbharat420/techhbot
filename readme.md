@@ -156,6 +156,8 @@ https://github.dev/JeffreyCA/spotify-recently-played-readme
 https://developer.spotify.com/console/get-users-currently-playing-track/
 https://api.spotify.com/v1/me/player/recently-played
 https://spotify-recently-played-readme.vercel.app/api?user=31ye3pvdjhhskndt6unwwwuawma4   username
+https://developer.spotify.com/api/search/all.json
+
 
 Idea should be the 
 
@@ -166,4 +168,42 @@ url?user=id || and check if requested for spotify command recently or not if yes
 
 ```js
 chrome-untrusted://new-tab-page/background.jpg
+```
+
+
+```js
+websocket
+//https://deepnudeonline.com/image
+wss://deepnudeonline.com/socket
+
+{"type":"imageSend","data":{"image":"data:image/png;base64,iVBORw0KGg -------- ","kod":""}}
+"{\"type\":\"message\",\"data\":\"ready\"}"
+
+..
+..
+"{\"type\":\"message\", \"data\" : \"waiting\",\"que\":\"12\",\"que2\":\"0\"}"
+
+
+
+"{\"type\":\"message\", \"data\" : \"converting\"}"
+
+"{\"type\":\"imageReady\", \"image\" : \"iVBORw0KGgoAAAANSUhEUgAAAg"}"
+
+
+https://run.mrepol853.repl.co/
+```
+
+
+
+```js
+//BLUR NUDE
+https://deep-nude.co/
+
+https://api.deep-nude.co/
+rawData: base64
+
+
+{
+  imgData: BASE64
+}
 ```

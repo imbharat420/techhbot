@@ -27,6 +27,10 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
     handleAttachments(event, customListen);
   }
 
+  if (body.startsWith('!undress')) {
+    handleAttachments(event, customListen);
+  }
+
   if (body === 'pp') {
     const { senderID } = event.messageReply;
     const filename = `${senderID}.jpg`;

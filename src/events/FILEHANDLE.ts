@@ -16,7 +16,36 @@ class FILEHANDLE {
       return callback(filename, path);
     });
   }
-
+  async base64ToImg(base64: string, type: string, name: string, callback: any) {
+    const location: string = this.filePath(type);
+    const filename: string = this.ext(type, name);
+    const path = `${location}/${filename}`;
+    console.log('base64ToImg', path, filename, location, path);
+    const base64Data = base64.replace(/^data:([A-Za-z-+/]+);base64,/, '');
+    // const buffer = Buffer.from(base64, 'base64');
+    const base64Image = base64.split(';base64,').pop();
+    if (!base64Image) {
+      return console.log('base64Image is empty');
+    }
+    fs.mkdirSync(location, { recursive: true });
+    fs.writeFile(path, base64Image, { encoding: 'base64' }, function (err) {
+      callback(path);
+    });
+    // fs.writeFile(
+    //   path,
+    //   bitmap,
+    //   {
+    //     encoding: 'utf8',
+    //   },
+    //   (err: any) => {
+    //     if (err) {
+    //       console.log(err);
+    //     }
+    //     console.log('base64 --------------------------', path);
+    //     return callback(path);
+    //   },
+    // );
+  }
   download(uri: any, location: string, filename: string, callback: any) {
     fs.mkdirSync(location, { recursive: true });
     const path = `${location}/${filename}`;

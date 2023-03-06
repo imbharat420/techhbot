@@ -93,7 +93,7 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
     }
   } catch (err: any) {
     console.log(err);
-    customListen.error_msg(event, err);
+    // customListen.error_msg(event, err);
   }
 };
 

@@ -46,7 +46,7 @@ const UploadImg = async (url: string) => {
     console.log(data);
     return data['id'];
   } catch (err) {
-    console.log(err);
+    return errorHandler(err);
   }
 };
 
