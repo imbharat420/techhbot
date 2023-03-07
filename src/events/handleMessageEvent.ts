@@ -8,7 +8,8 @@ import handleAttachments from './handleAttachments';
 import Poke from '../features/poke';
 import Excuse from '../features/excuse';
 import generateEmojipasta from '../utils/emojiPasta';
-
+import TextArtTypes from '../constants/textArtArray';
+import { TypeArt } from '../constants/textArt';
 const op: OPERATIONS = new OPERATIONS();
 
 const handleMessageEvent = async (event: any, customListen: EVENTS) => {
@@ -74,6 +75,59 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
         customListen.sendAttachment(path, event);
       });
     }
+    const hashtag = command.match(/(\#[a-zA-Z]+\b)(?!;)/g);
+    if (hashtag) {
+      //   // check #string
+      //   let message = '';
+      //   hashtag.map((item: string) => {
+      //     const cleanItem = item.replace('#', '');
+      //     const data: string[] = TextArtTypes.filter((item) => item == cleanItem.toLowerCase());
+      //     if (data) {
+      //       data.map((item) => {
+      //         const elArr: [{ name: string; art: string }] = TypeArt['item'];
+      //         message += elArr[Math.floor(Math.random() * elArr.length)]['art'];
+      //       });
+      //       // const elArr: [{ name: string; art: string }] = TextArtMapping[data[0]] as any;
+      //       // message += elArr[Math.floor(Math.random() * elArr.length)]['art'];
+      //     }
+      //   });
+      //   customListen.send(message, event);
+      // let message = '';
+      const body: string = command.replace('#', '');
+      hashtag.forEach((item: string) => {
+        const body: string = item.replace('#', '');
+        const data = TextArtTypes.filter((item) => item == body.toLowerCase());
+        data.map((item) => {
+          const elArr = TypeArt[item as keyof typeof TypeArt];
+          const element = elArr[Math.floor(Math.random() * elArr.length)]['art'];
+          console.log(element, item, data);
+          // message += element + '\n';
+          customListen.send(element, event);
+        });
+      });
+
+      // if (body.trim() == '' || body == null || body == undefined) {
+      //   customListen.sorry(event, 'Please provide a Text eg. #smile,');
+      // } else {
+      //   const data = TextArtTypes.filter((item) => item == body.toLowerCase());
+      //   data.map((item) => {
+      //     const elArr = TypeArt[item as keyof typeof TypeArt];
+      //     const element = elArr[Math.floor(Math.random() * elArr.length)]['art'];
+      //     console.log(element, item, data);
+      //     customListen.send(element, event);
+      //   });
+      // }
+      //   if (data) {
+      //     const elArr = TypeArt[data[0] as keyof typeof TypeArt];
+      //     const element = elArr[Math.floor(Math.random() * elArr.length)]['art'];
+      //     customListen.send(element, event);
+      //   } else {
+      //     customListen.sorry(event, 'Please provide a valid text art name or follow the format');
+      //   }
+      // }
+    }
+
+    //}
 
     if (command.startsWith('repeat')) {
       const body: string = op.clean_cmd('repeat', command);

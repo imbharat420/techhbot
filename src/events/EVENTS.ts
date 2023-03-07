@@ -1,5 +1,6 @@
 import fs from 'fs';
 import https from 'http';
+import { error } from '../utils/templates';
 
 import OPERATIONS from './OPERATIONS';
 
@@ -15,6 +16,7 @@ const isValidUrl = (urlString: string) => {
   }
 };
 // TODO: ALL BASIC FUNCTIONALITY SHOULD BE IN THIS CLASS
+
 class EVENTS {
   #api: any;
   #op: OPERATIONS;
@@ -33,11 +35,25 @@ class EVENTS {
       this.#api.sendMessage('Hello Trouble Maker', event.threadID, event.messageID);
     });
   }
+
+  getUserId(event: any): string {
+    const userId = event.senderID ?? event.threadID;
+    return userId;
+  }
+
+  getAttachment(event: any): string {
+    const attachment = event.attachments[0];
+    return attachment;
+  }
+
   async error_msg(event: any, msg?: string): Promise<void> {
-    if (msg) msg = 'There was an error :' + msg;
-    else msg = 'There was an error';
+    // console.log(msg);
+    // if (msg === undefined) msg = error('Sorry the message is empty 😢 because of error');
+
+    // if (typeof msg === 'object') msg = JSON.stringify(msg, null, 2);
+
     this.react('😎', event);
-    this.send('Sorry for the inconvenience⚠️😢\n' + msg, event);
+    this.send(error(JSON.stringify(msg)), event);
   }
 
   async markAsRead(event: any): Promise<void> {
@@ -52,14 +68,14 @@ class EVENTS {
   }
 
   async send(msg: string, event: any): Promise<void> {
-    if (typeof msg === 'string' && msg !== '' && msg !== undefined) {
-      console.log(msg);
-      // await wait(1000 * msg.length * 0.2);
-      this.#api.sendMessage(msg, event.threadID, event.messageID);
-      return;
-    }
+    // if (typeof msg === 'string' && msg !== '' && msg !== undefined) {
+    //   console.log(msg);
+    //   // await wait(1000 * msg.length * 0.2);
+    //   this.#api.sendMessage(msg, event.threadID, event.messageID);
+    //   return;
+    // }
 
-    this.#api.sendMessage('Sorry the message is empty 😢 because of error', event.threadID, event.messageID);
+    this.#api.sendMessage(msg, event.threadID, event.messageID);
   }
 
   // path: string | Array<string>

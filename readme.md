@@ -219,3 +219,58 @@ https://serpapi.com/google-reverse-image
 
 https://www.scraperapi.com/blog/best-google-image-search-apis-and-proxies/
 ```
+
+
+
+```
+  MORE HERE = https://saucenao.com/search.php
+  
+  https://trace.moe/?url=<URL OF IMAGE>
+  Ex=https://trace.moe/?url=https%3A%2F%2Fsaucenao.com%2Ftools%2Fimages%2Fimagesearchoptions.png
+
+
+
+  https://yandex.com/images/search?rpt=imageview&url=<URL of image >
+ EX
+  https://yandex.com/images/search?rpt=imageview&url=https://upload.wikimedia.org/wikipedia/en/b/bd/Doraemon_character.png
+
+
+  https://lens.google.com/uploadbyurl?url=<URL of image > 
+  EX : https://lens.google.com/uploadbyurl?url=https://saucenao.com/userdata/Uoc0myQZA.png.png
+```
+
+
+
+```
+  Find movie HTML https://clip.cafe/s/Dictator/category=~year=/
+
+
+```
+
+
+
+```
+Tiny Wow
+https://tinywow.com/file/upload
+
+Formdata
+type: image
+mode: profile_photo
+file: (binary)
+
+
+{
+    "status": true,
+    "file_id": 22392051,
+    "url": "https://tinywow.nyc3.digitaloceanspaces.com/2023-03-07_13-02/image_profile_photo/D8WGpBQoLCJnNKUsbjDAbDUA1o5W44I48sDqePs2.png"
+}
+
+
+```
+
+```
+ascii  https://text-art.top/3646-music-player
+https://text-art.top/wink
+
+https://www.textfacescopy.com/good-morning-text-faces.html
+```
