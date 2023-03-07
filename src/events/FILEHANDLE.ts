@@ -46,6 +46,12 @@ class FILEHANDLE {
     //   },
     // );
   }
+
+  // downloadAllFile(list:, 'video', (file: string, path: string) => {
+  //   console.log('downloadFile !findAnime', file, path);
+
+  // });
+
   download(uri: any, location: string, filename: string, callback: any) {
     fs.mkdirSync(location, { recursive: true });
     const path = `${location}/${filename}`;
@@ -92,3 +98,6 @@ class FILEHANDLE {
 }
 
 export default FILEHANDLE;
+function callback(filename: string, path: string) {
+  throw new Error('Function not implemented.');
+}
