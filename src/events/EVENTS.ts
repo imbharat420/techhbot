@@ -30,7 +30,7 @@ class EVENTS {
   //Desc: Send a message with a reaction
   do(reaction: string, event: any): void {
     this.#api.setMessageReaction(':love:', event.messageID, (err: any, data: any) => {
-      this.#api.sendMessage('Hello', event.threadID, event.messageID);
+      this.#api.sendMessage('Hello Trouble Maker', event.threadID, event.messageID);
     });
   }
   async error_msg(event: any, msg?: string): Promise<void> {
@@ -61,15 +61,28 @@ class EVENTS {
 
     this.#api.sendMessage('Sorry the message is empty 😢 because of error', event.threadID, event.messageID);
   }
+
   // path: string | Array<string>
   async sendAttachment(path: string, event: any): Promise<void> {
     console.log('sendAttachment', path);
+
+    // if (typeof path === 'object' && path.length > 0) {
+    //   const attachment: any = [];
+    //   path.forEach((p) => {
+    //     //@ts-ignore
+    //     return;
+    //   });
+    // }
+
     if (path === '') {
-      this.send('Sorry the message is empty 😢 because of error', event);
+      // this.send('Sorry the message is empty 😢 because of error', event);
       return;
     }
 
-    // await wait(1000 * 2);
+    if (typeof path !== 'string') {
+      return this.error_msg(event, 'Sorry the Path is not string for make that as stream 😢');
+    }
+    console.log('sendAttachment', path);
     this.#api.sendMessage(
       {
         body: '',
@@ -79,7 +92,27 @@ class EVENTS {
     );
   }
 
-  async sendByURL(url: string, event: any): Promise<void> {
+  async sendByURL(url: string | string[], event: any): Promise<void> {
+    if (typeof url === 'object' && url.length > 0) {
+      const attachment: any = [];
+      // url.forEach((p) => {
+      //   //@ts-ignore
+      //   https.get(p.video).on('response', (stream) => {
+      //     attachment.push(stream);
+      //   });
+      // });
+
+      this.#api.sendMessage(
+        {
+          body: '',
+          attachment,
+        },
+        event.threadID,
+      );
+      return;
+    }
+
+    if (url !== 'string') return this.error_msg(event, 'url is not a string');
     https.get(url).on('response', (stream) => {
       this.#api.sendMessage(
         {

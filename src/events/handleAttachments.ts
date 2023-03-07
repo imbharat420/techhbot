@@ -1,5 +1,6 @@
 import DeepNude from '../features/deepnude';
 import { UploadImg, RenderImg } from '../features/filterImg';
+import FindAnime from '../features/findAnime';
 import MusicHumming from '../features/music_humming';
 import EVENTS from './EVENTS';
 import OPERATIONS from './OPERATIONS';
@@ -103,19 +104,27 @@ const handleAttachments = async (event: any, customListen: EVENTS) => {
           console.log('!undress... 2');
           customListen.sendAttachment(path, event);
         });
+      });
+    }
 
-        //     .then((base64: any) => {
-        //       console.log(base64);
-        //       console.log('!undress... 1');
-        //       // op.base64ToImg(base64, type, filename, (path: string) => {
-        //       //   console.log('!undress... 2');
-        //       //   customListen.sendByURL(path, event);
-        //       // });
-        //     })
-        //     .catch((err: any) => {
-        //       console.log(err);
-        //       customListen.send('Sorry the message is empty 😢 because of error', event);
-        //     });
+    if (body.startsWith('!findAnime')) {
+      const { url, type, filename } = attachments[0];
+      console.log(url, type, filename);
+      op.downloadFile(url, type, filename, async (file: string, path: string) => {
+        console.log('downloadFile !findAnime', file, path);
+        const animesList = await FindAnime(path);
+
+        if (!animesList.length || !animesList[0].video) {
+          customListen.send(event, 'Sorry the message is empty 😢 because of error');
+          return;
+        }
+
+        // op.downloadAllFile(animesList, 'video', (file: string, path: string) => {
+        //   console.log('downloadFile !findAnime', file, path);
+        //   customListen.sendAttachment(path, event);
+        // });
+
+        customListen.sendAttachment(animesList, event);
       });
     }
   } catch (err) {
