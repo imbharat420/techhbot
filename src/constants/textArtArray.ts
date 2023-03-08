@@ -1,6 +1,7 @@
 const textArtTypes = [
   'morning',
   'niceday',
+
   // 'night',
   // 'rain',
   // 'snow',

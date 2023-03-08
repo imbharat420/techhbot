@@ -9,6 +9,7 @@ import Poke from '../features/poke';
 import Excuse from '../features/excuse';
 import generateEmojipasta from '../utils/emojiPasta';
 import TextArtTypes from '../constants/textArtArray';
+import { EMOJI_MAPPINGS } from '../constants/emojiMapping';
 import { TypeArt } from '../constants/textArt';
 const op: OPERATIONS = new OPERATIONS();
 
@@ -75,8 +76,23 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
         customListen.sendAttachment(path, event);
       });
     }
-    const hashtag = command.match(/(\#[a-zA-Z]+\b)(?!;)/g);
+
+    const regex = new RegExp(`\\b(${TextArtTypes.join('|')})\\b`, 'gi');
+    const hashtag = command.match(regex)?.map((match) => match.toLowerCase());
+    // const hashtag = command.match(/(\#[a-zA-Z]+\b)(?!;)/g);
     if (hashtag) {
+      // const body: string = command.replace('#', '');
+      hashtag.forEach((item: string) => {
+        const data = TextArtTypes.filter((item) => item == command.toLowerCase());
+        data.map((item) => {
+          const elArr = TypeArt[item as keyof typeof TypeArt];
+          const element = elArr[Math.floor(Math.random() * elArr.length)]['art'];
+          console.log(element, item, data);
+          // message += element + '\n';
+          customListen.send(element, event);
+        });
+      });
+
       //   // check #string
       //   let message = '';
       //   hashtag.map((item: string) => {
@@ -93,18 +109,6 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
       //   });
       //   customListen.send(message, event);
       // let message = '';
-      const body: string = command.replace('#', '');
-      hashtag.forEach((item: string) => {
-        const body: string = item.replace('#', '');
-        const data = TextArtTypes.filter((item) => item == body.toLowerCase());
-        data.map((item) => {
-          const elArr = TypeArt[item as keyof typeof TypeArt];
-          const element = elArr[Math.floor(Math.random() * elArr.length)]['art'];
-          console.log(element, item, data);
-          // message += element + '\n';
-          customListen.send(element, event);
-        });
-      });
 
       // if (body.trim() == '' || body == null || body == undefined) {
       //   customListen.sorry(event, 'Please provide a Text eg. #smile,');
@@ -127,7 +131,20 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
       // }
     }
 
-    //}
+    const emojiRegex = new RegExp(`\\b(${Object.keys(EMOJI_MAPPINGS).join('|')})\\b`, 'gi');
+    const wordExist = command.match(emojiRegex)?.map((match) => match.toLowerCase());
+    // const hashtag = command.match(/(\#[a-zA-Z]+\b)(?!;)/g);
+    if (wordExist) {
+      // const body: string = command.replace('#', '');
+
+      const item = wordExist[0]; //[Math.floor(Math.random() * wordExist.length)];
+      const data = EMOJI_MAPPINGS[item as keyof typeof EMOJI_MAPPINGS];
+      const emoji = data[Math.floor(Math.random() * data.length)];
+      // const elArr = TypeArt[item as keyof typeof TypeArt];
+      // console.log(data, item, data);
+      // message += element + '\n';
+      customListen.react(emoji, event);
+    }
 
     if (command.startsWith('repeat')) {
       const body: string = op.clean_cmd('repeat', command);

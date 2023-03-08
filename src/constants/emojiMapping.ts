@@ -54153,7 +54153,7 @@ export const EMOJI_MAPPINGS: { [key: string]: string[] } = {
   satisfy: ['😋'],
   thirst: ['🍶'],
   bitterness: ['😝'],
-  hatred: ['😠', '😒'],
+  hatred: ['😠', '😒','😡','💢','🗯️','👿','👹','👺','🤬'],
   forever: [
     '🔁',
     '🕐',
@@ -54187,7 +54187,7 @@ export const EMOJI_MAPPINGS: { [key: string]: string[] } = {
     '⏳',
   ],
   plane: ['✈', '✈', '✈', '🏙', '🏙'],
-  dignity: ['🌟'],
+  dignity: ['🌟'], 
   discipline: ['🥋'],
   creative: ['💭', '💭'],
   protest: ['🙈', '🙉', '🙊', '✊', '✊'],

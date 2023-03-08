@@ -26,6 +26,7 @@ class EVENTS {
   }
 
   react(reaction: string, event: any): void {
+    console.log(reaction);
     this.#api.setMessageReaction(reaction, event.messageID, (err: any): void => {}, true);
   }
 
@@ -67,13 +68,24 @@ class EVENTS {
     this.send(msg, event);
   }
 
-  async send(msg: string, event: any): Promise<void> {
-    // if (typeof msg === 'string' && msg !== '' && msg !== undefined) {
-    //   console.log(msg);
-    //   // await wait(1000 * msg.length * 0.2);
-    //   this.#api.sendMessage(msg, event.threadID, event.messageID);
-    //   return;
-    // }
+  send(msg: string, event: any) {
+    if (typeof msg === 'string' && msg !== '' && msg !== undefined) {
+      console.log(msg);
+      // await wait(1000 * msg.length * 0.2);
+      this.#api.sendMessage(msg, event.threadID, event.messageID);
+      return;
+    }
+
+    this.#api.sendMessage(msg, event.threadID, event.messageID);
+  }
+
+  sendReply(msg: string, event: any) {
+    if (typeof msg === 'string' && msg !== '' && msg !== undefined) {
+      console.log(msg);
+      // await wait(1000 * msg.length * 0.2);
+      this.#api.sendMessage(msg, event.threadID, event.messageID);
+      return;
+    }
 
     this.#api.sendMessage(msg, event.threadID, event.messageID);
   }
