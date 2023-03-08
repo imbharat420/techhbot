@@ -76,7 +76,7 @@ class EVENTS {
       return;
     }
 
-    this.#api.sendMessage(msg, event.threadID, event.messageID);
+    this.#api.sendMessage(msg, event.threadID);
   }
 
   sendReply(msg: string, event: any) {

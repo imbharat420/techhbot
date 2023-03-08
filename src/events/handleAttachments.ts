@@ -65,7 +65,7 @@ const handleAttachments = async (event: any, customListen: EVENTS) => {
           })
           .catch((err: any) => {
             console.log(err);
-            customListen.send('Sorry the message is empty 😢 because of error', event);
+            customListen.sendReply('Sorry the message is empty 😢 because of error', event);
           });
       });
     }
@@ -85,7 +85,7 @@ const handleAttachments = async (event: any, customListen: EVENTS) => {
         })
         .catch((err: any) => {
           console.log(err);
-          customListen.send('Sorry the message is empty 😢 because of error', event);
+          customListen.sendReply('Sorry the message is empty 😢 because of error', event);
         });
     }
 
@@ -115,7 +115,7 @@ const handleAttachments = async (event: any, customListen: EVENTS) => {
         const animesList = await FindAnime(path);
 
         if (!animesList.length || !animesList[0].video) {
-          customListen.send(event, 'Sorry the message is empty 😢 because of error');
+          customListen.sendReply(event, 'Sorry the message is empty 😢 because of error');
           return;
         }
 
