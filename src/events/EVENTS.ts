@@ -25,6 +25,12 @@ class EVENTS {
     this.#op = new OPERATIONS();
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  async delay(_time = 1000) {
+    await wait(_time);
+    return this;
+  }
+
   react(reaction: string, event: any): void {
     console.log(reaction);
     this.#api.setMessageReaction(reaction, event.messageID, (err: any): void => {}, true);
@@ -54,7 +60,7 @@ class EVENTS {
     // if (typeof msg === 'object') msg = JSON.stringify(msg, null, 2);
 
     this.react('😎', event);
-    this.send(error(JSON.stringify(msg)), event);
+    this.send(JSON.stringify(msg), event);
   }
 
   async markAsRead(event: any): Promise<void> {
@@ -72,7 +78,7 @@ class EVENTS {
     if (typeof msg === 'string' && msg !== '' && msg !== undefined) {
       console.log(msg);
       // await wait(1000 * msg.length * 0.2);
-      this.#api.sendMessage(msg, event.threadID, event.messageID);
+      this.#api.sendMessage(msg, event.threadID);
       return;
     }
 
@@ -123,12 +129,6 @@ class EVENTS {
   async sendByURL(url: string | string[], event: any): Promise<void> {
     if (typeof url === 'object' && url.length > 0) {
       const attachment: any = [];
-      // url.forEach((p) => {
-      //   //@ts-ignore
-      //   https.get(p.video).on('response', (stream) => {
-      //     attachment.push(stream);
-      //   });
-      // });
 
       this.#api.sendMessage(
         {
@@ -139,8 +139,9 @@ class EVENTS {
       );
       return;
     }
+    console.log(url);
 
-    if (url !== 'string') return this.error_msg(event, 'url is not a string');
+    if (typeof url !== 'string') return this.error_msg(event, 'url is not a string');
     https.get(url).on('response', (stream) => {
       this.#api.sendMessage(
         {

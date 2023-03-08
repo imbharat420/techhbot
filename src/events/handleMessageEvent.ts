@@ -11,6 +11,9 @@ import generateEmojipasta from '../utils/emojiPasta';
 import TextArtTypes from '../constants/textArtArray';
 import { EMOJI_MAPPINGS } from '../constants/emojiMapping';
 import { TypeArt } from '../constants/textArt';
+import { EMOJI_MEANING } from '../constants/emoji';
+import AI_FACE from '../features/aiFace';
+import REGEX from '../constants/regex';
 const op: OPERATIONS = new OPERATIONS();
 
 const handleMessageEvent = async (event: any, customListen: EVENTS) => {
@@ -68,6 +71,7 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
     if (command.startsWith('execuse')) {
       const body: string = op.clean_cmd('execuse', command);
       const data = await Excuse(body);
+      const path = await handleAttachments(data, event);
       customListen.send(data, event);
     }
 
@@ -77,23 +81,105 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
       });
     }
 
-    const regex = new RegExp(`\\b(${TextArtTypes.join('|')})\\b`, 'gi');
-    const hashtag = command.match(regex)?.map((match) => match.toLowerCase());
-    // const hashtag = command.match(/(\#[a-zA-Z]+\b)(?!;)/g);
-    if (hashtag) {
-      // const body: string = command.replace('#', '');
-      hashtag.forEach((item: string) => {
-        const data = TextArtTypes.filter((item) => item == command.toLowerCase());
-        data.map((item) => {
-          const elArr = TypeArt[item as keyof typeof TypeArt];
-          const element = elArr[Math.floor(Math.random() * elArr.length)]['art'];
-          console.log(element, item, data);
-          // message += element + '\n';
-          customListen.send(element, event);
-        });
-      });
+    if (command.startsWith('aiface')) {
+      const body: string = op.clean_cmd('aiface', command);
 
-      //   // check #string
+      const url = await AI_FACE(command);
+      op.downloadFile(url, 'photo', 'ai', async (file: string, path: string) => {
+        customListen.sendAttachment(path, event);
+      });
+    }
+
+    /**
+     * !SEND ASCII ART
+     */
+
+    // const regex = new RegExp(`\\b(${TextArtTypes.join('|')})\\b`, 'gi');
+    // const hashtag = command.match(regex)?.map((match) => match.toLowerCase());
+    // // const hashtag = command.match(/(\#[a-zA-Z]+\b)(?!;)/g);
+    // if (hashtag) {
+    //   // const body: string = command.replace('#', '');
+    //   hashtag.forEach((item: string) => {
+    //     const data = TextArtTypes.filter((item) => item == command.toLowerCase());
+    //     data.map((item) => {
+    //       const elArr = TypeArt[item as keyof typeof TypeArt];
+    //       const element = elArr[Math.floor(Math.random() * elArr.length)]['art'];
+    //       console.log(element, item, data);
+    //       // message += element + '\n';
+    //       customListen.send(element, event);
+    //     });
+    //   });
+    // }
+
+    /**
+     * !REACT EMOJI
+     */
+
+    // const emojiRegex = new RegExp(`\\b(${Object.keys(EMOJI_MAPPINGS).join('|')})\\b`, 'gi');
+    // const wordExist = command.match(emojiRegex)?.map((match) => match.toLowerCase());
+    // // const hashtag = command.match(/(\#[a-zA-Z]+\b)(?!;)/g);
+    // if (wordExist) {
+    //   const item = wordExist[0]; //[Math.floor(Math.random() * wordExist.length)];
+    //   const data = EMOJI_MAPPINGS[item as keyof typeof EMOJI_MAPPINGS];
+    //   const emoji = data[Math.floor(Math.random() * data.length)];
+    //   customListen.react(emoji, event);
+    // }
+
+    /**
+     * !REPEAT
+     */
+    if (command.startsWith('repeat')) {
+      const body: string = op.clean_cmd('repeat', command);
+      const cleanBody: string = op.clean_bad(body);
+      customListen.send(cleanBody, event);
+    }
+
+    /**
+     * !QUESTION DETECTION
+     */
+
+    const isQuestion: boolean = REGEX['question'].test(command);
+    if (isQuestion) {
+      customListen.sendReply("I not understand your question :'(", event);
+    }
+
+    /**
+     * !EMOJI MEANING
+     */
+
+    if (command.startsWith('meaning')) {
+      const body: string = op.clean_cmd('meaning', command);
+
+      const data = EMOJI_MEANING[body as keyof typeof EMOJI_MEANING];
+      if (data) {
+        let message = '';
+        message = `*${data['name']}* \n📌 _${data['meaning']}_ `;
+        customListen.send(message, event);
+        // customListen.send(data['meaning'], event);
+      }
+    }
+
+    if (command == 'bot') {
+      customListen.react('Hello World', event);
+    }
+
+    if (command == 'dog') {
+      customListen.react('⚠️', event);
+    }
+
+    if (command == 'cat') {
+      customListen.react('✨', event);
+    }
+  } catch (err: any) {
+    console.log(err);
+    // customListen.error_msg(event, err);
+  }
+};
+
+export default handleMessageEvent;
+/*
+
+    //   // check #string
       //   let message = '';
       //   hashtag.map((item: string) => {
       //     const cleanItem = item.replace('#', '');
@@ -129,43 +215,5 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
       //     customListen.sorry(event, 'Please provide a valid text art name or follow the format');
       //   }
       // }
-    }
 
-    const emojiRegex = new RegExp(`\\b(${Object.keys(EMOJI_MAPPINGS).join('|')})\\b`, 'gi');
-    const wordExist = command.match(emojiRegex)?.map((match) => match.toLowerCase());
-    // const hashtag = command.match(/(\#[a-zA-Z]+\b)(?!;)/g);
-    if (wordExist) {
-      // const body: string = command.replace('#', '');
-
-      const item = wordExist[0]; //[Math.floor(Math.random() * wordExist.length)];
-      const data = EMOJI_MAPPINGS[item as keyof typeof EMOJI_MAPPINGS];
-      const emoji = data[Math.floor(Math.random() * data.length)];
-      // const elArr = TypeArt[item as keyof typeof TypeArt];
-      // console.log(data, item, data);
-      // message += element + '\n';
-      customListen.react(emoji, event);
-    }
-
-    if (command.startsWith('repeat')) {
-      const body: string = op.clean_cmd('repeat', command);
-      const cleanBody: string = op.clean_bad(body);
-      customListen.send(cleanBody, event);
-    }
-    if (command == 'bot') {
-      customListen.react('Hello World', event);
-    }
-
-    if (command == 'dog') {
-      customListen.react('⚠️', event);
-    }
-
-    if (command == 'cat') {
-      customListen.react('✨', event);
-    }
-  } catch (err: any) {
-    console.log(err);
-    // customListen.error_msg(event, err);
-  }
-};
-
-export default handleMessageEvent;
+      */

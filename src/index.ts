@@ -5,6 +5,7 @@ import fs from 'fs';
 import handleMessageEvent from './events/handleMessageEvent';
 import EVENTS from './events/EVENTS';
 import handleMessageReply from './events/handleMessageReply';
+import handleMessageReaction from './events/handleReaction';
 
 const configListener: any = {
   listenEvents: true,
@@ -38,7 +39,7 @@ fca(login, async (err: any, api: any) => {
         handleMessageReply(event, customListen);
         break;
       case 'message_reaction':
-        console.log(event);
+        handleMessageReaction(event, customListen);
         break;
       case 'event':
         console.log(event);

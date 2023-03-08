@@ -276,3 +276,36 @@ https://www.textfacescopy.com/good-morning-text-faces.html
 
 https://cooltext.top/1
 ```
+
+
+
+```
+https://en.wikipedia.org/wiki/List_of_country_calling_codes
+
+```
+
+
+```
+AI Generated Images
+
+https://generated.photos/faces/right-facing/gray-hair/joy
+
+https://api.generated.photos/api/frontend/v1/images?page=1&per_page=30&head_pose=right-facing&emotion=joy
+
+
+https://api.generated.photos/api/frontend/v1/images?page=1&per_page=30&head_pose=right-facing&hair_color=gray&emotion=joy
+
+
+```
+
+
+```
+"dependencies": {
+        "axios": "^1.3.4",
+        "google-tts-api": "^2.0.2",
+        "googlethis": "^1.7.1",
+        "openai": "^3.2.1",
+        "weather-js": "^2.0.0",
+        "youtubei.js": "^1.4.5"
+    }
+    ```
