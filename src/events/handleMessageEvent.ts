@@ -151,11 +151,24 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
       const body: string = op.clean_cmd('meaning', command);
 
       const data = EMOJI_MEANING[body as keyof typeof EMOJI_MEANING];
+      const splitEmoji = [...body].filter((item) => item !== ' ').join(' ');
+
+      if (body.match(/\w/g)) {
+        // customListen.send(`*give emoji for finding meaning*_`, event);
+        return;
+      }
+
       if (data) {
         let message = '';
-        message = `*${data['name']}* \n📌 _${data['meaning']}_ `;
+        message = `*${data['name']}* \n📌 _${data['description']}_ `;
+        message += `\n\n📌This Emoji is created by using : ${splitEmoji}`;
         customListen.send(message, event);
         // customListen.send(data['meaning'], event);
+      } else {
+        let message = '';
+        message = `*Sorry ${body} EMOJI NOT FOUND*\n📌 _Please try another EMOJI_\n_Example: meaning 😅_`;
+        message += `\n\n📌But his Emoji is created by using : ${splitEmoji}`;
+        customListen.send(message, event);
       }
     }
 

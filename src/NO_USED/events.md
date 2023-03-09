@@ -97,3 +97,22 @@ POOL VOTES
   }
 }
 ```
+
+
+
+
+```json
+//Multiple Mentions
+ {
+  type: 'message_reply',
+  threadID: '5819745318103902',
+  messageID: 'mid.$gABStBwxea16M9f8IWGGxLm9LzAia',
+  senderID: '100037131918629',
+  attachments: [],
+  body: '@John Paul Caigas @John Paul Caigas',
+  isGroup: true,
+  mentions: {
+    '100046351269353': '@John Paul Caigas',
+    '100080934841785': '@John Paul Caigas'
+  },
+  ```
