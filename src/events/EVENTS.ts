@@ -90,7 +90,7 @@ class EVENTS {
     this.#api.sendMessage(msg, event.threadID);
   }
 
-  mention(msg: string, event: any): void {
+  mentionAll(msg: string, event: any): void {
     const emptyChar = '\u200E';
     const { threadID } = event;
 

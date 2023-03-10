@@ -28,7 +28,7 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
      * @send @here mention
      */
     if (command.startsWith('@here')) {
-      customListen.mention('everyone', event);
+      customListen.mentionAll('everyone', event);
     }
 
     /**
