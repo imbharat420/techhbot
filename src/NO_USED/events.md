@@ -116,3 +116,40 @@ POOL VOTES
     '100080934841785': '@John Paul Caigas'
   },
   ```
+
+
+
+  ```js
+  //SHARE
+  {
+  type: 'message',
+  senderID: '100081936620905',
+  body: '/fbdl https://www.facebook.com/100082599857819/posts/163136566449671/?app=fbl',
+  threadID: '5819745318103902',
+  messageID: 'mid.$gABStBwxea16M_IasiGGy0FjiXgQi',
+  attachments: [
+    {
+      type: 'share',
+      ID: 'ee.mid.$gABStBwxea16M_IasiGGy0FjiXgQi',
+      url: 'https://www.facebook.com/papiber15/posts/pfbid02JxsLQ6YHpaEmdevjVSWJnagd6fqPPb47rPPR44B9fue3Yu9xoWZRjXVKj6wozqq1l',
+      title: '',
+      description: 'Edi wag 🙄\n\nps. video not mine.',
+      source: 'Papiber',
+      image: 'https://scontent.xx.fbcdn.net/v/t15.5256-10/321761368_1236058500457168_3008727583224505411_n.jpg?stp=dst-jpg_p960x960&_nc_cat=108&ccb=1-7&_nc_sid=ad6a45&_nc_ohc=Dg2neSigDgQAX9GPfAI&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.xx&oh=00_AfCqew5jsIAUaBGdYUCeaQM4Q8vbsQbFiIMHvzrioJpFFQ&oe=6410901C',
+      width: 960,
+      height: 960,
+      playable: true,
+      duration: 7710,
+      playableUrl: 'https://scontent.xx.fbcdn.net/v/t42.1790-2/320829511_1372645130144438_6175101099307586046_n.mp4?_nc_cat=100&ccb=1-7&_nc_sid=985c63&efg=eyJybHIiOjU4OCwicmxhIjo1MTIsInZlbmNvZGVfdGFnIjoic3ZlX3NkIn0%3D&_nc_ohc=LtKa4_71CwoAX87jEbQ&rl=588&vabr=327&_nc_ht=scontent.xx&oh=00_AfBTI1wz8FMw7V0NBw8uyj3X45IOAZwb7k8gCV48QbPewA&oe=640B39BC',
+      subattachments: [Array],
+      properties: {},
+      facebookUrl: 'https://www.facebook.com/papiber15/posts/pfbid02JxsLQ6YHpaEmdevjVSWJnagd6fqPPb47rPPR44B9fue3Yu9xoWZRjXVKj6wozqq1l',
+      target: [Object],
+      styleList: [Array]
+    }
+  ],
+  mentions: {},
+  timestamp: '1678447305864',
+  isGroup: true
+}
+```

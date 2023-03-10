@@ -19,7 +19,9 @@ const Excuse = async (body: string) => {
   try {
     const response = await axios.post(process.env.EXCUSES as string, data);
     console.log(response);
-    const message = response.data[0]?.result?.data?.json?.generation;
+    let message = response.data[0]?.result?.data?.json?.generation;
+    if (!message) message = 'I am sorry, I am not feeling well today :(';
+    console.log(message);
     return message;
   } catch (error) {
     return errorHandler(error);

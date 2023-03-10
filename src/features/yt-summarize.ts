@@ -42,6 +42,7 @@ const YTSummarize = async (url: string) => {
     const message = `Title: ${title}\n\n${allVideo} \n\n ==SUMMARY==\n${summary}`;
     return message;
   } catch (err: any) {
+    console.log('YTSummarize', err);
     return errorHandler(err);
   }
 };

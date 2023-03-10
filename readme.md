@@ -309,3 +309,8 @@ https://api.generated.photos/api/frontend/v1/images?page=1&per_page=30&head_pose
         "youtubei.js": "^1.4.5"
     }
     ```
+
+    ```
+    https://github.com/webcrawlersdev/devconnector_2.0
+    https://api.github.com/repos/webcrawlersdev/devconnector_2.0
+    ```

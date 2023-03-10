@@ -43,15 +43,15 @@ const handleAttachments = async (event: any, customListen: EVENTS) => {
   const { attachments } = event.messageReply;
   console.log(attachments);
   try {
-    if (body.startsWith('!findSong')) {
-      const { url, type, filename } = attachments[0];
-      op.downloadFile(url, type, filename, (file: string, path: string) => {
-        MusicHumming(path).then((res: any) => {
-          console.log(res);
-          customListen.send(res, event);
-        });
-      });
-    }
+    /*############-------------------[ AUDIO FILES HANDLING ]--------------###################*/
+
+    /**
+     * *------------------------*
+     * !uploadImg & !renderImg
+     * @Send uploadImg to take files and send back ID & renderImg to take ID and send back filter image
+     * *------------------------*
+     */
+
     if (body.startsWith('!uploadImg')) {
       const { url, type, filename } = attachments[0];
       console.log(url, type, filename);
@@ -75,19 +75,43 @@ const handleAttachments = async (event: any, customListen: EVENTS) => {
       const data = filters.find((filter) => clean_body.includes(filter.name));
       const id = event.messageReply.body;
       console.log(id);
-      if (!data) {
+      if (clean_body === '' || !data) {
         customListen.sorry('sorry filter not found', event);
       }
-      RenderImg(id, data?.id ?? filters[0].id)
-        .then((res: any) => {
-          console.log(res);
-          customListen.sendByURL(res, event);
-        })
-        .catch((err: any) => {
-          console.log(err);
-          customListen.sendReply('Sorry the message is empty 😢 because of error', event);
-        });
+      try {
+        const res = await RenderImg(id, data?.id ?? filters[0].id);
+        console.log('handleAttachment RenderImg', res);
+        customListen.sendByHTTP(res, event);
+      } catch (err) {
+        customListen.sendReply('Sorry the message is empty 😢 because of error', event);
+      }
     }
+
+    /*############-------------------[ AI ]--------------###################*/
+
+    /**
+     * *------------------------*
+     * !findSong
+     * @Send Take Audio and send Song Name & Artist Name
+     * *------------------------*
+     */
+
+    if (body.startsWith('!findSong')) {
+      const { url, type, filename } = attachments[0];
+      op.downloadFile(url, type, filename, (file: string, path: string) => {
+        MusicHumming(path).then((res: any) => {
+          console.log(res);
+          customListen.send(res, event);
+        });
+      });
+    }
+
+    /**
+     * *------------------------*
+     * !undress
+     * @Send deepnude AI to take files and send back BASE64
+     * *------------------------*
+     */
 
     if (body.startsWith('!undress')) {
       const { url, type, filename } = attachments[0];
@@ -100,13 +124,22 @@ const handleAttachments = async (event: any, customListen: EVENTS) => {
           return;
         }
         console.log('!undress ==========================', base64.length);
-        op.base64ToImg(base64, 'photo', filename, (path: string) => {
+        const message: any = [];
+        message['message'] = 'Undress Image 🤤';
+        op.base64ToFile(base64, 'photo', filename, (path: string) => {
           console.log('!undress... 2');
-          customListen.sendAttachment(path, event);
+          message.push(path);
+          customListen.sendAttachment(message, event);
         });
       });
     }
 
+    /**
+     * *------------------------*
+     * !findAnime
+     * @Send send URL of Audio File
+     * *------------------------*
+     */
     if (body.startsWith('!findAnime')) {
       const { url, type, filename } = attachments[0];
       console.log(url, type, filename);
@@ -114,17 +147,28 @@ const handleAttachments = async (event: any, customListen: EVENTS) => {
         console.log('downloadFile !findAnime', file, path);
         const animesList = await FindAnime(path);
 
-        if (!animesList.length || !animesList[0].video) {
-          customListen.sendReply(event, 'Sorry the message is empty 😢 because of error');
+        if (typeof animesList === 'string') {
+          console.log('wrong');
+          customListen.send('MAYBE NOT FOUND ANYTHING !findAnime', event);
           return;
         }
 
-        // op.downloadAllFile(animesList, 'video', (file: string, path: string) => {
-        //   console.log('downloadFile !findAnime', file, path);
-        //   customListen.sendAttachment(path, event);
-        // });
+        if (animesList.length == 0) return customListen.send('MAYBE NOT FOUND ANYTHING !findAnime', event);
+        const message: any = [];
+        message['message'] = animesList['message'];
+        op.downloadFile(animesList[1], 'video', `vide-${filename}.mp4`, (file: string, path: string) => {
+          console.log('downloadFile !findAnime', file, path);
+          message.push(path);
+          console.log(message);
+          customListen.sendAttachment(message, event);
+        });
 
-        customListen.sendAttachment(animesList, event);
+        // console.log('data', animesList);
+        // op.downloadAllFile(animesList, 'audio', ()=>{
+        //   console.log('downloadAllFile');
+        //   console.log('files', file);
+        // });
+        // customListen.sendAttachment(animesList, event);
       });
     }
   } catch (err) {

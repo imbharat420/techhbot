@@ -14,40 +14,6 @@ async function base64_encode(file: string) {
   return bitmap;
 }
 
-function doRequest(url: string, base64: string) {
-  console.log('doRequest');
-  return new Promise(function (resolve, reject) {
-    request.post(
-      {
-        url: 'https://api.deep-nude.co/',
-        headers: {
-          'Content-Type': 'text/plain',
-          Accept: '*/*',
-          'Accept-Encoding': 'gzip, deflate, br',
-          'Content-Encoding': 'br',
-        },
-        body: `data:image/png;base64,${base64}`,
-      },
-      function (error: any, res: any, body: any) {
-        console.log(body);
-        if (!error && res.statusCode === 200) {
-          console.log(
-            '200 body------------***********************************************************************',
-            body,
-          );
-          resolve(body);
-        } else {
-          console.log(
-            'error------------***********************************************************************',
-            error,
-          );
-          reject(error);
-        }
-      },
-    );
-  });
-}
-
 const DeepNude = async (url: string) => {
   console.log('BASE64', url);
   try {
@@ -71,6 +37,42 @@ const DeepNude = async (url: string) => {
 };
 
 export default DeepNude;
+
+// function doRequest(url: string, base64: string) {
+//   console.log('doRequest');
+//   return new Promise(function (resolve, reject) {
+//     request.post(
+//       {
+//         url: 'https://api.deep-nude.co/',
+//         headers: {
+//           'Content-Type': 'text/plain',
+//           Accept: '*/*',
+//           'Accept-Encoding': 'gzip, deflate, br',
+//           'Content-Encoding': 'br',
+//         },
+//         body: `data:image/png;base64,${base64}`,
+//       },
+//       function (error: any, res: any, body: any) {
+//         console.log(body);
+//         if (!error && res.statusCode === 200) {
+//           console.log(
+//             '200 body------------***********************************************************************',
+//             body,
+//           );
+//           resolve(body);
+//         } else {
+//           console.log(
+//             'error------------***********************************************************************',
+//             error,
+//           );
+//           reject(error);
+//         }
+//       },
+//     );
+//   });
+// }
+
+//000000000000000000000000000000000000000000000000
 
 // const response = await fetch(process.env.URL as string, {
 //   method: 'POST',

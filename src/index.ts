@@ -6,6 +6,8 @@ import handleMessageEvent from './events/handleMessageEvent';
 import EVENTS from './events/EVENTS';
 import handleMessageReply from './events/handleMessageReply';
 import handleMessageReaction from './events/handleReaction';
+import wait from './utils/wait';
+import handleReadReceipt from './events/handlerReadReceipt';
 
 const configListener: any = {
   listenEvents: true,
@@ -14,8 +16,10 @@ const configListener: any = {
 };
 
 const login = { appState: JSON.parse(fs.readFileSync('./src/login/bha.json', 'utf8')) };
+// const login = { appState: JSON.parse(fs.readFileSync('./src/login/tech.json', 'utf8')) };
 
 // let ulogin = { email: process.env.USERNAME, password: process.env.PASSWORD };
+
 let done = true;
 let customListen: EVENTS;
 fca(login, async (err: any, api: any) => {
@@ -29,10 +33,6 @@ fca(login, async (err: any, api: any) => {
     }
     switch (event.type) {
       case 'message':
-        if (event.body === '!stop') {
-          api.sendMessage('Goodbye...', event.threadID);
-          return stopListening();
-        }
         handleMessageEvent(event, customListen);
         break;
       case 'message_reply':
@@ -41,6 +41,16 @@ fca(login, async (err: any, api: any) => {
       case 'message_reaction':
         handleMessageReaction(event, customListen);
         break;
+      case 'read_receipt':
+        handleReadReceipt(event, customListen);
+        break;
+
+      // 🥲 remove this later console will be full of this
+      case 'message_unsend':
+      case 'typ':
+      case 'read':
+      case 'presence':
+      case 'delivery':
       case 'event':
         console.log(event);
         break;

@@ -102,6 +102,11 @@
   resolved "https://registry.npmjs.org/@types/node/-/node-17.0.21.tgz"
   integrity sha512-DBZCJbhII3r90XbQxI8Y9IjjiiOGlZ0Hr32omXIZvwwZ7p4DMMXGrKXVyPfuoBOri9XNtL0UK69jYIBIsRX3QQ==
 
+"@types/random-useragent@^0.3.1":
+  version "0.3.1"
+  resolved "https://registry.npmjs.org/@types/random-useragent/-/random-useragent-0.3.1.tgz"
+  integrity sha512-yVz7897JjjwS6V+lmxlu8pktzNnNWgtF9MGxfaRfI8o+hQageO9K+0hfwr8PspdFJIIRE9KkLqp4o5tlQqv/0w==
+
 "@types/request@^2.48.8":
   version "2.48.8"
   resolved "https://registry.npmjs.org/@types/request/-/request-2.48.8.tgz"
@@ -126,6 +131,11 @@
   version "4.0.2"
   resolved "https://registry.npmjs.org/@types/tough-cookie/-/tough-cookie-4.0.2.tgz"
   integrity sha512-Q5vtl1W5ue16D+nIaW8JWebSSraJVlK+EthKn7e7UcD4KWsaSJ8BqGPXNaPghgtcn/fhvrN17Tv8ksUsQpiplw==
+
+"@types/user-agents@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.npmjs.org/@types/user-agents/-/user-agents-1.0.2.tgz"
+  integrity sha512-WOoL2UJTI6RxV8RB2kS3ZhxjjijI5G1i7mgU7mtlm4LsC1XGCfiV56h+GV4VZnAUkkkLQ4gbFGR/dggT01n0RA==
 
 "@typescript-eslint/eslint-plugin@^5.12.1":
   version "5.12.1"
@@ -637,6 +647,11 @@ delegates@^1.0.0:
   resolved "https://registry.npmjs.org/delegates/-/delegates-1.0.0.tgz"
   integrity sha512-bd2L678uiWATM6m5Z1VzNCErI3jiGzt6HGY8OVICs40JQq/HALfbyNJmp0UDakEY4pMMaN0Ly5om/B1VI/+xfQ==
 
+detect-indent@~6.0.0:
+  version "6.0.0"
+  resolved "https://registry.npmjs.org/detect-indent/-/detect-indent-6.0.0.tgz"
+  integrity sha512-oSyFlqaTHCItVRGK5RmrmjB+CmaMOW7IaNA/kdxqhoa6d17j/5ce9O9eWXmV/KEdRwqpQA+Vqe8a8Bsybu4YnA==
+
 diff@^4.0.1:
   version "4.0.2"
   resolved "https://registry.npmjs.org/diff/-/diff-4.0.2.tgz"
@@ -648,6 +663,11 @@ dir-glob@^3.0.1:
   integrity sha512-WkrWp9GR4KXfKGYzOLmTuGVi1UWFfws377n9cc55/tb6DuqyF6pcQ5AbiHEshaDpY9v6oaSr2XCDidGmMwdzIA==
   dependencies:
     path-type "^4.0.0"
+
+docopt@~0.6.2:
+  version "0.6.2"
+  resolved "https://registry.npmjs.org/docopt/-/docopt-0.6.2.tgz"
+  integrity sha512-NqTbaYeE4gA/wU1hdKFdU+AFahpDOpgGLzHP42k6H6DKExJd0A55KEVWYhL9FEmHmgeLvEU2vuKXDuU+4yToOw==
 
 doctrine@^2.1.0:
   version "2.1.0"
@@ -690,6 +710,15 @@ domutils@^1.5.1, domutils@1.5.1:
   dependencies:
     dom-serializer "0"
     domelementtype "1"
+
+dot-json@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.npmjs.org/dot-json/-/dot-json-1.2.2.tgz"
+  integrity sha512-AKL+GsO4wSEU4LU+fAk/PqN4nQ6PB1vT3HpMiZous9xCzK5S0kh4DzfUY0EfU67jsIXLlu0ty71659N9Nmg+Tw==
+  dependencies:
+    detect-indent "~6.0.0"
+    docopt "~0.6.2"
+    underscore-keypath "~0.0.22"
 
 dotenv@^16.0.3:
   version "16.0.3"
@@ -1779,6 +1808,11 @@ lodash.bind@^4.1.4:
   resolved "https://registry.npmjs.org/lodash.bind/-/lodash.bind-4.2.1.tgz"
   integrity sha512-lxdsn7xxlCymgLYo1gGvVrfHmkjDiyqVv62FAeF2i5ta72BipE1SLxw8hPEPLhD4/247Ijw07UQH7Hq/chT5LA==
 
+lodash.clonedeep@^4.5.0:
+  version "4.5.0"
+  resolved "https://registry.npmjs.org/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz"
+  integrity sha512-H5ZhCF25riFd9uB5UCkVKo61m3S/xZk1x4wA6yp/L3RFP6Z/eHH1ymQcGLo7J3GMPfm0V/7m1tryHuGVxpqEBQ==
+
 lodash.defaults@^4.0.1:
   version "4.2.0"
   resolved "https://registry.npmjs.org/lodash.defaults/-/lodash.defaults-4.2.0.tgz"
@@ -2755,6 +2789,18 @@ unc-path-regex@^0.1.2:
   resolved "https://registry.npmjs.org/unc-path-regex/-/unc-path-regex-0.1.2.tgz"
   integrity sha512-eXL4nmJT7oCpkZsHZUOJo8hcX3GbsiDOa0Qu9F646fi8dT3XuSVopVqAcEiVzSKKH7UoDti23wNX3qGFxcW5Qg==
 
+underscore-keypath@~0.0.22:
+  version "0.0.22"
+  resolved "https://registry.npmjs.org/underscore-keypath/-/underscore-keypath-0.0.22.tgz"
+  integrity sha512-fU7aYj1J2LQd+jqdQ67AlCOZKK3Pl+VErS8fGYcgZG75XB9/bY+RLM+F2xEcKHhHNtLvqqFyXAoZQlLYfec3Xg==
+  dependencies:
+    underscore "*"
+
+underscore@*:
+  version "1.13.6"
+  resolved "https://registry.npmjs.org/underscore/-/underscore-1.13.6.tgz"
+  integrity sha512-+A5Sja4HP1M08MaXya7p5LvjuM7K6q/2EaC0+iovj/wOcMsTzMvDFbasi/oSapiwOlt252IqsKqPjCl7huKS0A==
+
 unique-stream@^2.0.2:
   version "2.3.1"
   resolved "https://registry.npmjs.org/unique-stream/-/unique-stream-2.3.1.tgz"
@@ -2769,6 +2815,14 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+user-agents@^1.0.1315:
+  version "1.0.1315"
+  resolved "https://registry.npmjs.org/user-agents/-/user-agents-1.0.1315.tgz"
+  integrity sha512-QqjbpmO6JDm0vlVhskGu9mLA1niRAujXE9de6u6YT1eRiZRCu0VYgx5zK45oZY8L4cAQ6Ct3Pe934sTaKSAjjg==
+  dependencies:
+    dot-json "^1.2.2"
+    lodash.clonedeep "^4.5.0"
 
 util-deprecate@^1.0.1, util-deprecate@~1.0.1:
   version "1.0.2"

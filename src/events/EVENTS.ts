@@ -1,8 +1,10 @@
 import fs from 'fs';
-import https from 'http';
+import https from 'https';
+import http from 'http';
 import { error } from '../utils/templates';
 
 import OPERATIONS from './OPERATIONS';
+import { info } from 'console';
 
 const wait = (ms: number) => {
   if (ms > 2000) ms = 10000;
@@ -15,6 +17,20 @@ const isValidUrl = (urlString: string) => {
     return false;
   }
 };
+
+// eslint-disable-next-line @typescript-eslint/ban-types
+const waitForStream = (data: any, cb: Function) => {
+  const attachment: any = [];
+  for (const url of data) {
+    if (isValidUrl(url)) {
+      https.get(url).on('response', (stream) => {
+        attachment.push(stream);
+        if (url === data[data.length - 1]) cb(attachment);
+      });
+    }
+  }
+};
+
 // TODO: ALL BASIC FUNCTIONALITY SHOULD BE IN THIS CLASS
 
 class EVENTS {
@@ -71,7 +87,45 @@ class EVENTS {
 
   async sorry(event: any, msg: string): Promise<void> {
     this.react('😢', event);
-    this.send(msg, event);
+    this.#api.sendMessage(msg, event.threadID);
+  }
+
+  mention(msg: string, event: any): void {
+    const emptyChar = '\u200E';
+    const { threadID } = event;
+
+    this.#api.getThreadInfo(event.threadID, (err: any, info: any) => {
+      if (err) return console.error(err);
+      const msgToSend: any = { body: emptyChar + 'everyone', mentions: [] };
+
+      for (let i = 0; i < info.userInfo.length; i++) {
+        msgToSend.mentions.push({ tag: 'everyone', id: info.userInfo[i]['id'] }); // '100001023086597': 'everyone',
+        //msgToSend.mentions.push({ tag: 'everyone', id: event.threadID }); // '100001023086597': 'everyone',
+      }
+
+      this.#api.sendMessage(
+        {
+          body: emptyChar + 'everyone',
+          mentions: [
+            {
+              tag: 'everyone',
+              id: event.threadID,
+            },
+          ],
+        },
+        info.threadID,
+      );
+    });
+
+    // this.#api.sendMessage(
+    //   {
+    //     body: msg,
+    //     mentions: {
+    //       [threadID]: '@everyone',
+    //     },
+    //   },
+    //   event.threadID,
+    // );
   }
 
   send(msg: string, event: any) {
@@ -97,52 +151,71 @@ class EVENTS {
   }
 
   // path: string | Array<string>
-  async sendAttachment(path: string, event: any): Promise<void> {
+  async sendAttachment(path: any, event: any): Promise<void> {
     console.log('sendAttachment', path);
-
-    // if (typeof path === 'object' && path.length > 0) {
-    //   const attachment: any = [];
-    //   path.forEach((p) => {
-    //     //@ts-ignore
-    //     return;
-    //   });
-    // }
-
     if (path === '') {
-      // this.send('Sorry the message is empty 😢 because of error', event);
+      this.send('Sorry the url path is empty 😢 because of error', event);
       return;
     }
 
-    if (typeof path !== 'string') {
-      return this.error_msg(event, 'Sorry the Path is not string for make that as stream 😢');
-    }
-    console.log('sendAttachment', path);
     this.#api.sendMessage(
       {
-        body: '',
-        attachment: [fs.createReadStream(path)],
+        body: path['message'], //? path['message'] : '',
+        attachment: [fs.createReadStream(path[0])],
       },
       event.threadID,
     );
+
+    // if (typeof path !== 'string') {
+    //   return this.error_msg(event, 'Sorry the Path is not string for make that as stream 😢');
+    // }
+    // console.log('sendAttachment', path);
+    // if (path && path.length === 0)
+    //   return this.error_msg(event, 'Sorry the Path is not string for make that as stream 😢');
+
+    //@
+
+    //this.#api.sendMessage(JSON.stringify(path), event.threadID);
   }
 
-  async sendByURL(url: string | string[], event: any): Promise<void> {
-    if (typeof url === 'object' && url.length > 0) {
-      const attachment: any = [];
+  async sendByURL(url: any, event: any): Promise<void> {
+    try {
+      /* IF ARRAY OF URLS */
+      if (typeof url === 'object' && url.length > 0) {
+        waitForStream(url, (attachment: any) => {
+          this.#api.sendMessage(
+            {
+              body: url['message'],
+              attachment: attachment,
+            },
+            event.threadID,
+          );
+        });
+        return;
+      }
 
-      this.#api.sendMessage(
-        {
-          body: '',
-          attachment,
-        },
-        event.threadID,
-      );
-      return;
+      /* IF STRING  */
+      if (typeof url !== 'string' || url == '') return this.error_msg(event, 'url is not a string');
+
+      https.get(url).on('response', (stream) => {
+        this.#api.sendMessage(
+          {
+            body: '',
+            attachment: [stream],
+          },
+          event.threadID,
+        );
+      });
+    } catch (err) {
+      console.log(err);
     }
-    console.log(url);
+  }
 
-    if (typeof url !== 'string') return this.error_msg(event, 'url is not a string');
-    https.get(url).on('response', (stream) => {
+  async sendByHTTP(url: any, event: any): Promise<void> {
+    /* IF STRING  */
+    if (typeof url !== 'string' || url == '') return this.error_msg(event, 'url is not a string');
+
+    http.get(url).on('response', (stream) => {
       this.#api.sendMessage(
         {
           body: '',
