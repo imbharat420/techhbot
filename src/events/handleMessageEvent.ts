@@ -134,7 +134,7 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
       message['message'] = '👉 Poke 👈';
       Poke((path: string) => {
         message.urls = [];
-        message.path.push(path);
+        message.urls.push(path);
         customListen.sendAttachment(message, event);
       });
     }

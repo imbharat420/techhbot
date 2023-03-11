@@ -1,4 +1,4 @@
-const emojibaseShortcodes = {
+export const emojibaseShortcodes = {
   '😀': {
     name: 'grinning face',
     unicode: '1F600',
