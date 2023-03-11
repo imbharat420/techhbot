@@ -39,6 +39,21 @@ const DateChecker = (date: number) => {
 
       return false;
     },
+    fromNow: () => {
+      const now = new Date();
+      const gapInSeconds = Math.round((now.getTime() - then.getTime()) / 1000);
+      const gapInMinutes = Math.round(gapInSeconds / 60);
+      const gapInHours = Math.round(gapInMinutes / 60);
+      const gapInDays = Math.round(gapInHours / 24);
+      const gapInYears = Math.round(gapInDays / 365);
+      return {
+        seconds: gapInSeconds,
+        minutes: gapInMinutes,
+        hours: gapInHours,
+        days: gapInDays,
+        years: gapInYears,
+      };
+    },
     isSameMinute: (time: string) => {
       const now = new Date(+time);
       const [day2, month2, year2] = [now.getDate(), now.getMonth(), now.getFullYear()];
@@ -59,6 +74,24 @@ const DateChecker = (date: number) => {
       const now = new Date(+time);
       const [, , year2] = [now.getDate(), now.getMonth(), now.getFullYear()];
       return year === year2;
+    },
+    format: (format: string) => {
+      //format: dd/mm/yyyy hh:mm:ss
+      const [day, month, year] = [then.getDate(), then.getMonth(), then.getFullYear()];
+      const [hour, minute, second] = [then.getHours(), then.getMinutes(), then.getSeconds()];
+      const [day2, month2, year2] = [day < 10 ? '0' + day : day, month < 10 ? '0' + month : month, year];
+      const [hour2, minute2, second2] = [
+        hour < 10 ? '0' + hour : hour,
+        minute < 10 ? '0' + minute : minute,
+        second < 10 ? '0' + second : second,
+      ];
+      return format
+        .replace('dd', `${day2}`)
+        .replace('mm', `${month2}`)
+        .replace('yyyy', `${year2}`)
+        .replace('hh', `${hour2}`)
+        .replace('mm', `${minute2}`)
+        .replace('ss', `${second2}`);
     },
   };
 };

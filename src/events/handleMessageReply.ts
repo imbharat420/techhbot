@@ -6,6 +6,7 @@ import Translate from '../features/translate';
 import TextAudio from '../features/text_audio';
 import CountryTTS from '../features/country_tts';
 import PlayHT from '../features/playht';
+import SentenceSpin from '../features/sentence_spin';
 
 const op: OPERATIONS = new OPERATIONS();
 
@@ -23,6 +24,106 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
   const body: string = event.body;
   const rbody: string = event.messageReply.body;
 
+  /**
+   * ! not implemented yet
+   */
+  //if (ignoreList.has(event.threadID)) return;
+  /**
+   * *------------------------*
+   * @stalk
+   * @Send User Info
+   * *------------------------*
+   */
+
+  if (body.startsWith('@stalk')) {
+    const {
+      senderID,
+      messageReply: { senderID: rSenderID = senderID },
+    } = event;
+
+    const filename = `${rSenderID}.jpg`;
+    const url = `https://graph.facebook.com/${rSenderID}/picture?height=1500&width=1500&access_token=463372798834978|csqGyA8VWtIhabZZt-yhEBStl9Y`;
+    // if (userInfo) {
+
+    console.log(rSenderID, senderID);
+
+    customListen.getUserInfo(rSenderID, (data: any) => {
+      const userInfo = data[rSenderID];
+      const message: any = {};
+      message['message'] = '';
+      console.log('userInfo', userInfo);
+      for (const key in userInfo) {
+        if (userInfo.isFriend === true && customListen.isMe(rSenderID)) {
+          message['message'] = `We are already friend Message me if you wanna know about me\n`;
+          break;
+        }
+
+        if (userInfo.isFriend === false && customListen.isMe(rSenderID)) {
+          message['message'] = `We are not friends so add me if you wanna know about me \n`;
+          break;
+        }
+
+        if (key === 'profileUrl') continue; // link
+        if (key === 'thumbSrc') continue; // link
+        if (key === 'type') continue; // type: user
+
+        if (key === 'gender') {
+          if (userInfo[key] === false) {
+            message['message'] += `gender: 🤷‍♂️ \n`;
+            continue;
+          }
+
+          if (userInfo[key] === 1) {
+            message['message'] += `gender: Female ♀️ \n`;
+          } else {
+            message['message'] += `gender: Male ♂️\n`;
+          }
+          continue;
+        }
+        if (key === 'isFriend') {
+          if (userInfo[key] === true) {
+            message['message'] += `isFriend: 😎 you guys are friends \n`;
+            continue;
+          }
+
+          if (userInfo[key] === false && customListen.isMe(senderID)) {
+            message['message'] += `isFriend: 😅 you should add me on friend List \n`;
+            continue;
+          }
+
+          message['message'] += `isFriend: 😏 you guys are not friends \n`;
+          continue;
+        }
+
+        if (key === 'isBirthday' && userInfo[key] === false) {
+          message['message'] += `isBirthday: 🤷‍♂️ (🤨 Tell me your birthday Date) \n`;
+          continue;
+        }
+
+        if (key === 'vanity' && userInfo['vanity'] === '') {
+          message['message'] += `vanity: Don't know 🤷‍♂️ but your userId is ${rSenderID}) \n`;
+          continue;
+        }
+
+        message['message'] += `${key}: ${userInfo[key]} \n`;
+      }
+
+      op.downloadFile(url, 'photo', filename, (file: string, path: string) => {
+        // customListen.sendAttachment(path, event);
+        console.log('downloadFile', message, userInfo, path);
+        message.urls = [];
+        message.urls.push(path);
+        customListen.sendAttachment(message, event);
+      });
+    });
+  }
+
+  /**
+   * *------------------------*
+   * !pp
+   * @Send Profile Picture of User Download
+   * *------------------------*
+   */
   if (body.startsWith('!findSong')) {
     handleAttachments(event, customListen);
   }
@@ -68,6 +169,25 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
     });
   }
 
+  /**
+   *  * -----------------------------------------------
+   * !Word Spinner
+   * @send Text
+   * TODO: Add in **REPLY** also
+   *  * -----------------------------------------------
+   */
+
+  if (body.startsWith('!spinner')) {
+    const mainBody: string = op.clean_cmd('!spinner', rbody);
+    const cleanBody: string = op.clean_bad(mainBody);
+    const data = await SentenceSpin(cleanBody);
+    if (typeof data === 'object') {
+      customListen.sorry(event, 'Please provide a valid sentence or follow the format');
+    }
+    console.log(data);
+    customListen.send(data, event);
+  }
+
   /*#########################[ AUDIO FILES HANDLING ]##############################################*/
 
   /**
@@ -81,8 +201,12 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
     const { messageID } = event.messageReply;
     const type = op.clean_cmd('!read', body);
     const data = await TextAudio(rbody, type.trim());
+    const message: any = {};
+    message['message'] = '';
     op.base64ToFile('data:audio/mpeg;base64,' + data, 'audio', `audio-${messageID}.mp3`, (path: string) => {
-      customListen.sendAttachment(path, event);
+      message.urls = [];
+      message.urls.push(path);
+      customListen.sendAttachment(message, event);
     });
   }
 
@@ -118,6 +242,7 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
     const type = op.clean_cmd('!play', body);
     const data = await PlayHT(rbody, type.trim());
     console.log('!play', data);
+
     if (typeof data === 'string' && isValidUrl(data)) {
       op.downloadFile(data, 'audio', 'audio.mp3', (file: string, path: string) => {
         console.log('downloadFile', file, path);
@@ -133,7 +258,7 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
   /**
    * *------------------------*
    * !IGNORE
-   * @Send Text
+   * @Send Text ignore by stop responding to commands
    * *------------------------*
    */
 

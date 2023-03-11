@@ -153,3 +153,25 @@ POOL VOTES
   isGroup: true
 }
 ```
+
+# POOL CREATE
+```
+{
+  type: 'message',
+  senderID: '100037131918629',
+  body: 'yen is more',
+  threadID: '5819745318103902',
+  messageID: 'mid.$gABStBwxea16NAmiEBmG0SM9GKVEh',
+  logMessageType: 'group_poll',
+  logMessageData: {
+    added_option_ids: '[]',
+    removed_option_ids: '[]',
+    question_json: '{"id":"907455710502151","text":"Change Yen Prefix","total_count":2,"viewer_has_voted":"false","question_type":"CHOOSE_MULTIPLE","creator_id":"100037131918629","selected_option_texts":[],"unselected_option_texts":[],"is_thread_centric":false,"voters":[],"options":[{"id":"1182483082630716","text":"yes","total_count":0,"viewer_has_voted":"false","voters":[],"option_user_id":""},{"id":"1875348886151576","text":"option A","total_count":0,"viewer_has_voted":"false","voters":[],"option_user_id":""}]}',
+    new_option_texts: '[]',
+    event_type: 'question_creation',
+    question_id: '907455710502151'
+  },
+  logMessageBody: 'github.com/techhjork ❤️ created a poll: Change Yen Prefix.',
+  author: '100037131918629'
+}
+```

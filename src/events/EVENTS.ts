@@ -34,14 +34,30 @@ const waitForStream = (data: any, cb: Function) => {
 // TODO: ALL BASIC FUNCTIONALITY SHOULD BE IN THIS CLASS
 
 class EVENTS {
+  #owner = '100037131918629';
+  #isMe: string;
   #api: any;
   #op: OPERATIONS;
   constructor(api: any) {
     this.#api = api;
     this.#op = new OPERATIONS();
+    this.#isMe = this.#api.getCurrentUserID();
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  isMe(threadID: string): boolean {
+    console.log(this.#isMe, threadID, this.#owner);
+    return this.#isMe === threadID || this.#owner === threadID;
+  }
+
+  getUserInfo(userId: any, cb: any) {
+    this.#api.getUserInfo(userId, (err: any, data: any) => {
+      if (err) console.log(err);
+      cb(data);
+    });
+  }
+
+  //=========================[ EVENTS ]============================================//
+
   async delay(_time = 1000) {
     await wait(_time);
     return this;
@@ -153,29 +169,27 @@ class EVENTS {
   // path: string | Array<string>
   async sendAttachment(path: any, event: any): Promise<void> {
     console.log('sendAttachment', path);
-    if (path === '') {
-      this.send('Sorry the url path is empty 😢 because of error', event);
+
+    /* IF PATH will STRING  */
+    if (typeof path === 'string') {
+      this.#api.sendMessage(
+        {
+          body: '', //? path['message'] : '',
+          attachment: [fs.createReadStream(path)],
+        },
+        event.threadID,
+      );
       return;
     }
 
+    /* IF PATH will Object  */
     this.#api.sendMessage(
       {
         body: path['message'], //? path['message'] : '',
-        attachment: [fs.createReadStream(path[0])],
+        attachment: [fs.createReadStream(path.urls[0])],
       },
       event.threadID,
     );
-
-    // if (typeof path !== 'string') {
-    //   return this.error_msg(event, 'Sorry the Path is not string for make that as stream 😢');
-    // }
-    // console.log('sendAttachment', path);
-    // if (path && path.length === 0)
-    //   return this.error_msg(event, 'Sorry the Path is not string for make that as stream 😢');
-
-    //@
-
-    //this.#api.sendMessage(JSON.stringify(path), event.threadID);
   }
 
   async sendByURL(url: any, event: any): Promise<void> {
@@ -225,6 +239,8 @@ class EVENTS {
       );
     });
   }
+
+  //Desc: Send a message with a reaction
 }
 
 export default EVENTS;

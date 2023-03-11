@@ -124,11 +124,12 @@ const handleAttachments = async (event: any, customListen: EVENTS) => {
           return;
         }
         console.log('!undress ==========================', base64.length);
-        const message: any = [];
+        const message: any = {};
         message['message'] = 'Undress Image 🤤';
         op.base64ToFile(base64, 'photo', filename, (path: string) => {
           console.log('!undress... 2');
-          message.push(path);
+          message.urls = [];
+          message.urls.push(path);
           customListen.sendAttachment(message, event);
         });
       });
@@ -154,11 +155,12 @@ const handleAttachments = async (event: any, customListen: EVENTS) => {
         }
 
         if (animesList.length == 0) return customListen.send('MAYBE NOT FOUND ANYTHING !findAnime', event);
-        const message: any = [];
+        const message: any = {};
         message['message'] = animesList['message'];
         op.downloadFile(animesList[1], 'video', `vide-${filename}.mp4`, (file: string, path: string) => {
           console.log('downloadFile !findAnime', file, path);
-          message.push(path);
+          message.urls = [];
+          message.urls.push(path);
           console.log(message);
           customListen.sendAttachment(message, event);
         });

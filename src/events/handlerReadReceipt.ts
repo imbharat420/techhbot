@@ -10,31 +10,44 @@ type IReaders = {
 };
 
 const readers: IReaders = {
-  '100037131918629': {
-    body: '👀 Why yen you read my message so late\nI always wait for your reply 🥲🥲🥲',
-    isNotSent: true,
-    lastSeen: 0,
-  },
+  // '100037131918629': {
+  //   body: '👀 CHECKING .... TECHH JORK',
+  //   isNotSent: true,
+  //   lastSeen: 0,
+  // },
   '100081936620905': {
-    body: '👀 Why yen you read my message so late\nI always wait for your reply 🥲🥲🥲',
+    body: '👀 CHECKING .... YEN',
     isNotSent: true,
     lastSeen: 0,
   },
   '5819745318103902': {
-    body: '👀 Why yen you read my message so late\nI always wait for your reply 🥲🥲🥲',
+    body: '👀 CHECKING .... **HOC GROUP**',
     isNotSent: true,
     lastSeen: 0,
   },
 };
 
-const handleReadReceipt = (event: any, customListen: EVENTS) => {
+const timeTemplate = (obj: any): string => {
+  let message = obj.body + '\n\n';
+  for (const key in obj) {
+    if (key === 'body') continue;
+    if (key === 'lastSeen') continue;
+    message += `\n${key}: ${obj[key]}`;
+  }
+
+  message += `\nTIME : ${DateChecker(+obj['lastSeen']).format('yyyy-mm-dd hh:mm:ss')}\n`;
+  message += `📌 should be 1 minute ago`;
+  return message;
+};
+
+const handleReadReceipt = async (event: any, customListen: EVENTS) => {
   console.log('handleReadReceipt', event);
   const { reader, time, threadID } = event;
 
   const user = readers[reader as keyof typeof readers];
   if (!user) return;
 
-  const isGap = DateChecker(+user['lastSeen']).isGap('3s');
+  const isGap = DateChecker(+user['lastSeen']).isGap('1m');
   console.log('isGap', isGap);
 
   user['lastSeen'] = time;
@@ -45,21 +58,23 @@ const handleReadReceipt = (event: any, customListen: EVENTS) => {
   if (Object.keys(readers).includes(reader) && isGap && user['isNotSent']) {
     user['lastSeen'] = time;
     user['isNotSent'] = false;
-    changeUnsentMessage(threadID, time);
-    console.log("I'm here in read receipt reading messages");
-    customListen.send(user['body'], event);
+    changeUnsentMessage(user, time);
+    console.log(
+      "------------------------------------I'm here in read receipt reading messages ---------------------------",
+    );
+    (await customListen.delay(1000)).send(timeTemplate(user), event);
   }
 };
 
 export default handleReadReceipt;
 
-const changeUnsentMessage = (threadID: string, time: number) => {
+const changeUnsentMessage = (user: any, time: number) => {
   setTimeout(() => {
-    const user = readers[threadID as keyof typeof readers];
     if (!user) return;
     user['lastSeen'] = time;
     user['isNotSent'] = true;
-  }, 5000);
+    console.log("I'm here in changeUnsentMessage reading messages ---------------------------###############");
+  }, 10000);
 };
 
 /*

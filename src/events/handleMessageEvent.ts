@@ -79,6 +79,9 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
       const body: string = op.clean_cmd('!spinner', command);
       const cleanBody: string = op.clean_bad(body);
       const data = await SentenceSpin(cleanBody);
+      if (typeof data === 'object') {
+        customListen.sorry(event, 'Please provide a valid sentence or follow the format');
+      }
       console.log(data);
       customListen.send(data, event);
     }
@@ -86,12 +89,13 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
     /**
      *  * -----------------------------------------------
      * !execuse
+     * ADDED CONDITION if me or owner
      * @send Text
      * TODO: Add in **REPLY** also and excuse:coworker <Text>
      *  * -----------------------------------------------
      */
 
-    if (command.startsWith('excuse')) {
+    if (command.startsWith('excuse') || (command.startsWith('.') && customListen.isMe(event.senderID))) {
       const body: string = op.clean_cmd('excuse', command);
       const data = await Excuse(body);
       customListen.send(data, event);
@@ -126,10 +130,11 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
      *  * -----------------------------------------------
      */
     if (command.startsWith('poke')) {
-      const message: any = [];
+      const message: any = {};
       message['message'] = '👉 Poke 👈';
       Poke((path: string) => {
-        message.push(path);
+        message.urls = [];
+        message.path.push(path);
         customListen.sendAttachment(message, event);
       });
     }
@@ -145,10 +150,11 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
     if (command.startsWith('aiface')) {
       const body: string = op.clean_cmd('aiface', command);
       const url = await AI_FACE(command);
-      const message: any = [];
+      const message: any = {};
       message['message'] = '👉 aiface 👈';
       op.downloadFile(url, 'photo', 'ai', async (file: string, path: string) => {
-        message.push(path);
+        message.urls = [];
+        message.urls.push(path);
         customListen.sendAttachment(message, event);
       });
     }

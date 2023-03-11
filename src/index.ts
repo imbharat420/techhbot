@@ -49,8 +49,7 @@ fca(login, async (err: any, api: any) => {
       case 'message_unsend':
       case 'typ':
       case 'read':
-      case 'presence':
-      case 'delivery':
+      // case 'presence':
       case 'event':
         console.log(event);
         break;
