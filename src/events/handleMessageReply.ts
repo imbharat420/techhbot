@@ -7,6 +7,7 @@ import TextAudio from '../features/text_audio';
 import CountryTTS from '../features/country_tts';
 import PlayHT from '../features/playht';
 import SentenceSpin from '../features/sentence_spin';
+import LastNameCountry from '../features/lastname_country';
 
 const op: OPERATIONS = new OPERATIONS();
 
@@ -23,7 +24,10 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
   console.log('handleMessageReply', event);
   const body: string = event.body;
   const rbody: string = event.messageReply.body;
-
+  const {
+    senderID,
+    messageReply: { senderID: rSenderID = senderID },
+  } = event;
   /**
    * ! not implemented yet
    */
@@ -118,6 +122,16 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
     });
   }
 
+  if (body.startsWith('guessCountry')) {
+    customListen.getUserInfo(rSenderID, async (info: any) => {
+      const userInfo = info[rSenderID];
+      const lname = userInfo.firstName.split(' ').pop();
+      const data = await LastNameCountry(lname);
+      if (!data) return customListen.send('No Data Found', event);
+      customListen.send(JSON.stringify(data), event);
+    });
+  }
+
   /**
    * *------------------------*
    * !pp
@@ -159,6 +173,11 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
    * @Send Profile Picture of User Download
    * *------------------------*
    */
+
+  if (body.startsWith('!uid')) {
+    const { senderID } = event.messageReply;
+    customListen.send(senderID, event);
+  }
 
   if (body === 'pp') {
     const { senderID } = event.messageReply;

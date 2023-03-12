@@ -1,5 +1,4 @@
-export const emojiTags = {
-  '3,659 emojis': {},
+export const EMOJI_TAGS = {
   '😀': {
     name: 'grinning face',
     tags: ['face', 'grin'],

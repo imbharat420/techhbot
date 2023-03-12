@@ -6,6 +6,7 @@ type IReaders = {
     body: string;
     isNotSent: boolean;
     lastSeen: number;
+    username: string;
   };
 };
 
@@ -14,17 +15,32 @@ const readers: IReaders = {
   //   body: '👀 CHECKING .... TECHH JORK',
   //   isNotSent: true,
   //   lastSeen: 0,
+  //   username: 'TECHH JORK',
+  // },
+  // '100071743848974': {
+  //   body: '👀 CHECKING .... Melvin',
+  //   isNotSent: true,
+  //   lastSeen: 0,
+  //   username: '@Melvin',
+  // },
+  // '100080934841785': {
+  //   body: '👀 CHECKING .... PUSSY EATER',
+  //   isNotSent: true,
+  //   lastSeen: 0,
+  //   username: 'PUSSY EATER',
   // },
   '100081936620905': {
     body: '👀 CHECKING .... YEN',
     isNotSent: true,
     lastSeen: 0,
+    username: 'YEN',
   },
-  '5819745318103902': {
-    body: '👀 CHECKING .... **HOC GROUP**',
-    isNotSent: true,
-    lastSeen: 0,
-  },
+  // '5819745318103902': {
+  //   body: '👀 CHECKING .... **HOC GROUP**',
+  //   isNotSent: true,
+  //   lastSeen: 0,
+  //   username: '**HOC GROUP**',
+  // },
 };
 
 const timeTemplate = (obj: any): string => {
@@ -50,10 +66,10 @@ const handleReadReceipt = async (event: any, customListen: EVENTS) => {
   const isGap = DateChecker(+user['lastSeen']).isGap('1m');
   console.log('isGap', isGap);
 
-  user['lastSeen'] = time;
-  console.log('user', user, time);
-  if (DateChecker(+user['lastSeen']).isGap('5s')) {
-    user['isNotSent'] = true;
+  console.log('user', { isGap, user, time });
+
+  if (isGap === false) {
+    user['lastSeen'] = time;
   }
   if (Object.keys(readers).includes(reader) && isGap && user['isNotSent']) {
     user['lastSeen'] = time;
@@ -62,7 +78,7 @@ const handleReadReceipt = async (event: any, customListen: EVENTS) => {
     console.log(
       "------------------------------------I'm here in read receipt reading messages ---------------------------",
     );
-    (await customListen.delay(1000)).send(timeTemplate(user), event);
+    (await customListen.delay(1000)).msgWithMention(timeTemplate(user), reader, threadID, user['username']);
   }
 };
 

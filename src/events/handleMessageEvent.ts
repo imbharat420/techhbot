@@ -3,7 +3,6 @@ import ytsummarize from '../features/yt-summarize';
 import OPERATIONS from './OPERATIONS';
 import TripPlanner from '../features/TripPlanner';
 import SentenceSpin from '../features/sentence_spin';
-import MusicHumming from '../features/music_humming';
 import handleAttachments from './handleAttachments';
 import Poke from '../features/poke';
 import Excuse from '../features/excuse';
@@ -16,11 +15,15 @@ import AI_FACE from '../features/aiFace';
 import REGEX from '../constants/regex';
 import SuggestMobile from '../features/suggest_mobile';
 import SuggestTag from '../features/tags';
+import { EMOJI_TAGS } from '../constants/emoji-tags';
+import { EMOJI_BASE } from '../constants/emojibase-shortcodes';
+import LastNameCountry from '../features/lastname_country';
 const op: OPERATIONS = new OPERATIONS();
 
 const handleMessageEvent = async (event: any, customListen: EVENTS) => {
   try {
     const command: string = event.body;
+    const { senderID } = event;
     console.log(event);
     /**
      * * -----------------------------------------------
@@ -241,8 +244,13 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
      * @DESC REPEAT A MESSAGE with clean bad words
      *  * -----------------------------------------------
      */
-    if (command.startsWith('repeat')) {
+    if (command.startsWith('repeat') && customListen.isMe(event)) {
       const body: string = op.clean_cmd('repeat', command);
+      if (body == '') return customListen.sorry(event, 'Please provide a valid text to repeat');
+      if (body.length > 100)
+        return customListen.sorry(event, 'Please provide a valid text to repeat, max 100 characters');
+      if (body.split(' ').includes('repeat'))
+        return customListen.sorry(event, 'hehe double repeat in start of message');
       const cleanBody: string = op.clean_bad(body);
       customListen.send(cleanBody, event);
     }
@@ -266,29 +274,80 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
      * TODO : IMPROVE REGEX FOR DETECT MULTIPLE EMOJI not string
      *  * -----------------------------------------------
      */
+    type Item = {
+      name: string;
+      tags?: string[]; // add the `tags` property to the interface
+    };
 
+    type EmojiData = {
+      name: string;
+      unicode?: string;
+      cldr?: string[];
+      emojibase?: string[];
+      gitHub?: string[];
+      slack?: string[];
+      joyPixels?: string[];
+    };
+    //command.match(/meaning\s+(\p{Emoji})/)
     if (command.startsWith('meaning')) {
       const body: string = op.clean_cmd('meaning', command);
 
       const data = EMOJI_MEANING[body as keyof typeof EMOJI_MEANING];
-      const splitEmoji = [...body].filter((item) => item !== ' ').join(' ');
+      const tags: Item = EMOJI_TAGS[body as keyof typeof EMOJI_TAGS];
+      const emojibase: EmojiData = EMOJI_BASE[body as keyof typeof EMOJI_BASE];
 
-      if (body.match(/\w/g)) {
-        // customListen.send(`*give emoji for finding meaning*_`, event);
-        return;
-      }
+      const splitEmoji = [...body].filter((item) => item !== ' ').join(' ');
+      const tagOfEmoji = [...body].filter((item) => item !== ' ').join(' ');
+      const shortcodeEmoji = [...body].filter((item) => item !== ' ').join(' ');
+
+      // if (body.match(/\w/g)) {
+      //   // customListen.send(`*give emoji for finding meaning*_`, event);
+      //   return;
+      // }
 
       let message = '';
-      if (data) {
-        message = `*${data['name']}* \n📌 _${data['description']}_ `;
+      if (data || tags || emojibase) {
+        if (data?.name) {
+          message = `*${data['name']}* \n📌 _${data['description']}_ `;
+        } else if (tags?.name) {
+          message = `*${tags['name']}* \n`;
+        } else if (emojibase?.name) {
+          message = `*${emojibase['name']}* \n`;
+        } else {
+        }
+
+        if (emojibase?.unicode) message += `\n📌 Unicode: ${emojibase['unicode']}`;
+        if (emojibase?.gitHub) message += `\n📌 Github shortcode: ${emojibase['gitHub'].join(' ')}`;
+        if (emojibase?.slack) message += `\n📌 Slack shortcode: ${emojibase['slack'].join(' ')}`;
+        if (tags?.tags) message += `\n📌 Tags: ${tags['tags'].join(',')}`;
+
         if (splitEmoji.length > 2) message += `\n\n📌This Emoji is created by using : ${splitEmoji}`;
+
+        if (!message) return;
         customListen.send(message, event);
-        // customListen.send(data['meaning'], event);
       } else {
         message = `*Sorry ${body} EMOJI NOT FOUND*\n📌 _Please try another EMOJI_\n_Example: meaning 😅_`;
         if (splitEmoji.length > 2) message += `\n\n📌But this Emoji is created by using : ${splitEmoji}`;
         customListen.send(message, event);
       }
+    }
+
+    if (command.startsWith('@stalk')) {
+      const body: string = op.clean_cmd('@stalk', command);
+      if (Object.keys(event.mentions.length > 0)) {
+      } else {
+      }
+    }
+
+    if (command.startsWith('guessCountry')) {
+      const body: string = op.clean_cmd('guessCountry', command);
+
+      const data = await LastNameCountry(body);
+      if (data.lname == '' || data.country == '') return customListen.sendReply('🥲 please use another name', event);
+
+      const message = `*${data.lname}* \n📌 _${data.country}_ `;
+
+      customListen.send(message, event);
     }
 
     /**

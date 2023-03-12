@@ -175,3 +175,37 @@ POOL VOTES
   author: '100037131918629'
 }
 ```
+
+```
+//yen
+{
+  type: 'message',
+  senderID: '100037131918629',
+  body: '@Rin Naomi',
+  threadID: '5819745318103902',
+  messageID: 'mid.$gABStBwxea16NBZFFbmG1Ev6d8r2M',
+  attachments: [],
+  mentions: { '100081936620905': '@Rin Naomi' },
+  timestamp: '1678598995310',
+  isGroup: true
+}
+```
+
+```
+Multple Tags
+{
+  type: 'message',
+  senderID: '100037131918629',
+  body: '@Bilon Neil @Gwynard Andaya @John Paul Caigas',
+  threadID: '5819745318103902',
+  messageID: 'mid.$gABStBwxea16NBZoo5mG1FTd2NY0I',
+  attachments: [],
+  mentions: {
+    '100044851350896': '@Bilon Neil',
+    '100008813820978': '@Gwynard Andaya',
+    '100080934841785': '@John Paul Caigas'
+  },
+  timestamp: '1678599577830',
+  isGroup: true
+}
+```

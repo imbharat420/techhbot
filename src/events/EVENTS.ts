@@ -106,6 +106,23 @@ class EVENTS {
     this.#api.sendMessage(msg, event.threadID);
   }
 
+  msgWithMention(msg: string, userId: string, threadID: string, username: string): void {
+    const emptyChar = '\u200E';
+
+    this.#api.sendMessage(
+      {
+        body: emptyChar + msg,
+        mentions: [
+          {
+            tag: username,
+            id: userId,
+          },
+        ],
+      },
+      threadID,
+    );
+  }
+
   mentionAll(msg: string, event: any): void {
     const emptyChar = '\u200E';
     const { threadID } = event;
