@@ -4,15 +4,18 @@ const Regex101 = async (query: string) => {
   try {
     const { data } = await axios.get(`https://regex101.com/api/library/1/?orderBy=MOST_POINTS&search=${query}`);
 
-    if (data == undefined) return errorHandler('No results found!');
+    if (data['data'].length == 0) return errorHandler('No results found!');
     console.log(data);
     const res = await axios.get(`https://regex101.com/api/library/details/${data['data'][0].permalinkFragment}`);
 
-    let message = `**📌 ${res.data.title}**\n`;
-    message += `**Description:** ${res.data.description}\n`;
-    console.log(message);
+    let message = '';
+    if (res.data?.title) message += `**Title:** ${res.data.title}\n`;
+    if (res.data?.regex) message += `**Regex:** ${res.data?.regex}\n`;
+    if (res.data?.description) message += `**Description:** ${res.data.description}\n`;
+    if (message == '') return errorHandler('No results found!');
     return message;
   } catch (err) {
+    console.log(err);
     return errorHandler(err);
   }
 };
