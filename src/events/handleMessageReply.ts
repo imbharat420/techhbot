@@ -8,6 +8,8 @@ import CountryTTS from '../features/country_tts';
 import PlayHT from '../features/playht';
 import SentenceSpin from '../features/sentence_spin';
 import LastNameCountry from '../features/lastname_country';
+import RunCode from '../features/run_code';
+import { PLANGUAGES } from '../constants/PLANGUAGES';
 
 const op: OPERATIONS = new OPERATIONS();
 
@@ -122,13 +124,38 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
     });
   }
 
+  if (body.startsWith('!runcode')) {
+    const data = op.clean_cmd('!runcode', body);
+    // const language = data.split(' ')[0];
+
+    //detect language from message
+    const plang = new RegExp(`\\b(${Object.keys(PLANGUAGES).join('|')})\\b`, 'gi');
+    const wordExist = body.match(plang)?.map((match: string) => match.toLowerCase());
+    const lang: string = PLANGUAGES[wordExist as unknown as keyof typeof PLANGUAGES];
+
+    if (!lang) return customListen.send('Language Not Found', event);
+
+    let input = '';
+    if (data.includes('input')) {
+      input = op.clean_cmd('input', data);
+    }
+    console.log('lang', lang, wordExist, data, input);
+
+    const result = await RunCode(rbody, lang, input);
+    console.log(result);
+    customListen.send(result, event);
+  }
+
   if (body.startsWith('guessCountry')) {
     customListen.getUserInfo(rSenderID, async (info: any) => {
       const userInfo = info[rSenderID];
       const lname = userInfo.firstName.split(' ').pop();
       const data = await LastNameCountry(lname);
+
+      const message = `*${data.lname}* \n📌 _${data.country}_ `;
+
       if (!data) return customListen.send('No Data Found', event);
-      customListen.send(JSON.stringify(data), event);
+      customListen.send(message, event);
     });
   }
 
@@ -242,7 +269,11 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
     await CountryTTS(rbody, type.trim(), (data: string) => {
       console.log('CountryTTS', data);
       if (typeof data === 'string' && isValidUrl(data)) {
-        customListen.sendByURL(data, event);
+        const message: any = {};
+        message['message'] = '';
+        message.urls = [];
+        message.urls.push(data);
+        customListen.sendByURL(message, event);
       } else {
         customListen.send('NOT VALID URL FROM FILE', event);
       }

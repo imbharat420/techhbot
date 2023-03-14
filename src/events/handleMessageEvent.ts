@@ -18,6 +18,7 @@ import SuggestTag from '../features/tags';
 import { EMOJI_TAGS } from '../constants/emoji-tags';
 import { EMOJI_BASE } from '../constants/emojibase-shortcodes';
 import LastNameCountry from '../features/lastname_country';
+import ScreenShot from '../features/screenshot';
 const op: OPERATIONS = new OPERATIONS();
 
 const handleMessageEvent = async (event: any, customListen: EVENTS) => {
@@ -31,7 +32,7 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
      * @send @here mention
      */
     if (command.startsWith('@here')) {
-      customListen.mentionAll('everyone', event);
+      customListen.mentionAll('@everyone', event);
     }
 
     /**
@@ -122,7 +123,13 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
         customListen.send(data, event);
         return;
       }
-      customListen.sendByURL(data, event);
+      const message: any = {};
+      message['message'] = '👉 Suggest Mobile 👈';
+      message.urls = [];
+      data.forEach((element: any) => {
+        message.urls.push(element.url);
+      });
+      customListen.sendByURL(message, event);
     }
 
     /**
@@ -244,13 +251,12 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
      * @DESC REPEAT A MESSAGE with clean bad words
      *  * -----------------------------------------------
      */
-    if (command.startsWith('repeat') && customListen.isMe(event)) {
+    if (command.startsWith('repeat')) {
       const body: string = op.clean_cmd('repeat', command);
-      if (body == '') return customListen.sorry(event, 'Please provide a valid text to repeat');
+      // if (body == '') return customListen.sorry(event, 'Please provide a valid text to repeat');
       if (body.length > 100)
         return customListen.sorry(event, 'Please provide a valid text to repeat, max 100 characters');
-      if (body.split(' ').includes('repeat'))
-        return customListen.sorry(event, 'hehe double repeat in start of message');
+      if (body.split(' ').includes('repeat')) return customListen.sorry(event, "don't use repeat in your message");
       const cleanBody: string = op.clean_bad(body);
       customListen.send(cleanBody, event);
     }
@@ -341,15 +347,26 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
 
     if (command.startsWith('guessCountry')) {
       const body: string = op.clean_cmd('guessCountry', command);
-
+      if (body == '') return customListen.sendReply('🥲 please provide a valid last name', event);
       const data = await LastNameCountry(body);
       if (data.lname == '' || data.country == '') return customListen.sendReply('🥲 please use another name', event);
 
       const message = `*${data.lname}* \n📌 _${data.country}_ `;
 
-      customListen.send(message, event);
+      customListen.sendReply(message, event);
     }
 
+    if (command.startsWith('!ss')) {
+      const body: string = op.clean_cmd('!ss', command);
+      const data = await ScreenShot(body);
+      console.log(data);
+      if (typeof data !== 'object' || data == undefined)
+        return customListen.sendReply('🥲 please wait if you not get Image or try same link after 50s', event);
+      const message: any = {};
+      message['message'] = '📌 _Screenshot_ ';
+      message.url = data;
+      customListen.sendByURL(message, event);
+    }
     /**
      * * -----------------------------------------------
      * % BOT COMMANDS

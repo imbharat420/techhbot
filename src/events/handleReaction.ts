@@ -4,7 +4,10 @@ const reacted = new Set();
 const handleMessageReaction = async (event: any, customListen: EVENTS) => {
   console.log('handleMessageReaction', event);
   const { reaction, messageID, threadID, senderID } = event;
-  if (reacted.has(messageID)) return;
+  if (reacted.has(messageID) && customListen.owner !== event.userID) return;
+
+  console.log('---------------REACTED-----------------');
+
   (await customListen.delay(5000)).react(reaction, event);
   reacted.add(messageID);
 };

@@ -19,7 +19,7 @@ const isValidUrl = (urlString: string) => {
 };
 
 // eslint-disable-next-line @typescript-eslint/ban-types
-const waitForStream = (data: any, cb: Function) => {
+const waitForStream = (data: string[], cb: Function) => {
   const attachment: any = [];
   for (const url of data) {
     if (isValidUrl(url)) {
@@ -34,7 +34,7 @@ const waitForStream = (data: any, cb: Function) => {
 // TODO: ALL BASIC FUNCTIONALITY SHOULD BE IN THIS CLASS
 
 class EVENTS {
-  #owner = '100037131918629';
+  owner = '100037131918629';
   #isMe: string;
   #api: any;
   #op: OPERATIONS;
@@ -45,8 +45,8 @@ class EVENTS {
   }
 
   isMe(threadID: string): boolean {
-    console.log(this.#isMe, threadID, this.#owner);
-    return this.#isMe === threadID || this.#owner === threadID;
+    console.log(this.#isMe, threadID, this.owner);
+    return this.#isMe === threadID || this.owner === threadID;
   }
 
   getUserInfo(userId: any, cb: any) {
@@ -111,10 +111,10 @@ class EVENTS {
 
     this.#api.sendMessage(
       {
-        body: emptyChar + msg,
+        body: msg,
         mentions: [
           {
-            tag: username,
+            tag: emptyChar + username,
             id: userId,
           },
         ],
@@ -129,19 +129,19 @@ class EVENTS {
 
     this.#api.getThreadInfo(event.threadID, (err: any, info: any) => {
       if (err) return console.error(err);
-      const msgToSend: any = { body: emptyChar + 'everyone', mentions: [] };
+      const msgToSend: any = { body: emptyChar + '@everyone', mentions: [] };
 
       for (let i = 0; i < info.userInfo.length; i++) {
-        msgToSend.mentions.push({ tag: 'everyone', id: info.userInfo[i]['id'] }); // '100001023086597': 'everyone',
+        msgToSend.mentions.push({ tag: '@everyone', id: info.userInfo[i]['id'] }); // '100001023086597': 'everyone',
         //msgToSend.mentions.push({ tag: 'everyone', id: event.threadID }); // '100001023086597': 'everyone',
       }
 
       this.#api.sendMessage(
         {
-          body: emptyChar + 'everyone',
+          body: emptyChar + '@everyone',
           mentions: [
             {
-              tag: 'everyone',
+              tag: '@everyone',
               id: event.threadID,
             },
           ],
@@ -209,11 +209,11 @@ class EVENTS {
     );
   }
 
-  async sendByURL(url: any, event: any): Promise<void> {
+  async sendByURL(url: { url: string[]; message: string }, event: any): Promise<void> {
     try {
       /* IF ARRAY OF URLS */
-      if (typeof url === 'object' && url.length > 0) {
-        waitForStream(url, (attachment: any) => {
+      if (typeof url === 'object' && url.url.length > 0) {
+        waitForStream(url.url, (attachment: any) => {
           this.#api.sendMessage(
             {
               body: url['message'],

@@ -1,3 +1,4 @@
+import path from 'path';
 import DateChecker from '../utils/dateChecker';
 import EVENTS from './EVENTS';
 
@@ -11,12 +12,12 @@ type IReaders = {
 };
 
 const readers: IReaders = {
-  // '100037131918629': {
-  //   body: '👀 CHECKING .... TECHH JORK',
-  //   isNotSent: true,
-  //   lastSeen: 0,
-  //   username: 'TECHH JORK',
-  // },
+  '100037131918629': {
+    body: '👀 CHECKING .... \u200ETECHH JORK',
+    isNotSent: true,
+    lastSeen: 0,
+    username: 'TECHH JORK',
+  },
   // '100071743848974': {
   //   body: '👀 CHECKING .... Melvin',
   //   isNotSent: true,
@@ -79,6 +80,8 @@ const handleReadReceipt = async (event: any, customListen: EVENTS) => {
       "------------------------------------I'm here in read receipt reading messages ---------------------------",
     );
     (await customListen.delay(1000)).msgWithMention(timeTemplate(user), reader, threadID, user['username']);
+    const url = path.join(__dirname, 'assets', 'video', 'noActivity1.mp4');
+    (await customListen.delay(1000)).sendAttachment(url, event);
   }
 };
 

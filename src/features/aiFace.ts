@@ -50,6 +50,9 @@ const AI_FACE = async (types: string) => {
         authorization: 'API-Key Cph30qkLrdJDkjW-THCeyA',
       },
     });
+
+    // if (!data['images']) return 'No images found ' + JSON.stringify(data);
+
     return data['images'][getRandomInt(1, 30)]['thumb_url'];
   } catch (err) {
     return errorHandler(err);
@@ -57,6 +60,59 @@ const AI_FACE = async (types: string) => {
 };
 
 export default AI_FACE;
+
+// type Type = {
+//   [key: string]: string[];
+// };
+
+// function generateRegex(sentence: string, type: Type): { [key: string]: string } {
+//   const regexStr = Object.keys(type)
+//     .map((key) => `(?:${type[key].join('|')})`)
+//     .join('|');
+
+//   const regex = new RegExp(regexStr, 'gi');
+//   const matches = sentence.match(regex) || [];
+
+//   const result: { [key: string]: string } = {};
+
+//   Object.keys(type).forEach((key, index) => {
+//     result[key] = matches[index] || type[key][0];
+//   });
+
+//   return result;
+// }
+
+// function generateRegex(input:string) {
+//   const regexObj:any = {};
+//   const faceRegex = /(all|natural|beautified)/i;
+//   regexObj['face'] = input.match(faceRegex) ? input.match(faceRegex)[0] : 'natural';
+
+//   for (const key in type) {
+//     if (key !== 'face') {
+//       const regex = new RegExp(`(${type[key].join('|')})`, 'i');
+//       const match = input.match(regex);
+//       regexObj[key] = match ? match[1].toLowerCase() : type[key][0];
+//     }
+//   }
+//   return regexObj;
+// }
+
+/*
+const placeholders = {
+  yourname: 'John',
+  countryName: 'India',
+  weatherName: 'Cloudy',
+};
+
+const str = 'Hello [yourname], the weather in [countryName] is currently [weatherName].';
+
+const replacedStr = str.replace(/\[(\w+)\]/g, (match, key) => {
+  return placeholders[key] || match;
+});
+
+console.log(replacedStr); // "Hello John, the weather in India is currently Cloudy."
+
+*/
 
 /*
 
