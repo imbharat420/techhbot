@@ -48,12 +48,13 @@ const timeTemplate = (obj: any): string => {
   let message = obj.body + '\n\n';
   for (const key in obj) {
     if (key === 'body') continue;
-    if (key === 'lastSeen') continue;
+    if (key === 'lastSeen') {
+      message += `\nTIME : ${DateChecker(+obj['lastSeen']).format('mm:ss')}\n`;
+      continue;
+    }
     message += `\n${key}: ${obj[key]}`;
   }
 
-  message += `\nTIME : ${DateChecker(+obj['lastSeen']).format('yyyy-mm-dd hh:mm:ss')}\n`;
-  message += `📌 should be 1 minute ago`;
   return message;
 };
 

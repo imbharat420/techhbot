@@ -21,6 +21,7 @@ import LastNameCountry from '../features/lastname_country';
 import ScreenShot from '../features/screenshot';
 import Regexr from '../features/regexr';
 import Regex from '../features/regex101';
+import OSInfo from '../features/os';
 const op: OPERATIONS = new OPERATIONS();
 
 const handleMessageEvent = async (event: any, customListen: EVENTS) => {
@@ -35,6 +36,19 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
      */
     if (command.startsWith('@here')) {
       customListen.mentionAll('@everyone', event);
+    }
+
+    /**
+     *  * -----------------------------------------------
+     * osinfo <link>
+     * @send Text summary of youtube video
+     * TODO: Add in **REPLY** also
+     *  * -----------------------------------------------
+     */
+
+    if (command.startsWith('osinfo')) {
+      const data = OSInfo();
+      customListen.send(data, event);
     }
 
     /**
