@@ -12,12 +12,12 @@ type IReaders = {
 };
 
 const readers: IReaders = {
-  '100037131918629': {
-    body: '👀 CHECKING .... \u200ETECHH JORK',
-    isNotSent: true,
-    lastSeen: 0,
-    username: 'TECHH JORK',
-  },
+  //'100037131918629': {
+  //   body: '👀 CHECKING .... \u200ETECHH JORK',
+  //   isNotSent: true,
+  //   lastSeen: 0,
+  //   username: 'TECHH JORK',
+  // },
   // '100071743848974': {
   //   body: '👀 CHECKING .... Melvin',
   //   isNotSent: true,
@@ -31,7 +31,7 @@ const readers: IReaders = {
   //   username: 'PUSSY EATER',
   // },
   '100081936620905': {
-    body: '👀 CHECKING .... YEN',
+    body: '👀 CHECKING .... \u200EYEN',
     isNotSent: true,
     lastSeen: 0,
     username: 'YEN',

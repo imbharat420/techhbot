@@ -149,7 +149,7 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
   if (body.startsWith('guessCountry')) {
     customListen.getUserInfo(rSenderID, async (info: any) => {
       const userInfo = info[rSenderID];
-      const lname = userInfo.firstName.split(' ').pop();
+      const lname = userInfo.name.split(' ').pop();
       const data = await LastNameCountry(lname);
 
       const message = `*${data.lname}* \n📌 _${data.country}_ `;

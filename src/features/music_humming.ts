@@ -6,6 +6,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 import FormData from 'form-data';
 import fs from 'fs';
+import errorHandler from '../utils/errorHandler';
 const MusicHumming = async (fileURL: string) => {
   console.log(fileURL);
 
@@ -23,10 +24,12 @@ const MusicHumming = async (fileURL: string) => {
       },
     };
     const { data } = await axios(config);
-    const message = `Song Name: ${data.data.title} \nArtist: ${data.data.artists}`;
+    console.log(data);
+    if (data.data == null) return 'sorry, can not find this song try song with short length';
+    const message = `Song Name: ${data?.data?.title} \nArtist: ${data?.data?.artists}`;
     return message;
   } catch (err) {
-    console.log(err);
+    return errorHandler(err);
   }
 };
 
