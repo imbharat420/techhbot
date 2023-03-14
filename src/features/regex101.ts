@@ -5,7 +5,7 @@ const Regex101 = async (query: string) => {
     const { data } = await axios.get(`https://regex101.com/api/library/1/?orderBy=MOST_POINTS&search=${query}`);
 
     if (data['data'].length == 0) return errorHandler('No results found!');
-    console.log(data);
+    console.log(data?.data[0]);
     const res = await axios.get(`https://regex101.com/api/library/details/${data['data'][0].permalinkFragment}`);
 
     let message = '';
