@@ -19,6 +19,8 @@ import { EMOJI_TAGS } from '../constants/emoji-tags';
 import { EMOJI_BASE } from '../constants/emojibase-shortcodes';
 import LastNameCountry from '../features/lastname_country';
 import ScreenShot from '../features/screenshot';
+import Regexr from '../features/regexr';
+import Regex from '../features/regex101';
 const op: OPERATIONS = new OPERATIONS();
 
 const handleMessageEvent = async (event: any, customListen: EVENTS) => {
@@ -169,6 +171,34 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
       });
     }
 
+    /**
+     *  * -----------------------------------------------
+     * !regex
+     * @DESC suggest regex for the text
+     * TODO : IMPROVE REGEX FOR DETECT MULTIPLE EMOJI not string
+     *  * -----------------------------------------------
+     */
+
+    if (command.startsWith('!regex')) {
+      const body: string = op.clean_cmd('!regex', command);
+      const data = await Regex(body);
+      customListen.send(data, event);
+    }
+
+    /**
+     *  * -----------------------------------------------
+     * !regex
+     * @DESC suggest regex for the text
+     * TODO : IMPROVE REGEX FOR DETECT MULTIPLE EMOJI not string
+     *  * -----------------------------------------------
+     */
+
+    if (command.startsWith('!regex1')) {
+      const body: string = op.clean_cmd('!regex1', command);
+      Regexr(body, (msg: string) => {
+        customListen.send(msg, event);
+      });
+    }
     /**
      *  * -----------------------------------------------
      * !bsuggestTags
@@ -367,6 +397,7 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
       message.url = data;
       customListen.sendByURL(message, event);
     }
+
     /**
      * * -----------------------------------------------
      * % BOT COMMANDS
