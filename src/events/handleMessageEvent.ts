@@ -22,6 +22,7 @@ import ScreenShot from '../features/screenshot';
 import Regexr from '../features/regexr';
 import Regex from '../features/regex101';
 import OSInfo from '../features/os';
+import OpenAI from '../features/openAI';
 const op: OPERATIONS = new OPERATIONS();
 
 const handleMessageEvent = async (event: any, customListen: EVENTS) => {
@@ -314,7 +315,11 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
      */
 
     if (REGEX['question'].test(command)) {
-      // customListen.sendReply("I not understand your question :'(", event);
+      console.log('question', command);
+      const cleanBody: string = op.clean_bad(command);
+      const msg = await OpenAI(cleanBody);
+      if (msg == undefined) return customListen.sorry(event, 'Sorry, I can not answer this question');
+      customListen.sendReply(msg, event);
     }
 
     /**

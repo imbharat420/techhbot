@@ -212,7 +212,7 @@ class EVENTS {
   async sendByURL(url: { url: string[]; message: string }, event: any): Promise<void> {
     try {
       /* IF ARRAY OF URLS */
-      if (typeof url === 'object' && url.url.length > 0) {
+      if (typeof url === 'object' && url?.url.length > 0) {
         waitForStream(url.url, (attachment: any) => {
           this.#api.sendMessage(
             {

@@ -18,6 +18,7 @@ const CountryTTS = async (body: string, tye: string, cb: Function) => {
       },
       function (err, httpResponse, body) {
         const data = JSON.parse(body);
+        console.log(data);
         cb(data['URL']);
       },
     );

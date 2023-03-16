@@ -2,6 +2,7 @@ import DeepNude from '../features/deepnude';
 import { UploadImg, RenderImg } from '../features/filterImg';
 import FindAnime from '../features/findAnime';
 import MusicHumming from '../features/music_humming';
+import ReverseGoogle from '../features/reverse_google';
 import EVENTS from './EVENTS';
 import OPERATIONS from './OPERATIONS';
 const op: OPERATIONS = new OPERATIONS();
@@ -85,6 +86,26 @@ const handleAttachments = async (event: any, customListen: EVENTS) => {
       } catch (err) {
         customListen.sendReply('Sorry the message is empty 😢 because of error', event);
       }
+    }
+
+    /*############-------------------[ Google Reverse Image Search ]--------------###################*/
+
+    if (body.startsWith('!reverse')) {
+      const { url, type, filename } = attachments[0];
+      op.downloadFile(url, type, filename, async (file: string, path: string) => {
+        const data = await ReverseGoogle(path);
+        console.log('handleAttachment ReverseGoogle', data);
+        if (!data || typeof data === 'string') {
+          customListen.sendReply('Sorry the message is empty 😢 because of error', event);
+          return;
+        }
+
+        const { title, description, url } = data;
+
+        const message = `*${title}*\n${description}\n${url}`;
+
+        customListen.sendReply(message, event);
+      });
     }
 
     /*############-------------------[ AI ]--------------###################*/

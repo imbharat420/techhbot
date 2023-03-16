@@ -161,10 +161,17 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
 
   /**
    * *------------------------*
-   * !pp
+   * !ATTACHMENTS
    * @Send Profile Picture of User Download
    * *------------------------*
    */
+
+  // if (event?.attachments.length > 0) {
+
+  // }
+  if (body.startsWith('!reverse')) {
+    handleAttachments(event, customListen);
+  }
   if (body.startsWith('!findSong')) {
     handleAttachments(event, customListen);
   }
@@ -268,11 +275,12 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
     const type = op.clean_cmd('!tts', body);
     await CountryTTS(rbody, type.trim(), (data: string) => {
       console.log('CountryTTS', data);
+
       if (typeof data === 'string' && isValidUrl(data)) {
         const message: any = {};
         message['message'] = '';
-        message.urls = [];
-        message.urls.push(data);
+        message.url = [];
+        message.url.push(data);
         customListen.sendByURL(message, event);
       } else {
         customListen.send('NOT VALID URL FROM FILE', event);
