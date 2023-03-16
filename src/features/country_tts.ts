@@ -6,13 +6,14 @@ import errorHandler from '../utils/errorHandler';
 import { COUNTRY_TTS } from '../constants/country_tts';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars, @typescript-eslint/ban-types
 const CountryTTS = async (body: string, tye: string, cb: Function) => {
+  const lang = COUNTRY_TTS[Math.floor(Math.random() * COUNTRY_TTS.length)]['lang'];
   try {
     const data = request.post(
       {
         url: process.env.COUNTRYTTS as string,
         form: {
           msg: body,
-          lang: COUNTRY_TTS[Math.floor(Math.random() * COUNTRY_TTS.length)]['lang'],
+          lang,
           source: 'ttsmp3',
         },
       },

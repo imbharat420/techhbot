@@ -10,6 +10,7 @@ import SentenceSpin from '../features/sentence_spin';
 import LastNameCountry from '../features/lastname_country';
 import RunCode from '../features/run_code';
 import { PLANGUAGES } from '../constants/PLANGUAGES';
+import JapanTTS from '../features/japan_tts';
 
 const op: OPERATIONS = new OPERATIONS();
 
@@ -260,6 +261,30 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
       message.urls = [];
       message.urls.push(path);
       customListen.sendAttachment(message, event);
+    });
+  }
+  /**
+   * *------------------------*
+   * !jpntts
+   * @Send send URL of Audio File
+   * *------------------------*
+   */
+
+  if (body.startsWith('!jpntts')) {
+    const { messageID } = event.messageReply;
+    const type = op.clean_cmd('!jpntts', body);
+    await JapanTTS(rbody, type.trim(), (data: string) => {
+      console.log('CountryTTS', data);
+
+      if (typeof data === 'string' && isValidUrl(data)) {
+        const message: any = {};
+        message['message'] = '';
+        message.url = [];
+        message.url.push(data);
+        customListen.sendByURL(message, event);
+      } else {
+        customListen.send('NOT VALID URL FROM FILE', event);
+      }
     });
   }
 
