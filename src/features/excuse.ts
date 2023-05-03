@@ -3,7 +3,7 @@ import errorHandler from '../utils/errorHandler';
 
 const Excuse = async (body: string) => {
   const messup = body;
-  const target = 'Girlfriend';
+  const target = 'Coworker';
 
   const data = {
     '0': {
@@ -18,7 +18,6 @@ const Excuse = async (body: string) => {
   console.log(process.env.EXCUSES);
   try {
     const response = await axios.post(process.env.EXCUSES as string, data);
-    console.log(response);
     let message = response.data[0]?.result?.data?.json?.generation;
     if (!message) message = 'I am sorry, I am not feeling well today :(';
     console.log(message);

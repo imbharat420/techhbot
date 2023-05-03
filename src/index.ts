@@ -15,7 +15,7 @@ const configListener: any = {
   selfListen: true,
 };
 
-const login = { appState: JSON.parse(fs.readFileSync('./src/login/bha.json', 'utf8')) };
+const login = { appState: JSON.parse(fs.readFileSync('./src/login/tech.json', 'utf8')) };
 // const login = { appState: JSON.parse(fs.readFileSync('./src/login/tech.json', 'utf8')) };
 
 // let ulogin = { email: process.env.USERNAME, password: process.env.PASSWORD };
@@ -33,9 +33,11 @@ fca(login, async (err: any, api: any) => {
     }
     switch (event.type) {
       case 'message':
+        console.log(event);
         handleMessageEvent(event, customListen);
         break;
       case 'message_reply':
+        console.log(event);
         handleMessageReply(event, customListen);
         break;
       case 'message_reaction':

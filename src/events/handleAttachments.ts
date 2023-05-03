@@ -21,10 +21,6 @@ const filters = [
     name: 'wanted',
   },
   {
-    id: '520907ee92237baf21e766e6',
-    name: 'wanted',
-  },
-  {
     id: '520fb27e92237bdd77b09ebe',
     name: '3d',
   },

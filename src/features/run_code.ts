@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 import FormData from 'form-data';
+import errorHandler from '../utils/errorHandler';
 
 const RunCode = async (code: string, language: string, input: string) => {
   const lang = language.toLowerCase();
@@ -33,7 +34,7 @@ const RunCode = async (code: string, language: string, input: string) => {
 
   try {
     const response = await axios.post(process.env.RUN_CODE as string, formData);
-
+    console.log(response.data);
     let errorMsg = '⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️\n';
     if (response.data.Stats !== null) {
       errorMsg += response.data.Stats + '\n';
@@ -45,10 +46,13 @@ const RunCode = async (code: string, language: string, input: string) => {
       errorMsg += '⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️⚠️\n';
       return errorMsg;
     }
-
+    if (response.data.Warnings === null) {
+      return 'sorry some error occured';
+      //   return response.data.Warnings;
+    }
     return response.data.Result;
-  } catch (e) {
-    console.log(e);
+  } catch (err) {
+    return errorHandler(err);
   }
 };
 

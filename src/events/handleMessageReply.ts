@@ -60,15 +60,15 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
       message['message'] = '';
       console.log('userInfo', userInfo);
       for (const key in userInfo) {
-        if (userInfo.isFriend === true && customListen.isMe(rSenderID)) {
-          message['message'] = `We are already friend Message me if you wanna know about me\n`;
-          break;
-        }
+        // if (userInfo.isFriend === true && customListen.isMe(rSenderID)) {
+        //   message['message'] = `We are already friend Message me if you wanna know about me\n`;
+        //   break;
+        // }
 
-        if (userInfo.isFriend === false && customListen.isMe(rSenderID)) {
-          message['message'] = `We are not friends so add me if you wanna know about me \n`;
-          break;
-        }
+        // if (userInfo.isFriend === false && customListen.isMe(rSenderID)) {
+        //   message['message'] = `We are not friends so add me if you wanna know about me \n`;
+        //   break;
+        // }
 
         if (key === 'profileUrl') continue; // link
         if (key === 'thumbSrc') continue; // link
@@ -87,30 +87,30 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
           }
           continue;
         }
-        if (key === 'isFriend') {
-          if (userInfo[key] === true) {
-            message['message'] += `isFriend: 😎 you guys are friends \n`;
-            continue;
-          }
+        // if (key === 'isFriend') {
+        // if (userInfo[key] === true) {
+        //   message['message'] += `isFriend: 😎 you guys are friends \n`;
+        //   continue;
+        // }
 
-          if (userInfo[key] === false && customListen.isMe(senderID)) {
-            message['message'] += `isFriend: 😅 you should add me on friend List \n`;
-            continue;
-          }
+        // if (userInfo[key] === false && customListen.isMe(senderID)) {
+        //   message['message'] += `isFriend: 😅 you should add me on friend List \n`;
+        //   continue;
+        // }
 
-          message['message'] += `isFriend: 😏 you guys are not friends \n`;
-          continue;
-        }
+        //   message['message'] += `isFriend: 😏 you guys are not friends \n`;
+        //   continue;
+        // }
 
-        if (key === 'isBirthday' && userInfo[key] === false) {
-          message['message'] += `isBirthday: 🤷‍♂️ (🤨 Tell me your birthday Date) \n`;
-          continue;
-        }
+        // if (key === 'isBirthday' && userInfo[key] === false) {
+        //   message['message'] += `isBirthday: 🤷‍♂️ (🤨 Tell me your birthday Date) \n`;
+        //   continue;
+        // }
 
-        if (key === 'vanity' && userInfo['vanity'] === '') {
-          message['message'] += `vanity: Don't know 🤷‍♂️ but your userId is ${rSenderID}) \n`;
-          continue;
-        }
+        // if (key === 'vanity' && userInfo['vanity'] === '') {
+        //   message['message'] += `vanity: Don't know 🤷‍♂️ but your userId is ${rSenderID}) \n`;
+        //   continue;
+        // }
 
         message['message'] += `${key}: ${userInfo[key]} \n`;
       }
@@ -127,22 +127,22 @@ const handleMessageReply = async (event: any, customListen: EVENTS) => {
 
   if (body.startsWith('!runcode')) {
     const data = op.clean_cmd('!runcode', body);
+
     // const language = data.split(' ')[0];
-
     //detect language from message
-    const plang = new RegExp(`\\b(${Object.keys(PLANGUAGES).join('|')})\\b`, 'gi');
-    const wordExist = body.match(plang)?.map((match: string) => match.toLowerCase());
-    const lang: string = PLANGUAGES[wordExist as unknown as keyof typeof PLANGUAGES];
+    // const plang = new RegExp(`\\b(${Object.keys(PLANGUAGES).join('|')})\\b`, 'gi');
+    // const wordExist = body.match(plang)?.map((match: string) => match.toLowerCase());
+    // const lang: string = PLANGUAGES[wordExist as unknown as keyof typeof PLANGUAGES];
 
-    if (!lang) return customListen.send('Language Not Found', event);
+    // if (!lang) return customListen.send('Language Not Found', event);
 
-    let input = '';
-    if (data.includes('input')) {
-      input = op.clean_cmd('input', data);
-    }
-    console.log('lang', lang, wordExist, data, input);
+    // let input = '';
+    // if (data.includes('input')) {
+    //   input = op.clean_cmd('input', data);
+    // }
+    // console.log('lang', lang, wordExist, data, input);
 
-    const result = await RunCode(rbody, lang, input);
+    const result = await RunCode(body, data, '');
     console.log(result);
     customListen.send(result, event);
   }

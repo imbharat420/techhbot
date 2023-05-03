@@ -6,7 +6,7 @@ const type = {
   emotion: ['joy', 'neutral'],
   face: ['all', 'natural', 'beautified'],
   head_pose: ['front-facing', 'left-facing', 'right-facing'],
-  gender: ['male', 'female'],
+  gender: ['female'], //'male',
   age: ['young-adult', 'adult', 'child', 'elderly', 'infant'],
   ethnicity: ['white', 'black', 'latino', 'asian'],
   hair_color: ['brown', 'black', 'blond', 'gray'],

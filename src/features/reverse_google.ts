@@ -7,6 +7,7 @@ const ReverseGoogle = async (url: string) => {
   const my_awesome_image = fs.readFileSync(url);
   try {
     const reverse = await google.search(my_awesome_image, { ris: true });
+    console.log(reverse);
     if (reverse?.results.length == 0) {
       return 'no results';
     }

@@ -23,6 +23,9 @@ import Regexr from '../features/regexr';
 import Regex from '../features/regex101';
 import OSInfo from '../features/os';
 import OpenAI from '../features/openAI';
+import Gitignore from '../features/gitignore';
+import Translate from '../features/translate';
+
 const op: OPERATIONS = new OPERATIONS();
 
 const handleMessageEvent = async (event: any, customListen: EVENTS) => {
@@ -109,6 +112,21 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
 
     /**
      *  * -----------------------------------------------
+     * .gitignore
+     * ADDED CONDITION if me or owner
+     * @send Text
+     * TODO: Add in **REPLY** also and excuse:coworker <Text>
+     *  * -----------------------------------------------
+     */
+
+    if (command.startsWith('.gitignore')) {
+      const body: string = op.clean_cmd('.gitignore', command);
+      const data = await Gitignore(body);
+      customListen.send(data, event);
+    }
+
+    /**
+     *  * -----------------------------------------------
      * !execuse
      * ADDED CONDITION if me or owner
      * @send Text
@@ -116,9 +134,26 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
      *  * -----------------------------------------------
      */
 
-    if (command.startsWith('excuse') || (command.startsWith('.') && customListen.isMe(event.senderID))) {
+    //&& (command.startsWith('.') && customListen.isMe(event.senderID))
+    if (command.startsWith('excuse')) {
       const body: string = op.clean_cmd('excuse', command);
       const data = await Excuse(body);
+      customListen.send(data, event);
+    }
+
+    /**
+     *  * -----------------------------------------------
+     * !execuse
+     * ADDED CONDITION if me or owner
+     * @send Text
+     * TODO: Add in **REPLY** also and excuse:coworker <Text>
+     *  * -----------------------------------------------
+     */
+
+    //&& (command.startsWith('.') && customListen.isMe(event.senderID))
+    if (command.startsWith('!tn')) {
+      const body: string = op.clean_cmd('excuse', command);
+      const data = await Translate(body);
       customListen.send(data, event);
     }
 
@@ -176,9 +211,10 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
 
     if (command.startsWith('aiface')) {
       const body: string = op.clean_cmd('aiface', command);
-      const url = await AI_FACE(command);
+      const url = await AI_FACE(body);
       const message: any = {};
       message['message'] = '👉 aiface 👈';
+      console.log(url);
       op.downloadFile(url, 'photo', 'ai', async (file: string, path: string) => {
         message.urls = [];
         message.urls.push(path);
@@ -322,6 +358,14 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
       customListen.sendReply(msg, event);
     }
 
+    if (command.startsWith('!ai')) {
+      const body: string = op.clean_cmd('!ai', command);
+      const cleanBody: string = op.clean_bad(body);
+      const msg = await OpenAI(cleanBody);
+      if (msg == undefined) return customListen.sorry(event, 'Sorry, I can not answer this question');
+      customListen.sendReply(msg, event);
+    }
+
     /**
      *  * -----------------------------------------------
      * !EMOJI MEANING
@@ -432,11 +476,24 @@ const handleMessageEvent = async (event: any, customListen: EVENTS) => {
       console.log(element);
       message += `${element}\n`;
       message += `COMMANDS*\n`;
-      message += `meaning <EMOJI> eg: meaning 😅\n`;
-      message += `repeat <TEXT> eg: repeat hello world\n`;
-      message += `execuse <TEXT> eg: execuse i am late\n`;
-      message += `poke\n`;
-      message += `aiface <TEXT> eg: aiface {face,eye_color,emotion,face,head_pose,gender,age,ethnicity,hair_color,hair_length}\n`;
+      message += `-----------------------------------------------\n`;
+      message += `⊛ meaning <EMOJI> eg: meaning 😅\n`;
+      message += `⊛ repeat <TEXT> eg: repeat hello world\n`;
+      message += `⊛ excuse <TEXT> eg: execuse i am late\n`;
+      message += `⊛ poke\n`;
+      message += `⊛ !uploadImg and !renderImg (3d,locket,sketch,poster,wanted,forever) \n`;
+      message += `⊛ @here\n`;
+      message += `⊛ osinfo\n`;
+      message += `⊛ !reverse (reply to image)\n`;
+      message += `⊛ !findSong (reply to voice message)\n`;
+      message += `⊛ !findAnime\n`;
+      message += `⊛ ytsummarize <LINK>\n`;
+      message += `⊛ !spinner (with text)\n`;
+      message += `⊛ !suggestTags\n`;
+      message += `⊛ repeat (it for clean bad words)\n`;
+      message += `⊛ @stalk (reply someone)\n`;
+      message += `⊛ guessCountry (eg. reply or write lastname)\n`;
+      message += `⊛ aiface <TEXT> eg: aiface {eye_color,emotion,face,head_pose,gender,age,hair_color,hair_length}\n`;
       (await customListen.delay(1000)).send(message, event);
     }
 

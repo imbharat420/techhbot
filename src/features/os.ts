@@ -13,8 +13,7 @@ const OSInfo = () => {
   const cpuSpeed = os.cpus()[0].speed;
 
   let message = '';
-  message += '◆ Server: ' + secondsToTime(uptime) + ' seconds' + '\n';
-  message += '◆ Process: ' + secondsToTime(processUptime) + ' seconds' + '\n';
+  message += '◆ Process: ' + secondsToTime(processUptime) + '\n';
   message += '◆ CPU: ' + cpuCount + 'x ' + cpuModel + ' @ ' + cpuSpeed + 'MHz' + '\n';
 
   message += '◆ OS: ' + os.type() + ' ' + os.release() + ' ' + os.arch() + '\n';
